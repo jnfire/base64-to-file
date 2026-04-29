@@ -21,9 +21,14 @@ Todo el procesamiento se realiza localmente en tu navegador web, lo que garantiz
 - **Vanilla CSS** para un rendimiento óptimo y sin dependencias externas.
 
 ## 📁 Estructura del Proyecto
-- `src/utils/fileDetection.ts`: Lógica central de decodificación y detección de tipos.
-- `src/App.vue`: Interfaz de usuario reactiva y visualizadores.
-- `index.html`: Configuración global, título y favicon (📁).
+El proyecto sigue una arquitectura modular separando la lógica de negocio de la vista:
+- `src/core/`: Lógica de dominio pura (Typescript).
+  - `decoder.ts`: Decodificación Base64.
+  - `detector.ts`: Detección de tipos MIME (*Magic Bytes* y Data URIs).
+  - `preview.ts`: Reglas de previsualización.
+- `src/composables/`: Hooks de Vue que conectan el estado y la lógica de negocio con la interfaz (`useBase64Converter.ts`).
+- `src/components/`: Componentes de interfaz de usuario de responsabilidad única (`ConverterInput`, `FileResult`, etc.).
+- `tests/`: Pruebas unitarias para asegurar la estabilidad de la capa core.
 
 ## 🚀 Cómo ejecutarlo localmente
 1. **Instalar dependencias:**
@@ -34,7 +39,12 @@ Todo el procesamiento se realiza localmente en tu navegador web, lo que garantiz
    ```bash
    npm run dev
    ```
-3. **Construir para producción:**
+3. **Ejecutar Pruebas Unitarias:**
+   El proyecto utiliza **Vitest** para garantizar el funcionamiento correcto de su núcleo lógico.
+   ```bash
+   npm run test
+   ```
+4. **Construir para producción:**
    ```bash
    npm run build
    ```
