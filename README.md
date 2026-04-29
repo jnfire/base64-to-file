@@ -1,6 +1,8 @@
 # Base64 to File Converter 📁
 
-Una herramienta web minimalista, rápida y privada construida con **Vue 3 (Composition API)** y **TypeScript** para recuperar tus archivos originales a partir de cadenas Base64.
+Una herramienta web rápida, privada y sin servidor diseñada para desarrolladores y usuarios técnicos. Permite decodificar cadenas de texto en formato Base64 (incluyendo Data URIs) y recuperar los archivos originales de forma instantánea.
+
+Todo el procesamiento se realiza localmente en tu navegador web, lo que garantiza una **privacidad total** de tus datos. Construida con **Vue 3 (Composition API)** y **TypeScript**.
 
 ## ✨ Características Principales
 - **Detección Dual:**
