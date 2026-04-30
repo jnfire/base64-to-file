@@ -1,56 +1,36 @@
 # Base64 to File Converter 📁
 
-Una herramienta web rápida, privada y sin servidor diseñada para desarrolladores y usuarios técnicos. Permite decodificar cadenas de texto en formato Base64 (incluyendo Data URIs) y recuperar los archivos originales de forma instantánea.
+*Leer esto en [Español](README-es.md).*
 
-Todo el procesamiento se realiza localmente en tu navegador web, lo que garantiza una **privacidad total** de tus datos. Construida con **Vue 3 (Composition API)** y **TypeScript**.
+A fast, private, and serverless web tool designed for developers and technical users. It decodes Base64 text strings (including Data URIs) and retrieves the original files instantly.
 
-## ✨ Características Principales
-- **Detección Dual:**
-  - **Automática:** Identifica el tipo de archivo mediante Data URI o analizando los *Magic Bytes* del binario (PNG, JPEG, PDF, ZIP, GIF, XML).
-  - **Manual:** Permite forzar el tipo de archivo desde un selector de formatos comunes (Word, Excel, JSON, SVG, etc.).
-- **Previsualización Inteligente:**
-  - **Imágenes y SVG:** Visualización directa en el navegador.
-  - **PDF:** Embebido para revisión rápida sin descarga.
-  - **Datos (JSON/XML/Texto):** Visor de código con **auto-formateo para JSON** para una lectura cómoda.
-- **Privacidad Total:** Todo el procesamiento ocurre 100% en el cliente. Tus datos nunca salen de tu navegador.
-- **Interfaz:** Diseño limpio, responsivo y con soporte para temas claro/oscuro.
+All processing is done locally in your web browser, ensuring **total privacy** for your data. Built with **Vue 3 (Composition API)** and **TypeScript**.
 
-## 🛠️ Tecnologías Utilizadas
+## ✨ Key Features
+- **Dual Detection:**
+  - **Automatic:** Identifies file types via Data URIs or by parsing binary *Magic Bytes* (PNG, JPEG, PDF, ZIP, GIF, XML).
+  - **Manual:** Forces a file type using a selector with common formats (Word, Excel, JSON, SVG, etc.).
+- **Smart Preview:**
+  - **Images & SVGs:** Displayed natively in the browser.
+  - **PDFs:** Embedded for quick review without downloading.
+  - **Data (JSON/XML/Text):** Embedded code viewer with **auto-formatting for JSON** for easy reading.
+- **Total Privacy:** Everything happens 100% client-side. Your data never leaves your browser.
+- **Interface:** Clean, responsive design with dark/light mode support. Multi-language support.
+
+## 🛠️ Built With
 - **Vue.js 3** (Composition API) + **Vite**
-- **TypeScript** para un código robusto y tipado.
-- **Vanilla CSS** para un rendimiento óptimo y sin dependencias externas.
+- **TypeScript** for robust, typed code.
+- **Vue-i18n** for multi-language support.
+- **Vanilla CSS** for optimal performance without external dependencies.
 
-## 📁 Estructura del Proyecto
-El proyecto sigue una arquitectura modular separando la lógica de negocio de la vista:
-- `src/core/`: Lógica de dominio pura (Typescript).
-  - `decoder.ts`: Decodificación Base64.
-  - `detector.ts`: Detección de tipos MIME (*Magic Bytes* y Data URIs).
-  - `preview.ts`: Reglas de previsualización.
-- `src/composables/`: Hooks de Vue que conectan el estado y la lógica de negocio con la interfaz (`useBase64Converter.ts`).
-- `src/components/`: Componentes de interfaz de usuario de responsabilidad única (`ConverterInput`, `FileResult`, etc.).
-- `tests/`: Pruebas unitarias para asegurar la estabilidad de la capa core.
+## 📁 Project Architecture
+The project follows a modular architecture separating business logic from the view layer. You can check the details in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
-## 🚀 Cómo ejecutarlo localmente
-1. **Instalar dependencias:**
-   ```bash
-   npm install
-   ```
-2. **Iniciar servidor de desarrollo:**
-   ```bash
-   npm run dev
-   ```
-3. **Ejecutar Pruebas Unitarias:**
-   El proyecto utiliza **Vitest** para garantizar el funcionamiento correcto de su núcleo lógico.
-   ```bash
-   npm run test
-   ```
-4. **Construir para producción:**
-   ```bash
-   npm run build
-   ```
+## 🚀 How to Run Locally
+Please see our detailed guide in [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md).
 
-## 📄 Licencia
-Este proyecto está licenciado bajo la **GNU General Public License v3.0 (GPL-3.0)**. Consulta el archivo `LICENSE` para más detalles.
+## 📄 License
+This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**. See the `LICENSE` file for more details.
 
 ---
-Hecho con :heart: 2026.
+Made with :heart: 2026.

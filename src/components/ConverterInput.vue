@@ -41,15 +41,15 @@ const localSelectedType = computed({
         <button 
           :class="{ active: localDetectionMode === 'auto' }" 
           @click="localDetectionMode = 'auto'"
-        >Auto-Detección</button>
+        >{{ $t('input.mode.auto') }}</button>
         <button 
           :class="{ active: localDetectionMode === 'manual' }" 
           @click="localDetectionMode = 'manual'"
-        >Manual</button>
+        >{{ $t('input.mode.manual') }}</button>
       </div>
 
       <div v-if="localDetectionMode === 'manual'" class="manual-options">
-        <label for="fileType">Formato:</label>
+        <label for="fileType">{{ $t('input.format') }}</label>
         <select id="fileType" v-model="localSelectedType">
           <option v-for="type in commonTypes" :key="type.mime" :value="type">
             {{ type.label }} (.{{ type.extension }})
@@ -60,16 +60,18 @@ const localSelectedType = computed({
 
     <textarea
       v-model="localInput"
-      placeholder="Pega tu cadena Base64 o Data URI aquí..."
+      :placeholder="$t('input.placeholder')"
       rows="8"
     ></textarea>
     
     <div class="actions">
-      <button @click="$emit('convert')" class="btn-primary">Decodificar</button>
-      <button @click="$emit('clear')" class="btn-secondary">Limpiar</button>
+      <button @click="$emit('convert')" class="btn-primary">{{ $t('input.btn_decode') }}</button>
+      <button @click="$emit('clear')" class="btn-secondary">{{ $t('input.btn_clear') }}</button>
     </div>
     
-    <p v-if="error" class="error-msg">{{ error }}</p>
+    <p v-if="error" class="error-msg">
+      {{ error === 'Por favor, pega un código Base64.' ? $t('input.error_empty') : $t('input.error_invalid') }}
+    </p>
   </div>
 </template>
 

@@ -1,0 +1,35 @@
+{
+  "header": {
+    "title": "Base64 to File",
+    "subtitle": "Local Base64 string to file decoder.",
+    "badges": {
+      "opensource": "Open Source",
+      "privacy": "Local Privacy",
+      "serverless": "Serverless"
+    }
+  },
+  "input": {
+    "mode": {
+      "auto": "Auto-Detection",
+      "manual": "Manual"
+    },
+    "format": "Format:",
+    "placeholder": "Paste your Base64 string or Data URI here...",
+    "btn_decode": "Decode",
+    "btn_clear": "Clear",
+    "error_empty": "Please paste a Base64 string.",
+    "error_invalid": "Error decoding Base64. Make sure the format is correct."
+  },
+  "result": {
+    "title": "Recovered File",
+    "mime": "MIME:",
+    "extension": "Extension:",
+    "size": "Size:",
+    "btn_download": "Download",
+    "no_preview": "Preview not available for this format. Please download the file."
+  },
+  "footer": {
+    "text": "Designed with simplicity and a focus on privacy. All code runs on your device.",
+    "source": "View Source Code"
+  }
+}

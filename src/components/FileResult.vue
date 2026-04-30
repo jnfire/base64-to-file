@@ -46,14 +46,14 @@ watch(() => props.fileInfo, (newVal) => {
   <div class="file-result">
     <div class="result-header">
       <div class="meta-info">
-        <h3>Archivo Recuperado</h3>
+        <h3>{{ $t('result.title') }}</h3>
         <div class="meta-details">
-          <span class="meta-item"><span class="label">MIME:</span> {{ fileInfo.mime }}</span>
-          <span class="meta-item"><span class="label">Extensión:</span> .{{ fileInfo.extension }}</span>
-          <span class="meta-item"><span class="label">Tamaño:</span> {{ fileSizeKb }} KB</span>
+          <span class="meta-item"><span class="label">{{ $t('result.mime') }}</span> {{ fileInfo.mime }}</span>
+          <span class="meta-item"><span class="label">{{ $t('result.extension') }}</span> .{{ fileInfo.extension }}</span>
+          <span class="meta-item"><span class="label">{{ $t('result.size') }}</span> {{ fileSizeKb }} KB</span>
         </div>
       </div>
-      <button @click="$emit('download')" class="btn-download">Descargar</button>
+      <button @click="$emit('download')" class="btn-download">{{ $t('result.btn_download') }}</button>
     </div>
 
     <div v-if="previewPossible" class="preview-area">
@@ -64,7 +64,7 @@ watch(() => props.fileInfo, (newVal) => {
       </div>
     </div>
     <div v-else class="no-preview">
-      <p>Previsualización no disponible para este formato. Por favor, descarga el archivo.</p>
+      <p>{{ $t('result.no_preview') }}</p>
     </div>
   </div>
 </template>

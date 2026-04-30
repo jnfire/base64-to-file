@@ -1,11 +1,10 @@
 <template>
   <footer class="app-footer">
     <p>
-      Diseñado con simplicidad y foco en la privacidad. 
-      Todo el código se ejecuta en tu dispositivo.
+      {{ $t('footer.text') }}
     </p>
     <div class="links">
-      <a href="https://github.com" target="_blank" rel="noopener noreferrer">Ver Código Fuente</a>
+      <a href="https://github.com/jaiver/base64-to-file" target="_blank" rel="noopener noreferrer">{{ $t('footer.source') }}</a>
     </div>
   </footer>
 </template>
