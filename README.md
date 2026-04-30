@@ -49,5 +49,8 @@ El proyecto sigue una arquitectura modular separando la lógica de negocio de la
    npm run build
    ```
 
+## 📄 Licencia
+Este proyecto está licenciado bajo la **GNU General Public License v3.0 (GPL-3.0)**. Consulta el archivo `LICENSE` para más detalles.
+
 ---
 Hecho con :heart: 2026.
