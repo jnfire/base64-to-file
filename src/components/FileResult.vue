@@ -7,7 +7,7 @@ const props = defineProps<{
   previewPossible: boolean;
 }>();
 
-const emit = defineEmits<{
+defineEmits<{
   (e: 'download'): void;
 }>();
 
