@@ -221,7 +221,7 @@ button {
 
 @media (max-width: 600px) {
   .converter-input {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   .controls-header {

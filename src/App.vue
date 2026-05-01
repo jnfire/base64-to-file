@@ -208,7 +208,7 @@ body {
 /* Mobile Responsive Adjustments */
 @media (max-width: 600px) {
   .app-layout {
-    padding: 2rem 1rem;
+    padding: 1rem 0.5rem;
   }
 }
 </style>

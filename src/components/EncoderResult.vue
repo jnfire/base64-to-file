@@ -169,7 +169,7 @@ const handleCopy = () => {
   }
   
   .result-header, .result-area {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   .result-textarea {

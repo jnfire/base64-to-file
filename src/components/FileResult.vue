@@ -186,7 +186,7 @@ watch(() => props.fileInfo, (newVal) => {
 
 @media (max-width: 600px) {
   .result-header, .preview-area {
-    padding: 1.25rem;
+    padding: 1rem;
   }
 
   .text-preview {
