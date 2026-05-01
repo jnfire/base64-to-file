@@ -1,22 +1,43 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import AppHeader from './components/AppHeader.vue';
 import ConverterInput from './components/ConverterInput.vue';
 import FileResult from './components/FileResult.vue';
+import EncoderInput from './components/EncoderInput.vue';
+import EncoderResult from './components/EncoderResult.vue';
 import AppFooter from './components/AppFooter.vue';
 import { useBase64Converter } from './composables/useBase64Converter';
+import { useFileEncoder } from './composables/useFileEncoder';
+
+const activeTab = ref<'decode' | 'encode'>('decode');
 
 const {
   base64Input,
-  error,
+  error: decoderError,
   detectionMode,
   selectedManualType,
   fileInfo,
   COMMON_TYPES,
-  convert,
-  clear,
+  convert: convertBase64,
+  clear: clearDecoder,
   download,
   previewPossible
 } = useBase64Converter();
+
+const {
+  selectedFile,
+  finalBase64Result,
+  error: encoderError,
+  includeDataUri,
+  isDragging,
+  handleDragEnter,
+  handleDragLeave,
+  handleDragOver,
+  handleDrop,
+  encodeFile,
+  clear: clearEncoder,
+  copyToClipboard
+} = useFileEncoder();
 </script>
 
 <template>
@@ -24,22 +45,62 @@ const {
     <AppHeader />
 
     <main class="main-content">
-      <ConverterInput
-        v-model:base64Input="base64Input"
-        v-model:detectionMode="detectionMode"
-        v-model:selectedManualType="selectedManualType"
-        :error="error"
-        :commonTypes="COMMON_TYPES"
-        @convert="convert"
-        @clear="clear"
-      />
+      <div class="tabs">
+        <button 
+          class="tab-btn" 
+          :class="{ active: activeTab === 'decode' }"
+          @click="activeTab = 'decode'"
+        >
+          {{ $t('tabs.decode') }}
+        </button>
+        <button 
+          class="tab-btn" 
+          :class="{ active: activeTab === 'encode' }"
+          @click="activeTab = 'encode'"
+        >
+          {{ $t('tabs.encode') }}
+        </button>
+      </div>
 
-      <FileResult
-        v-if="fileInfo"
-        :fileInfo="fileInfo"
-        :previewPossible="previewPossible"
-        @download="download"
-      />
+      <div v-if="activeTab === 'decode'" class="tab-pane">
+        <ConverterInput
+          v-model:base64Input="base64Input"
+          v-model:detectionMode="detectionMode"
+          v-model:selectedManualType="selectedManualType"
+          :error="decoderError"
+          :commonTypes="COMMON_TYPES"
+          @convert="convertBase64"
+          @clear="clearDecoder"
+        />
+
+        <FileResult
+          v-if="fileInfo"
+          :fileInfo="fileInfo"
+          :previewPossible="previewPossible"
+          @download="download"
+        />
+      </div>
+
+      <div v-if="activeTab === 'encode'" class="tab-pane">
+        <EncoderInput
+          :selectedFile="selectedFile"
+          :isDragging="isDragging"
+          :error="encoderError"
+          @file-selected="encodeFile"
+          @clear="clearEncoder"
+          @dragenter="handleDragEnter"
+          @dragleave="handleDragLeave"
+          @dragover="handleDragOver"
+          @drop="handleDrop"
+        />
+        
+        <EncoderResult
+          :base64Result="finalBase64Result"
+          :includeDataUri="includeDataUri"
+          @update:includeDataUri="includeDataUri = $event"
+          @copy="copyToClipboard"
+        />
+      </div>
     </main>
 
     <AppFooter />
@@ -100,5 +161,47 @@ body {
 
 .main-content {
   flex: 1;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  background-color: var(--bg-surface);
+  padding: 0.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  color: var(--text-main);
+  background-color: var(--bg-surface-hover);
+}
+
+.tab-btn.active {
+  background-color: var(--accent-color);
+  color: var(--bg-body);
+}
+
+.tab-pane {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
