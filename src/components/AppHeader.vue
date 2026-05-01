@@ -90,4 +90,24 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+@media (max-width: 600px) {
+  .header-top {
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+
+  .lang-toggle {
+    position: static;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+}
 </style>

@@ -204,4 +204,11 @@ body {
   from { opacity: 0; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 600px) {
+  .app-layout {
+    padding: 2rem 1rem;
+  }
+}
 </style>

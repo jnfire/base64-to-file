@@ -183,4 +183,14 @@ watch(() => props.fileInfo, (newVal) => {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+@media (max-width: 600px) {
+  .result-header, .preview-area {
+    padding: 1.25rem;
+  }
+
+  .text-preview {
+    font-size: 0.95rem;
+  }
+}
 </style>

@@ -218,4 +218,10 @@ button {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+@media (max-width: 600px) {
+  .converter-input {
+    padding: 1.25rem;
+  }
+}
 </style>

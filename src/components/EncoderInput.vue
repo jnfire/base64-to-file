@@ -204,4 +204,11 @@ const handleFileChange = (e: Event) => {
   font-weight: 500;
   margin: 0;
 }
+
+@media (max-width: 600px) {
+  .drop-zone {
+    padding: 2rem 1rem;
+    min-height: 200px;
+  }
+}
 </style>

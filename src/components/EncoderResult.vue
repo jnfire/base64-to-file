@@ -162,4 +162,18 @@ const handleCopy = () => {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+@media (max-width: 600px) {
+  .encoder-result {
+    padding: 0;
+  }
+  
+  .result-header, .result-area {
+    padding: 1.25rem;
+  }
+
+  .result-textarea {
+    font-size: 0.95rem;
+  }
+}
 </style>
