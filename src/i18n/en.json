@@ -30,6 +30,7 @@
   },
   "footer": {
     "text": "Designed with simplicity and a focus on privacy. All code runs on your device.",
-    "source": "View Source Code"
+    "source": "View Source Code",
+    "license": "Licensed under GPL-3.0"
   }
 }

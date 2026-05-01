@@ -4,7 +4,9 @@
       {{ $t('footer.text') }}
     </p>
     <div class="links">
-      <a href="https://github.com/jaiver/base64-to-file" target="_blank" rel="noopener noreferrer">{{ $t('footer.source') }}</a>
+      <a href="https://github.com/jnfire/base64-to-file" target="_blank" rel="noopener noreferrer">{{ $t('footer.source') }}</a>
+      <span class="separator">&bull;</span>
+      <a href="https://github.com/jnfire/base64-to-file/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">{{ $t('footer.license') }}</a>
     </div>
   </footer>
 </template>
@@ -33,5 +35,10 @@ a {
 a:hover {
   color: var(--accent-color);
   text-decoration: underline;
+}
+
+.separator {
+  margin: 0 0.5rem;
+  color: var(--text-muted);
 }
 </style>
