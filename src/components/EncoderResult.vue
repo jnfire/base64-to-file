@@ -72,7 +72,7 @@ const handleCopy = () => {
 }
 
 .result-header {
-  padding: 1.5rem;
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -105,7 +105,7 @@ const handleCopy = () => {
 }
 
 .result-area {
-  padding: 1.5rem;
+  padding: 2rem;
   background-color: var(--bg-body);
   display: flex;
   flex-direction: column;
@@ -141,7 +141,7 @@ const handleCopy = () => {
   align-items: center;
   gap: 0.5rem;
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--bg-body);
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
@@ -169,7 +169,7 @@ const handleCopy = () => {
   }
   
   .result-header, .result-area {
-    padding: 1.25rem;
+    padding: 1.5rem;
   }
 
   .result-textarea {

@@ -70,6 +70,9 @@ h1 {
   color: var(--text-muted);
   font-size: 1.1rem;
   margin-bottom: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .badges {

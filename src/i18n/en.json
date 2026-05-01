@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "Base64 to File",
-    "subtitle": "Local Base64 string to file decoder.",
+    "subtitle": "Convert your Base64 strings to files instantly and securely. 100% private, serverless processing, open source.",
     "badges": {
       "opensource": "Open Source",
       "privacy": "Local Privacy",
@@ -49,6 +49,6 @@
   "footer": {
     "text": "Designed with simplicity and a focus on privacy. All code runs on your device.",
     "source": "View Source Code",
-    "license": "Licensed under GPL-3.0"
+    "license": "GPL-3.0 License"
   }
 }

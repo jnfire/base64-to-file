@@ -141,7 +141,7 @@ const handleFileChange = (e: Event) => {
 .btn-browse {
   margin-top: 0.5rem;
   background-color: var(--accent-color);
-  color: white;
+  color: var(--bg-body);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -207,7 +207,7 @@ const handleFileChange = (e: Event) => {
 
 @media (max-width: 600px) {
   .drop-zone {
-    padding: 2rem 1rem;
+    padding: 1.5rem;
     min-height: 200px;
   }
 }

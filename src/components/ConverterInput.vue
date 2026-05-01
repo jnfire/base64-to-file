@@ -82,10 +82,10 @@ const localSelectedType = computed({
   gap: 1rem;
   margin-bottom: 2rem;
   background-color: var(--bg-surface);
-  padding: 1.5rem;
+  padding: 2rem;
   border-radius: 12px;
   border: 1px solid var(--border-color);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .controls-header {
@@ -221,7 +221,37 @@ button {
 
 @media (max-width: 600px) {
   .converter-input {
-    padding: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  .controls-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mode-selector {
+    width: 100%;
+  }
+
+  .mode-selector button {
+    flex: 1;
+  }
+
+  .manual-options {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .manual-options label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  select {
+    width: 100%;
   }
 }
 </style>

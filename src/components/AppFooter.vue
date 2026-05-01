@@ -1,44 +1,70 @@
 <template>
-  <footer class="app-footer">
-    <p>
-      {{ $t('footer.text') }}
-    </p>
-    <div class="links">
-      <a href="https://github.com/jnfire/base64-to-file" target="_blank" rel="noopener noreferrer">{{ $t('footer.source') }}</a>
-      <span class="separator">&bull;</span>
-      <a href="https://github.com/jnfire/base64-to-file/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">{{ $t('footer.license') }}</a>
+  <footer class="footer">
+    <div class="footer__content">
+      <p class="footer__text">
+        {{ $t('footer.text') }}
+      </p>
+      <div class="footer__links">
+        <a
+          href="https://github.com/jnfire/base64-to-file"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer__link"
+        >
+          {{ $t('footer.source') }}
+        </a>
+        <span class="footer__divider">|</span>
+        <a
+          href="https://github.com/jnfire/base64-to-file/blob/main/LICENSE"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer__link"
+        >
+          {{ $t('footer.license') }}
+        </a>
+      </div>
     </div>
   </footer>
 </template>
 
 <style scoped>
-.app-footer {
+.footer {
+  padding: 3rem 1.5rem;
   margin-top: 4rem;
-  padding-top: 2rem;
   border-top: 1px solid var(--border-color);
+}
+
+.footer__content {
   text-align: center;
-  font-size: 0.85rem;
+}
+
+.footer__text {
   color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
 }
 
-.links {
-  margin-top: 0.5rem;
+.footer__links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
 }
 
-a {
+.footer__link {
   color: var(--text-main);
-  text-decoration: none;
+  font-size: 0.85rem;
   font-weight: 500;
-  transition: color 0.2s;
+  text-decoration: none;
+  transition: opacity 0.2s;
 }
 
-a:hover {
-  color: var(--accent-color);
-  text-decoration: underline;
+.footer__link:hover {
+  opacity: 0.7;
 }
 
-.separator {
-  margin: 0 0.5rem;
-  color: var(--text-muted);
+.footer__divider {
+  color: var(--border-color);
+  font-size: 0.8rem;
 }
 </style>

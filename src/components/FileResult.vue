@@ -111,7 +111,7 @@ watch(() => props.fileInfo, (newVal) => {
 
 .btn-download {
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--bg-body);
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
