@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const props = defineProps<{
+defineProps<{
   selectedFile: File | null;
   isDragging: boolean;
   error: string | null;
