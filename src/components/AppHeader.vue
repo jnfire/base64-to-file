@@ -2,19 +2,16 @@
 import { useI18n } from 'vue-i18n';
 
 const { t, locale } = useI18n();
-
-const toggleLanguage = () => {
-  locale.value = locale.value === 'es' ? 'en' : 'es';
-};
 </script>
 
 <template>
   <header class="app-header">
     <div class="header-top">
       <h1>{{ t('header.title') }}</h1>
-      <button class="lang-toggle" @click="toggleLanguage" aria-label="Toggle language">
-        {{ locale === 'es' ? '🇪🇸 ES' : '🇬🇧 EN' }}
-      </button>
+      <select class="lang-selector" v-model="locale" aria-label="Select language">
+        <option value="es">🇪🇸 ES</option>
+        <option value="en">🇬🇧 EN</option>
+      </select>
     </div>
     <p class="subtitle">{{ t('header.subtitle') }}</p>
     <div class="badges">
@@ -48,7 +45,7 @@ h1 {
   margin: 0;
 }
 
-.lang-toggle {
+.lang-selector {
   position: absolute;
   right: 0;
   background: var(--bg-surface);
@@ -62,7 +59,7 @@ h1 {
   transition: all 0.2s;
 }
 
-.lang-toggle:hover {
+.lang-selector:hover {
   background: var(--bg-surface-hover);
 }
 
@@ -100,7 +97,7 @@ h1 {
     margin-bottom: 1.5rem;
   }
 
-  .lang-toggle {
+  .lang-selector {
     position: static;
     margin-bottom: 1rem;
   }
