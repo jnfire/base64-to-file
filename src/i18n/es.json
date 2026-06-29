@@ -47,7 +47,7 @@
     "error_read": "Error al leer el archivo."
   },
   "footer": {
-    "text": "Diseñado para desarrolladores. Tus datos te pertenecen: herramientas rápidas y de código abierto que se ejecutan directamente en tu dispositivo.",
+    "text": "Desarrollo local-first y open-source. Tus datos, tu control.",
     "source": "Ver Código Fuente",
     "license": "Licencia GPL-3.0"
   }

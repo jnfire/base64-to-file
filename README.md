@@ -2,9 +2,9 @@
 
 *Leer esto en [Español](README-es.md).*
 
-A fast, private, and serverless web tool designed for developers and technical users. It decodes Base64 text strings (including Data URIs) and retrieves the original files instantly.
+A fast, local-first web tool designed for developers and technical users. It decodes Base64 text strings (including Data URIs) and retrieves the original files instantly.
 
-All processing is done locally in your web browser, ensuring **total privacy** for your data. Built with **Vue 3 (Composition API)** and **TypeScript**.
+All processing is done locally in your web browser, ensuring **complete control** of your data (Local-First). Built with **Vue 3 (Composition API)** and **TypeScript**.
 
 ## ✨ Key Features
 - **Dual Detection:**

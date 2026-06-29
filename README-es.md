@@ -2,9 +2,9 @@
 
 *Read this in [English](README.md).*
 
-Una herramienta web rápida, privada y sin servidor diseñada para desarrolladores y usuarios técnicos. Permite decodificar cadenas de texto en formato Base64 (incluyendo Data URIs) y recuperar los archivos originales de forma instantánea.
+Una herramienta web rápida y local-first diseñada para desarrolladores y usuarios técnicos. Permite decodificar cadenas de texto en formato Base64 (incluyendo Data URIs) y recuperar los archivos originales de forma instantánea.
 
-Todo el procesamiento se realiza localmente en tu navegador web, lo que garantiza una **privacidad total** de tus datos. Construida con **Vue 3 (Composition API)** y **TypeScript**.
+Todo el procesamiento se realiza localmente en tu navegador web, garantizando un **control total** de tus datos (Local-First). Construida con **Vue 3 (Composition API)** y **TypeScript**.
 
 ## ✨ Características Principales
 - **Detección Dual:**
