@@ -1,11 +1,11 @@
 {
   "header": {
     "title": "Base64 to File",
-    "subtitle": "Convert your Base64 strings to files instantly and securely. 100% private, serverless processing, open source.",
+    "subtitle": "Convert your Base64 strings to files instantly and securely. Local-first, no registration, and open source.",
     "badges": {
       "opensource": "Open Source",
-      "privacy": "Local Privacy",
-      "serverless": "Serverless"
+      "privacy": "Local-First",
+      "serverless": "No Registration"
     }
   },
   "input": {
@@ -47,7 +47,7 @@
     "error_read": "Error reading the file."
   },
   "footer": {
-    "text": "Designed with simplicity and a focus on privacy. All code runs on your device.",
+    "text": "Designed for developers. Your data belongs to you: fast, open-source tools running directly on your device.",
     "source": "View Source Code",
     "license": "GPL-3.0 License"
   }
