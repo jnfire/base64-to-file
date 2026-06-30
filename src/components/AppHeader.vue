@@ -15,7 +15,7 @@ const { t, locale } = useI18n();
     </div>
     <p class="subtitle">{{ t('header.subtitle') }}</p>
     <div class="badges">
-      <span class="badge">{{ t('header.badges.opensource') }}</span>
+      <span class="badge">{{ t('header.badges.auditable') }}</span>
       <span class="badge">{{ t('header.badges.privacy') }}</span>
       <span class="badge">{{ t('header.badges.serverless') }}</span>
     </div>

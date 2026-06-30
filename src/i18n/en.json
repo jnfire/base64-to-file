@@ -1,9 +1,9 @@
 {
   "header": {
     "title": "Base64 to File",
-    "subtitle": "Convert your Base64 strings to files instantly and securely. Local-first, no registration, and open source.",
+    "subtitle": "Convert your Base64 strings to files instantly and securely. Local-first and no registration.",
     "badges": {
-      "opensource": "Open Source",
+      "auditable": "Auditable",
       "privacy": "Local-First",
       "serverless": "No Registration"
     }
@@ -47,8 +47,8 @@
     "error_read": "Error reading the file."
   },
   "footer": {
-    "text": "Local-first & open-source development. Your data, your control.",
+    "text": "Local-first development for portfolio review and personal use. Your data, your control.",
     "source": "View Source Code",
-    "license": "GPL-3.0 License"
+    "license": "All Rights Reserved"
   }
 }

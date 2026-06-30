@@ -27,10 +27,13 @@ Todo el procesamiento se realiza localmente en tu navegador web, garantizando un
 El proyecto sigue una arquitectura modular separando la lógica de negocio de la vista. Puedes ver los detalles en [`docs/ARCHITECTURE-es.md`](docs/ARCHITECTURE-es.md).
 
 ## 🚀 Cómo ejecutarlo localmente
-Consulta nuestra guía detallada en [`docs/CONTRIBUTING-es.md`](docs/CONTRIBUTING-es.md).
+```sh
+npm install
+npm run dev
+```
 
 ## 📄 Licencia
-Este proyecto está licenciado bajo la **GNU General Public License v3.0 (GPL-3.0)**. Consulta el archivo `LICENSE` para más detalles.
+Este proyecto es propietario y tiene todos los derechos reservados por Javier Nicolás Pérez Mesa. Se publica exclusivamente con fines de revisión de portafolio, auditoría de código y uso estrictamente personal. Consulta el archivo `LICENSE` para más detalles.
 
 ---
 Hecho con :heart: 2026.

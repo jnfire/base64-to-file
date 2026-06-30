@@ -27,10 +27,13 @@ All processing is done locally in your web browser, ensuring **complete control*
 The project follows a modular architecture separating business logic from the view layer. You can check the details in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## 🚀 How to Run Locally
-Please see our detailed guide in [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md).
+```sh
+npm install
+npm run dev
+```
 
 ## 📄 License
-This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**. See the `LICENSE` file for more details.
+This project is proprietary and all rights are reserved by Javier Nicolás Pérez Mesa. It is published exclusively for portfolio review, code audit, and personal use. See the `LICENSE` file for details.
 
 ---
 Made with :heart: 2026.
