@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
+import LangSelector from './LangSelector.vue';
 
 const { t, locale } = useI18n();
+
+const languages = [
+  { code: 'es', label: 'ES' },
+  { code: 'en', label: 'EN' }
+];
 </script>
 
 <template>
   <header class="app-header">
-    <div class="header-top">
-      <h1>{{ t('header.title') }}</h1>
-      <select class="lang-selector" v-model="locale" aria-label="Select language">
-        <option value="es">ES</option>
-        <option value="en">EN</option>
-      </select>
+    <h1>{{ t('header.title') }}</h1>
+    <div class="lang-selector-wrapper">
+      <LangSelector v-model="locale" :options="languages" />
     </div>
     <p class="subtitle">{{ t('header.subtitle') }}</p>
     <div class="badges">
@@ -28,13 +31,10 @@ const { t, locale } = useI18n();
   text-align: center;
 }
 
-.header-top {
+.lang-selector-wrapper {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-  position: relative;
+  margin: 0.75rem 0 1rem 0;
 }
 
 h1 {
@@ -43,24 +43,6 @@ h1 {
   letter-spacing: -0.05em;
   color: var(--text-main);
   margin: 0;
-}
-
-.lang-selector {
-  position: absolute;
-  right: 0;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  padding: 0.4rem 0.8rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: all 0.2s;
-}
-
-.lang-selector:hover {
-  background: var(--bg-surface-hover);
 }
 
 .subtitle {
@@ -92,16 +74,6 @@ h1 {
 }
 
 @media (max-width: 600px) {
-  .header-top {
-    flex-direction: column;
-    margin-bottom: 1.5rem;
-  }
-
-  .lang-selector {
-    position: static;
-    margin-bottom: 1rem;
-  }
-
   h1 {
     font-size: 2rem;
   }
