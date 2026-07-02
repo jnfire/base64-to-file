@@ -6,8 +6,15 @@ import FileResult from './components/FileResult.vue';
 import EncoderInput from './components/EncoderInput.vue';
 import EncoderResult from './components/EncoderResult.vue';
 import AppFooter from './components/AppFooter.vue';
+import CookieBanner from './components/CookieBanner.vue';
 import { useBase64Converter } from './composables/useBase64Converter';
 import { useFileEncoder } from './composables/useFileEncoder';
+import { initAnalytics } from './utils/analytics';
+
+const handleCookieAccept = () => {
+  const gaId = (import.meta.env.VITE_GA_ID as string) || 'G-XXXXXXXXXX';
+  initAnalytics(gaId);
+};
 
 const activeTab = ref<'decode' | 'encode'>('decode');
 
@@ -104,6 +111,7 @@ const {
     </main>
 
     <AppFooter />
+    <CookieBanner @accept="handleCookieAccept" />
   </div>
 </template>
 

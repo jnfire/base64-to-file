@@ -46,6 +46,11 @@
     "error_too_large": "El archivo supera el límite de seguridad de {mb}MB.",
     "error_read": "Error al leer el archivo."
   },
+  "cookies": {
+    "text": "¿Nos ayudas a mejorar? Usamos cookies de análisis anónimas para comprender el uso y optimizar la web.",
+    "accept": "Aceptar",
+    "decline": "Rechazar"
+  },
   "footer": {
     "text": "Desarrollo local-first. Tus datos, tu control.",
     "source": "Ver Código Fuente",

@@ -14,7 +14,7 @@ All processing is done locally in your web browser, ensuring **complete control*
   - **Images & SVGs:** Displayed natively in the browser.
   - **PDFs:** Embedded for quick review without downloading.
   - **Data (JSON/XML/Text):** Embedded code viewer with **auto-formatting for JSON** for easy reading.
-- **Total Privacy:** Everything happens 100% client-side. Your data never leaves your browser.
+- **Local Processing:** Everything happens client-side. Your files and converted data are never sent to any server.
 - **Interface:** Clean, responsive design with dark/light mode support. Multi-language support.
 
 ## 🛠️ Built With

@@ -46,6 +46,11 @@
     "error_too_large": "The file exceeds the {mb}MB security limit.",
     "error_read": "Error reading the file."
   },
+  "cookies": {
+    "text": "Help us improve? We use anonymous analytics cookies to understand usage and optimize the web.",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
   "footer": {
     "text": "Local-first development. Your data, your control.",
     "source": "View Source Code",

@@ -14,7 +14,7 @@ Todo el procesamiento se realiza localmente en tu navegador web, garantizando un
   - **Imágenes y SVG:** Visualización directa en el navegador.
   - **PDF:** Embebido para revisión rápida sin descarga.
   - **Datos (JSON/XML/Texto):** Visor de código con **auto-formateo para JSON** para una lectura cómoda.
-- **Privacidad Total:** Todo el procesamiento ocurre 100% en el cliente. Tus datos nunca salen de tu navegador.
+- **Procesamiento Local:** Todo el procesamiento ocurre en el cliente. Tus archivos y datos convertidos nunca se envían a ningún servidor.
 - **Interfaz:** Diseño limpio, responsivo y con soporte para temas claro/oscuro. Soporte multi-idioma.
 
 ## 🛠️ Tecnologías Utilizadas
