@@ -9,8 +9,8 @@ const { t, locale } = useI18n();
     <div class="header-top">
       <h1>{{ t('header.title') }}</h1>
       <select class="lang-selector" v-model="locale" aria-label="Select language">
-        <option value="es">🇪🇸 ES</option>
-        <option value="en">🇬🇧 EN</option>
+        <option value="es">ES</option>
+        <option value="en">EN</option>
       </select>
     </div>
     <p class="subtitle">{{ t('header.subtitle') }}</p>
