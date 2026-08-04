@@ -1,0 +1,59 @@
+{
+  "header": {
+    "title": "Base64 to File",
+    "subtitle": "Converti le tue stringhe Base64 in file istantaneamente e in modo sicuro. Local-first e senza registrazione.",
+    "badges": {
+      "auditable": "Verificabile",
+      "privacy": "Local-First",
+      "serverless": "Senza Registrazione"
+    }
+  },
+  "input": {
+    "mode": {
+      "auto": "Rilevamento Auto",
+      "manual": "Manuale"
+    },
+    "format": "Formato:",
+    "placeholder": "Incolla qui la tua stringa Base64 o Data URI...",
+    "btn_decode": "Decodifica",
+    "btn_clear": "Pulisci",
+    "error_empty": "Per favore, incolla un codice Base64.",
+    "error_invalid": "Errore durante la decodifica Base64. Assicurati che il formato sia corretto."
+  },
+  "result": {
+    "title": "File Recuperato",
+    "mime": "MIME:",
+    "extension": "Estensione:",
+    "size": "Dimensione:",
+    "btn_download": "Scarica",
+    "no_preview": "Anteprima non disponibile per questo formato. Scarica il file."
+  },
+  "tabs": {
+    "decode": "Decodifica (Base64 \u2192 File)",
+    "encode": "Codifica (File \u2192 Base64)"
+  },
+  "encoder": {
+    "drop_zone": "Trascina e rilascia un file qui",
+    "or": "o",
+    "btn_browse": "Sfoglia File",
+    "file_selected": "File selezionato:",
+    "btn_encode": "Codifica in Base64",
+    "btn_clear": "Pulisci",
+    "include_data_uri": "Includi prefisso Data URI",
+    "result_title": "Risultato Base64",
+    "btn_copy": "Copia negli Appunti",
+    "copied": "Copiato!",
+    "error_too_large": "Il file supera il limite di sicurezza di {mb}MB.",
+    "error_read": "Errore durante la lettura del file."
+  },
+  "cookies": {
+    "text": "Aiutaci a migliorare? Utilizziamo cookie di analisi anonimi per comprendere l'uso e ottimizzare il sito.",
+    "accept": "Accetta",
+    "decline": "Rifiuta"
+  },
+  "footer": {
+    "text": "Sviluppo local-first. I tuoi dati, il tuo controllo.",
+    "source": "Visualizza Codice Sorgente",
+    "license": "Tutti i Diritti Riservati"
+  }
+}

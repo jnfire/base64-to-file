@@ -1,0 +1,59 @@
+{
+  "header": {
+    "title": "Base64 to File",
+    "subtitle": "Convertissez vos chaînes Base64 en fichiers instantanément et en toute sécurité. Local-first et sans inscription.",
+    "badges": {
+      "auditable": "Auditable",
+      "privacy": "Local-First",
+      "serverless": "Sans Inscription"
+    }
+  },
+  "input": {
+    "mode": {
+      "auto": "Détection Auto",
+      "manual": "Manuel"
+    },
+    "format": "Format :",
+    "placeholder": "Collez votre chaîne Base64 ou Data URI ici...",
+    "btn_decode": "Décoder",
+    "btn_clear": "Effacer",
+    "error_empty": "Veuillez coller un code Base64.",
+    "error_invalid": "Erreur lors du décodage Base64. Assurez-vous que le format est correct."
+  },
+  "result": {
+    "title": "Fichier Récupéré",
+    "mime": "MIME :",
+    "extension": "Extension :",
+    "size": "Taille :",
+    "btn_download": "Télécharger",
+    "no_preview": "Aperçu indisponible pour ce format. Veuillez télécharger le fichier."
+  },
+  "tabs": {
+    "decode": "Décoder (Base64 \u2192 Fichier)",
+    "encode": "Encoder (Fichier \u2192 Base64)"
+  },
+  "encoder": {
+    "drop_zone": "Glissez et déposez un fichier ici",
+    "or": "ou",
+    "btn_browse": "Parcourir le Fichier",
+    "file_selected": "Fichier sélectionné :",
+    "btn_encode": "Encoder en Base64",
+    "btn_clear": "Effacer",
+    "include_data_uri": "Inclure le préfixe Data URI",
+    "result_title": "Résultat Base64",
+    "btn_copy": "Copier dans le Presse-papiers",
+    "copied": "Copié !",
+    "error_too_large": "Le fichier dépasse la limite de sécurité de {mb} Mo.",
+    "error_read": "Erreur lors de la lecture du fichier."
+  },
+  "cookies": {
+    "text": "Nous aider à nous améliorer ? Nous utilisons des cookies d'analyse anonymes pour comprendre l'utilisation et optimiser le site.",
+    "accept": "Accepter",
+    "decline": "Refuser"
+  },
+  "footer": {
+    "text": "Développement local-first. Vos données, votre contrôle.",
+    "source": "Voir le Code Source",
+    "license": "Tous Droits Réservés"
+  }
+}

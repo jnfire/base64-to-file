@@ -1,0 +1,59 @@
+{
+  "header": {
+    "title": "Base64 to File",
+    "subtitle": "Konvertieren Sie Ihre Base64-Zeichenfolgen sofort und sicher in Dateien. Local-First und ohne Registrierung.",
+    "badges": {
+      "auditable": "Überprüfbar",
+      "privacy": "Local-First",
+      "serverless": "Keine Registrierung"
+    }
+  },
+  "input": {
+    "mode": {
+      "auto": "Auto-Erkennung",
+      "manual": "Manuell"
+    },
+    "format": "Format:",
+    "placeholder": "Fügen Sie hier Ihre Base64-Zeichenfolge oder Ihr Data-URI ein...",
+    "btn_decode": "Decodieren",
+    "btn_clear": "Leeren",
+    "error_empty": "Bitte fügen Sie einen Base64-Code ein.",
+    "error_invalid": "Fehler beim Decodieren von Base64. Stellen Sie sicher, dass das Format korrekt ist."
+  },
+  "result": {
+    "title": "Wiederhergestellte Datei",
+    "mime": "MIME:",
+    "extension": "Erweiterung:",
+    "size": "Größe:",
+    "btn_download": "Herunterladen",
+    "no_preview": "Vorschau für dieses Format nicht verfügbar. Bitte laden Sie die Datei herunter."
+  },
+  "tabs": {
+    "decode": "Decodieren (Base64 \u2192 Datei)",
+    "encode": "Codieren (Datei \u2192 Base64)"
+  },
+  "encoder": {
+    "drop_zone": "Ziehen Sie eine Datei hierher",
+    "or": "oder",
+    "btn_browse": "Datei Durchsuchen",
+    "file_selected": "Ausgewählte Datei:",
+    "btn_encode": "In Base64 Codieren",
+    "btn_clear": "Leeren",
+    "include_data_uri": "Data-URI-Präfix einschließen",
+    "result_title": "Base64-Ergebnis",
+    "btn_copy": "In die Zwischenablage kopieren",
+    "copied": "Kopiert!",
+    "error_too_large": "Die Datei überschreitet das Sicherheitslimit von {mb}MB.",
+    "error_read": "Fehler beim Lesen der Datei."
+  },
+  "cookies": {
+    "text": "Helfen Sie uns, uns zu verbessern? Wir verwenden anonyme Analyse-Cookies, um die Nutzung zu verstehen und die Website zu optimieren.",
+    "accept": "Akzeptieren",
+    "decline": "Ablehnen"
+  },
+  "footer": {
+    "text": "Local-First-Entwicklung. Ihre Daten, Ihre Kontrolle.",
+    "source": "Quellcode Anzeigen",
+    "license": "Alle Rechte Vorbehalten"
+  }
+}

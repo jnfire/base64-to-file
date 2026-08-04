@@ -1,0 +1,59 @@
+{
+  "header": {
+    "title": "Base64 to File",
+    "subtitle": "Converta suas strings Base64 em arquivos instantaneamente e com segurança. Local-first e sem registo.",
+    "badges": {
+      "auditable": "Auditável",
+      "privacy": "Local-First",
+      "serverless": "Sem Registo"
+    }
+  },
+  "input": {
+    "mode": {
+      "auto": "Auto-Deteção",
+      "manual": "Manual"
+    },
+    "format": "Formato:",
+    "placeholder": "Cole sua string Base64 ou Data URI aqui...",
+    "btn_decode": "Decodificar",
+    "btn_clear": "Limpar",
+    "error_empty": "Por favor, cole um código Base64.",
+    "error_invalid": "Erro ao decodificar Base64. Certifique-se de que o formato está correto."
+  },
+  "result": {
+    "title": "Arquivo Recuperado",
+    "mime": "MIME:",
+    "extension": "Extensão:",
+    "size": "Tamanho:",
+    "btn_download": "Descarregar",
+    "no_preview": "Visualização não disponível para este formato. Por favor, descarregue o arquivo."
+  },
+  "tabs": {
+    "decode": "Decodificar (Base64 \u2192 Arquivo)",
+    "encode": "Codificar (Arquivo \u2192 Base64)"
+  },
+  "encoder": {
+    "drop_zone": "Arraste e solte um arquivo aqui",
+    "or": "ou",
+    "btn_browse": "Procurar Arquivo",
+    "file_selected": "Arquivo selecionado:",
+    "btn_encode": "Codificar para Base64",
+    "btn_clear": "Limpar",
+    "include_data_uri": "Incluir prefixo Data URI",
+    "result_title": "Resultado Base64",
+    "btn_copy": "Copiar para Área de Transferência",
+    "copied": "Copiado!",
+    "error_too_large": "O arquivo excede o limite de segurança de {mb}MB.",
+    "error_read": "Erro ao ler o arquivo."
+  },
+  "cookies": {
+    "text": "Ajuda-nos a melhorar? Usamos cookies de análise anónimos para compreender o uso e otimizar a web.",
+    "accept": "Aceitar",
+    "decline": "Recusar"
+  },
+  "footer": {
+    "text": "Desenvolvimento local-first. Seus dados, seu controlo.",
+    "source": "Ver Código Fonte",
+    "license": "Todos os Direitos Reservados"
+  }
+}

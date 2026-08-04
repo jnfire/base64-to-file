@@ -5,8 +5,12 @@ import LangSelector from './LangSelector.vue';
 const { t, locale } = useI18n();
 
 const languages = [
-  { code: 'es', label: 'ES' },
-  { code: 'en', label: 'EN' }
+  { code: 'en', label: 'English' },
+  { code: 'es', label: 'Español' },
+  { code: 'fr', label: 'Français' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'it', label: 'Italiano' },
+  { code: 'pt', label: 'Português' }
 ];
 </script>
 

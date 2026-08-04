@@ -33,7 +33,7 @@
     "encode": "Encode (File \u2192 Base64)"
   },
   "encoder": {
-    "drop_zone": "Drag & Drop a file here",
+    "drop_zone": "Drag and drop a file here",
     "or": "or",
     "btn_browse": "Browse File",
     "file_selected": "Selected file:",
@@ -43,8 +43,8 @@
     "result_title": "Base64 Result",
     "btn_copy": "Copy to Clipboard",
     "copied": "Copied!",
-    "error_too_large": "The file exceeds the {mb}MB security limit.",
-    "error_read": "Error reading the file."
+    "error_too_large": "The file exceeds the safety limit of {mb}MB.",
+    "error_read": "Error reading file."
   },
   "cookies": {
     "text": "Help us improve? We use anonymous analytics cookies to understand usage and optimize the web.",
