@@ -48,8 +48,17 @@ const {
 </script>
 
 <template>
+  <AppHeader />
+
   <div class="app-layout">
-    <AppHeader />
+    <header class="app-hero">
+      <p class="subtitle">{{ $t('header.subtitle') }}</p>
+      <div class="badges">
+        <span class="badge">{{ $t('header.badges.auditable') }}</span>
+        <span class="badge">{{ $t('header.badges.privacy') }}</span>
+        <span class="badge">{{ $t('header.badges.serverless') }}</span>
+      </div>
+    </header>
 
     <main class="main-content">
       <div class="tabs">
@@ -161,10 +170,44 @@ body {
 .app-layout {
   max-width: 800px;
   margin: 0 auto;
-  padding: 3rem 1.5rem;
-  min-height: 100vh;
+  padding: 0 1.5rem 3rem 1.5rem;
+  min-height: calc(100vh - 55px);
   display: flex;
   flex-direction: column;
+}
+
+.app-hero {
+  text-align: center;
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.badges {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  background-color: var(--bg-surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .main-content {
@@ -216,7 +259,14 @@ body {
 /* Mobile Responsive Adjustments */
 @media (max-width: 600px) {
   .app-layout {
-    padding: 1rem 0.5rem;
+    padding: 0 0.5rem 2rem 0.5rem;
+  }
+  .app-hero {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .subtitle {
+    font-size: 1rem;
   }
 }
 </style>

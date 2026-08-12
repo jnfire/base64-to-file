@@ -15,75 +15,71 @@ const languages = [
 </script>
 
 <template>
-  <header class="app-header">
-    <h1>{{ t('header.title') }}</h1>
-    <div class="lang-selector-wrapper">
-      <LangSelector v-model="locale" :options="languages" />
-    </div>
-    <p class="subtitle">{{ t('header.subtitle') }}</p>
-    <div class="badges">
-      <span class="badge">{{ t('header.badges.auditable') }}</span>
-      <span class="badge">{{ t('header.badges.privacy') }}</span>
-      <span class="badge">{{ t('header.badges.serverless') }}</span>
+  <header class="navbar">
+    <div class="navbar-container">
+      <a href="./" class="navbar-brand" :aria-label="t('header.title')">
+        <h1 class="title">{{ t('header.title') }}</h1>
+      </a>
+
+      <div class="navbar-actions">
+        <LangSelector v-model="locale" :options="languages" />
+      </div>
     </div>
   </header>
 </template>
 
 <style scoped>
-.app-header {
-  margin-bottom: 2.5rem;
-  text-align: center;
+.navbar {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.lang-selector-wrapper {
+.navbar-container {
+  padding: 0 1.5rem;
   display: flex;
-  justify-content: center;
-  margin: 0.75rem 0 1rem 0;
+  justify-content: space-between;
+  align-items: center;
 }
 
-h1 {
-  font-size: 2.5rem;
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 6px;
+}
+
+.navbar-brand:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
+}
+
+.title {
+  font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.02em;
   color: var(--text-main);
   margin: 0;
 }
 
-.subtitle {
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.badges {
+.navbar-actions {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.badge {
-  font-size: 0.75rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 9999px;
-  background-color: var(--bg-surface);
-  color: var(--text-muted);
-  border: 1px solid var(--border-color);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  align-items: center;
+  gap: 1rem;
 }
 
 @media (max-width: 600px) {
-  h1 {
-    font-size: 2rem;
+  .navbar-container {
+    padding: 0 1rem;
   }
 
-  .subtitle {
-    font-size: 1rem;
+  .title {
+    font-size: 1.05rem;
   }
 }
 </style>

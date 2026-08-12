@@ -1,8 +1,23 @@
+<script setup lang="ts">
+const appVersion = __APP_VERSION__;
+</script>
+
 <template>
   <footer class="footer">
     <div class="footer__content">
       <p class="footer__text">
         {{ $t('footer.text') }}
+        <span class="footer__version">
+          •
+          <a
+            :href="`https://github.com/jnfire/base64-to-file/releases/tag/v${appVersion}`"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer__version-link"
+          >
+            v{{ appVersion }}
+          </a>
+        </span>
       </p>
       <div class="footer__links">
         <a
@@ -42,6 +57,21 @@
   color: var(--text-muted);
   font-size: 0.9rem;
   margin-bottom: 1rem;
+}
+
+.footer__version {
+  opacity: 0.8;
+}
+
+.footer__version-link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.footer__version-link:hover {
+  text-decoration: underline;
+  opacity: 1;
 }
 
 .footer__links {
