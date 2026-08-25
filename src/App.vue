@@ -7,7 +7,7 @@ import EncoderInput from './components/EncoderInput.vue';
 import EncoderResult from './components/EncoderResult.vue';
 import AppFooter from './components/AppFooter.vue';
 import CookieBanner from './components/CookieBanner.vue';
-import SettingsModal from './components/SettingsModal.vue';
+import SettingsView from './components/SettingsView.vue';
 import { useBase64Converter } from './composables/useBase64Converter';
 import { useFileEncoder } from './composables/useFileEncoder';
 import { initAnalytics } from './utils/analytics';
@@ -50,10 +50,10 @@ const {
 </script>
 
 <template>
-  <AppHeader @open-settings="showSettings = true" />
+  <AppHeader :showSettings="showSettings" @toggle-settings="showSettings = !showSettings" @home="showSettings = false" />
 
   <div class="app-layout">
-    <header class="app-hero">
+    <header class="app-hero" v-if="!showSettings">
       <p class="subtitle">{{ $t('header.subtitle') }}</p>
       <div class="badges">
         <span class="badge">{{ $t('header.badges.auditable') }}</span>
@@ -62,7 +62,9 @@ const {
       </div>
     </header>
 
-    <main class="main-content">
+    <SettingsView v-if="showSettings" :show="showSettings" @close="showSettings = false" />
+
+    <main class="main-content" v-else>
       <div class="tabs">
         <button 
           class="tab-btn" 
@@ -124,8 +126,6 @@ const {
     <AppFooter />
     <CookieBanner @accept="handleCookieAccept" />
   </div>
-
-  <SettingsModal :show="showSettings" @close="showSettings = false" />
 </template>
 
 <style>

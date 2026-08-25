@@ -2,24 +2,30 @@
 import { useI18n } from 'vue-i18n';
 import SettingsIcon from './SettingsIcon.vue';
 
+defineProps<{
+  showSettings?: boolean;
+}>();
+
 const { t } = useI18n();
 
 const emit = defineEmits<{
-  (e: 'open-settings'): void;
+  (e: 'toggle-settings'): void;
+  (e: 'home'): void;
 }>();
 </script>
 
 <template>
   <header class="navbar">
     <div class="navbar-container">
-      <a href="./" class="navbar-brand" :aria-label="t('header.title')">
+      <button class="navbar-brand" @click="emit('home')" :aria-label="t('header.title')">
         <h1 class="title">{{ t('header.title') }}</h1>
-      </a>
+      </button>
 
       <div class="navbar-actions">
         <button
           class="btn-secondary config-toggle"
-          @click="emit('open-settings')"
+          :class="{ active: showSettings }"
+          @click="emit('toggle-settings')"
           :aria-label="t('settings.title') || 'Settings'"
         >
           <SettingsIcon class="icon" />
@@ -97,6 +103,11 @@ const emit = defineEmits<{
   .config-toggle:hover {
     background-color: var(--bg-surface-hover);
   }
+}
+
+.config-toggle.active {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--accent-color);
 }
 .icon {
   width: 18px;
