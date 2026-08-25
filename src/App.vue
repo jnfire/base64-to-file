@@ -186,7 +186,7 @@ body {
 .app-layout {
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 1.5rem 3rem 1.5rem;
+  padding: 3rem 1.5rem;
   min-height: calc(100vh - 55px);
   display: flex;
   flex-direction: column;
@@ -194,8 +194,7 @@ body {
 
 .app-hero {
   text-align: center;
-  margin-top: 2.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .subtitle {

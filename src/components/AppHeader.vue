@@ -24,7 +24,7 @@ const emit = defineEmits<{
       <div class="navbar-actions">
         <button
           class="btn-secondary config-toggle"
-          :class="{ active: showSettings }"
+          :class="{ 'config-toggle--active': showSettings }"
           @click="emit('toggle-settings')"
           :aria-label="t('settings.title') || 'Settings'"
         >
@@ -52,8 +52,6 @@ const emit = defineEmits<{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 .navbar-brand {
@@ -67,11 +65,11 @@ const emit = defineEmits<{
   font-family: inherit;
   border-radius: 6px;
   text-decoration: none;
+}
 
-  .navbar-brand:focus-visible {
-    outline: 2px solid var(--accent-color);
-    outline-offset: 4px;
-  }
+.navbar-brand:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
 }
 
 .title {
@@ -99,20 +97,30 @@ const emit = defineEmits<{
   color: var(--text-main);
   border-radius: 6px;
   cursor: pointer;
-
-  .config-toggle:hover {
-    background-color: var(--bg-surface-hover);
-  }
+  transition: all 0.2s ease;
 }
 
-.config-toggle.active {
+.config-toggle:hover {
   background-color: var(--bg-surface-hover);
+}
+
+.config-toggle--active {
+  background-color: var(--accent-color);
+  color: var(--bg-body);
   border-color: var(--accent-color);
 }
+
+.config-toggle--active:hover {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  opacity: 0.9;
+}
+
 .icon {
   width: 18px;
   height: 18px;
 }
+
 @media (max-width: 600px) {
   .navbar-container {
     padding: 0 1rem;
@@ -121,7 +129,7 @@ const emit = defineEmits<{
     font-size: 1.05rem;
   }
   .config-toggle .text {
-    display: none; /* hide text on mobile */ 
+    display: none;
   }
 }
 </style>
