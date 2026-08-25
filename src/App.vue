@@ -7,6 +7,7 @@ import EncoderInput from './components/EncoderInput.vue';
 import EncoderResult from './components/EncoderResult.vue';
 import AppFooter from './components/AppFooter.vue';
 import CookieBanner from './components/CookieBanner.vue';
+import SettingsModal from './components/SettingsModal.vue';
 import { useBase64Converter } from './composables/useBase64Converter';
 import { useFileEncoder } from './composables/useFileEncoder';
 import { initAnalytics } from './utils/analytics';
@@ -17,6 +18,7 @@ const handleCookieAccept = () => {
 };
 
 const activeTab = ref<'decode' | 'encode'>('decode');
+const showSettings = ref(false);
 
 const {
   base64Input,
@@ -48,7 +50,7 @@ const {
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader @open-settings="showSettings = true" />
 
   <div class="app-layout">
     <header class="app-hero">
@@ -122,6 +124,8 @@ const {
     <AppFooter />
     <CookieBanner @accept="handleCookieAccept" />
   </div>
+
+  <SettingsModal :show="showSettings" @close="showSettings = false" />
 </template>
 
 <style>
@@ -139,7 +143,7 @@ const {
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg-body: #111827;
     --bg-surface: #1f2937;
     --bg-surface-hover: #374151;
@@ -150,6 +154,18 @@ const {
     --accent-color-alpha: rgba(255, 255, 255, 0.1);
     --error-color: #f87171;
   }
+}
+
+:root[data-theme="dark"] {
+  --bg-body: #111827;
+  --bg-surface: #1f2937;
+  --bg-surface-hover: #374151;
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+  --border-color: #374151;
+  --accent-color: #ffffff;
+  --accent-color-alpha: rgba(255, 255, 255, 0.1);
+  --error-color: #f87171;
 }
 
 * {

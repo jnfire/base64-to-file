@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue';
 import { fileToDataUri, extractRawBase64, MAX_FILE_SIZE_BYTES } from '../core/encoder';
+import { autoCopyConfig, mimeFormatConfig } from '../utils/config';
 
 export function useFileEncoder() {
   const selectedFile = ref<File | null>(null);
@@ -11,10 +12,22 @@ export function useFileEncoder() {
 
   const finalBase64Result = computed(() => {
     if (!dataUriResult.value) return '';
+    let result = '';
     if (includeDataUri.value) {
-      return dataUriResult.value;
+      result = dataUriResult.value;
+    } else {
+      result = extractRawBase64(dataUriResult.value);
     }
-    return extractRawBase64(dataUriResult.value);
+    
+    if (mimeFormatConfig.value) {
+      // Add line breaks every 76 characters
+      const regex = /.{1,76}/g;
+      const chunks = result.match(regex);
+      if (chunks) {
+        result = chunks.join('\n');
+      }
+    }
+    return result;
   });
 
   const encodeFile = async (file: File) => {
@@ -24,6 +37,12 @@ export function useFileEncoder() {
     
     try {
       dataUriResult.value = await fileToDataUri(file);
+      if (autoCopyConfig.value) {
+        // give it a tick to compute
+        setTimeout(() => {
+          copyToClipboard();
+        }, 50);
+      }
     } catch (e: any) {
       if (e.message === 'FILE_TOO_LARGE') {
         const mb = (MAX_FILE_SIZE_BYTES / 1024 / 1024).toFixed(0);

@@ -29,4 +29,10 @@ const i18n = createI18n<[MessageSchema], SupportedLocale>({
   }
 });
 
+export const setUiLanguage = (lang: SupportedLocale) => {
+  const globalI18n = i18n.global as any;
+  globalI18n.locale = lang;
+};
+
+export type { SupportedLocale };
 export default i18n;

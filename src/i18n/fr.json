@@ -29,8 +29,8 @@
     "no_preview": "Aperçu indisponible pour ce format. Veuillez télécharger le fichier."
   },
   "tabs": {
-    "decode": "Décoder (Base64 \u2192 Fichier)",
-    "encode": "Encoder (Fichier \u2192 Base64)"
+    "decode": "Décoder (Base64 → Fichier)",
+    "encode": "Encoder (Fichier → Base64)"
   },
   "encoder": {
     "drop_zone": "Glissez et déposez un fichier ici",
@@ -55,5 +55,17 @@
     "text": "Développement local-first. Vos données, votre contrôle.",
     "source": "Voir le Code Source",
     "license": "Tous Droits Réservés"
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "language": "Language",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
+    "encoder": "Encoder Settings",
+    "autoCopy": "Auto-copy base64 to clipboard",
+    "mimeFormat": "MIME format (line breaks every 76 chars)"
   }
 }

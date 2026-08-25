@@ -29,8 +29,8 @@
     "no_preview": "Anteprima non disponibile per questo formato. Scarica il file."
   },
   "tabs": {
-    "decode": "Decodifica (Base64 \u2192 File)",
-    "encode": "Codifica (File \u2192 Base64)"
+    "decode": "Decodifica (Base64 → File)",
+    "encode": "Codifica (File → Base64)"
   },
   "encoder": {
     "drop_zone": "Trascina e rilascia un file qui",
@@ -55,5 +55,17 @@
     "text": "Sviluppo local-first. I tuoi dati, il tuo controllo.",
     "source": "Visualizza Codice Sorgente",
     "license": "Tutti i Diritti Riservati"
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "language": "Language",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
+    "encoder": "Encoder Settings",
+    "autoCopy": "Auto-copy base64 to clipboard",
+    "mimeFormat": "MIME format (line breaks every 76 chars)"
   }
 }

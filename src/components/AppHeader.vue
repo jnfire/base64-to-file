@@ -1,17 +1,12 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import LangSelector from './LangSelector.vue';
+import SettingsIcon from './SettingsIcon.vue';
 
-const { t, locale } = useI18n();
+const { t } = useI18n();
 
-const languages = [
-  { code: 'en', label: 'English' },
-  { code: 'es', label: 'Español' },
-  { code: 'fr', label: 'Français' },
-  { code: 'de', label: 'Deutsch' },
-  { code: 'it', label: 'Italiano' },
-  { code: 'pt', label: 'Português' }
-];
+const emit = defineEmits<{
+  (e: 'open-settings'): void;
+}>();
 </script>
 
 <template>
@@ -22,13 +17,20 @@ const languages = [
       </a>
 
       <div class="navbar-actions">
-        <LangSelector v-model="locale" :options="languages" />
+        <button
+          class="btn-secondary config-toggle"
+          @click="emit('open-settings')"
+          :aria-label="t('settings.title') || 'Settings'"
+        >
+          <SettingsIcon class="icon" />
+          <span class="text">{{ t('settings.title') || 'Settings' }}</span>
+        </button>
       </div>
     </div>
   </header>
 </template>
 
-<style scoped>
+<style scoped >
 .navbar {
   background-color: var(--bg-surface);
   border-bottom: 1px solid var(--border-color);
@@ -44,19 +46,26 @@ const languages = [
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .navbar-brand {
   display: flex;
   align-items: center;
-  text-decoration: none;
-  color: inherit;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
   border-radius: 6px;
-}
+  text-decoration: none;
 
-.navbar-brand:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 4px;
+  .navbar-brand:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 4px;
+  }
 }
 
 .title {
@@ -73,13 +82,35 @@ const languages = [
   gap: 1rem;
 }
 
+.config-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: 6px;
+  cursor: pointer;
+
+  .config-toggle:hover {
+    background-color: var(--bg-surface-hover);
+  }
+}
+.icon {
+  width: 18px;
+  height: 18px;
+}
 @media (max-width: 600px) {
   .navbar-container {
     padding: 0 1rem;
   }
-
   .title {
     font-size: 1.05rem;
+  }
+  .config-toggle .text {
+    display: none; /* hide text on mobile */ 
   }
 }
 </style>
