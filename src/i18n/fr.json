@@ -57,15 +57,15 @@
     "license": "Tous Droits Réservés"
   },
   "settings": {
-    "title": "Settings",
-    "general": "General",
-    "language": "Language",
-    "theme": "Theme",
-    "themeLight": "Light",
-    "themeDark": "Dark",
-    "themeSystem": "System",
-    "encoder": "Encoder Settings",
-    "autoCopy": "Auto-copy base64 to clipboard",
-    "mimeFormat": "MIME format (line breaks every 76 chars)"
+    "title": "Paramètres",
+    "general": "Général",
+    "language": "Langue",
+    "theme": "Thème",
+    "themeLight": "Clair",
+    "themeDark": "Sombre",
+    "themeSystem": "Système",
+    "encoder": "Paramètres de l'encodeur",
+    "autoCopy": "Copie automatique base64",
+    "mimeFormat": "Format MIME (sauts de ligne)"
   }
 }

@@ -57,15 +57,15 @@
     "license": "Alle Rechte Vorbehalten"
   },
   "settings": {
-    "title": "Settings",
-    "general": "General",
-    "language": "Language",
-    "theme": "Theme",
-    "themeLight": "Light",
-    "themeDark": "Dark",
+    "title": "Einstellungen",
+    "general": "Allgemein",
+    "language": "Sprache",
+    "theme": "Thema",
+    "themeLight": "Hell",
+    "themeDark": "Dunkel",
     "themeSystem": "System",
-    "encoder": "Encoder Settings",
-    "autoCopy": "Auto-copy base64 to clipboard",
-    "mimeFormat": "MIME format (line breaks every 76 chars)"
+    "encoder": "Encoder-Einstellungen",
+    "autoCopy": "Base64 automatisch kopieren",
+    "mimeFormat": "MIME-Format (Zeilenumbrüche)"
   }
 }

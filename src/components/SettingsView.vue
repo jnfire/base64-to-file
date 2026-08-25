@@ -10,9 +10,7 @@ defineProps<{
   show: boolean;
 }>();
 
-const emit = defineEmits<{
-  (e: 'close'): void;
-}>();
+// defineEmits removed
 
 const { t, locale } = useI18n();
 
@@ -41,13 +39,6 @@ const handleLanguageChange = (langCode: string) => {
 
 <template>
   <div v-if="show" class="settings-view">
-    <div class="settings-header">
-      <h2 class="settings-title">{{ t('settings.title') || 'Settings' }}</h2>
-      <button class="close-btn btn-secondary" @click="emit('close')">
-        {{ t('common.close') || 'Cerrar' }}
-      </button>
-    </div>
-
     <div class="settings-content">
       <!-- General Settings Section -->
       <section class="settings-section">
@@ -110,46 +101,27 @@ const handleLanguageChange = (langCode: string) => {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.settings-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.settings-title {
-  margin: 0;
-  font-size: 1.5rem;
-  color: var(--text-main);
-}
-
-.close-btn {
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
-
 .settings-content {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
 }
 
 .settings-section {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .settings-section:last-child {
   margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .section-title {
   margin: 0 0 1rem 0;
-  font-size: 1.05rem;
   color: var(--text-main);
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .settings-column {
@@ -162,6 +134,7 @@ const handleLanguageChange = (langCode: string) => {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  max-width: 300px;
 }
 
 .setting-label {
@@ -180,23 +153,13 @@ const handleLanguageChange = (langCode: string) => {
 }
 
 .theme-select {
-  padding: 0.75rem;
+  padding: 0.6rem 1rem;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background-color: var(--bg-surface);
   color: var(--text-main);
   font-family: inherit;
   font-size: 0.9rem;
-}
-
-:deep(.lang-selector-container),
-:deep(.lang-selector-trigger) {
-  width: 100%;
-}
-:deep(.lang-selector-trigger) {
-  justify-content: space-between;
-}
-:deep(.lang-selector-dropdown) {
   width: 100%;
 }
 </style>
