@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import LangSelector from './LangSelector.vue';
+import CustomSelect from './CustomSelect.vue';
 import { getTheme, setTheme, type Theme } from '../utils/theme';
 import { setUiLanguage, type SupportedLocale } from '../i18n';
 import { autoCopyConfig, mimeFormatConfig } from '../utils/config';
@@ -9,8 +10,6 @@ import { autoCopyConfig, mimeFormatConfig } from '../utils/config';
 defineProps<{
   show: boolean;
 }>();
-
-// defineEmits removed
 
 const { t, locale } = useI18n();
 
@@ -25,11 +24,16 @@ const languages = [
 
 const currentTheme = ref<Theme>(getTheme());
 
-const handleThemeChange = (event: Event) => {
-  const target = event.target as HTMLSelectElement;
-  const theme = target.value as Theme;
-  currentTheme.value = theme;
-  setTheme(theme);
+const themeOptions = computed(() => [
+  { value: 'light', label: t('settings.themeLight') || 'Light' },
+  { value: 'dark', label: t('settings.themeDark') || 'Dark' },
+  { value: 'system', label: t('settings.themeSystem') || 'System' }
+]);
+
+const handleThemeChange = (theme: string) => {
+  const newTheme = theme as Theme;
+  currentTheme.value = newTheme;
+  setTheme(newTheme);
 };
 
 const handleLanguageChange = (langCode: string) => {
@@ -53,12 +57,12 @@ const handleLanguageChange = (langCode: string) => {
             />
           </div>
           <div class="setting-item">
-            <label class="setting-label" for="theme-select">{{ t('settings.theme') || 'Theme' }}</label>
-            <select id="theme-select" class="input-element theme-select" :value="currentTheme" @change="handleThemeChange">
-              <option value="light">{{ t('settings.themeLight') || 'Light' }}</option>
-              <option value="dark">{{ t('settings.themeDark') || 'Dark' }}</option>
-              <option value="system">{{ t('settings.themeSystem') || 'System' }}</option>
-            </select>
+            <label class="setting-label">{{ t('settings.theme') || 'Theme' }}</label>
+            <CustomSelect
+              :modelValue="currentTheme"
+              :options="themeOptions"
+              @update:modelValue="handleThemeChange"
+            />
           </div>
         </div>
       </section>
