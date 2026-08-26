@@ -65,24 +65,45 @@ const {
     <SettingsView v-if="showSettings" :show="showSettings" @close="showSettings = false" />
 
     <main class="main-content" v-else>
-      <div class="tabs">
+      <div class="tabs" role="tablist" :aria-label="$t('header.title')">
         <button 
+          id="tab-decode"
+          role="tab"
           class="tab-btn" 
           :class="{ active: activeTab === 'decode' }"
+          :aria-selected="activeTab === 'decode'"
+          aria-controls="panel-decode"
+          :tabindex="activeTab === 'decode' ? 0 : -1"
           @click="activeTab = 'decode'"
+          @keydown.right.prevent="activeTab = 'encode'"
+          @keydown.left.prevent="activeTab = 'encode'"
         >
           {{ $t('tabs.decode') }}
         </button>
         <button 
+          id="tab-encode"
+          role="tab"
           class="tab-btn" 
           :class="{ active: activeTab === 'encode' }"
+          :aria-selected="activeTab === 'encode'"
+          aria-controls="panel-encode"
+          :tabindex="activeTab === 'encode' ? 0 : -1"
           @click="activeTab = 'encode'"
+          @keydown.right.prevent="activeTab = 'decode'"
+          @keydown.left.prevent="activeTab = 'decode'"
         >
           {{ $t('tabs.encode') }}
         </button>
       </div>
 
-      <div v-if="activeTab === 'decode'" class="tab-pane">
+      <div 
+        v-if="activeTab === 'decode'" 
+        id="panel-decode"
+        role="tabpanel"
+        aria-labelledby="tab-decode"
+        tabindex="0"
+        class="tab-pane"
+      >
         <ConverterInput
           v-model:base64Input="base64Input"
           v-model:detectionMode="detectionMode"
@@ -101,7 +122,14 @@ const {
         />
       </div>
 
-      <div v-if="activeTab === 'encode'" class="tab-pane">
+      <div 
+        v-if="activeTab === 'encode'" 
+        id="panel-encode"
+        role="tabpanel"
+        aria-labelledby="tab-encode"
+        tabindex="0"
+        class="tab-pane"
+      >
         <EncoderInput
           :selectedFile="selectedFile"
           :isDragging="isDragging"
@@ -255,6 +283,16 @@ body {
 .tab-btn:hover {
   color: var(--text-main);
   background-color: var(--bg-surface-hover);
+}
+
+.tab-btn:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+[role="tabpanel"]:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
 }
 
 .tab-btn.active {

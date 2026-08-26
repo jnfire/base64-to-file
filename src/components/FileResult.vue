@@ -43,7 +43,10 @@ watch(() => props.fileInfo, (newVal) => {
 </script>
 
 <template>
-  <div class="file-result">
+  <div class="file-result" role="region" :aria-label="$t('result.title')">
+    <div class="sr-only" role="status" aria-live="polite">
+      {{ $t('result.title') }}: {{ fileInfo.mime }}, .{{ fileInfo.extension }}, {{ fileSizeKb }} KB
+    </div>
     <div class="result-header">
       <div class="meta-info">
         <h3>{{ $t('result.title') }}</h3>
@@ -53,14 +56,21 @@ watch(() => props.fileInfo, (newVal) => {
           <span class="meta-item"><span class="label">{{ $t('result.size') }}</span> {{ fileSizeKb }} KB</span>
         </div>
       </div>
-      <button @click="$emit('download')" class="btn-download">{{ $t('result.btn_download') }}</button>
+      <button 
+        type="button" 
+        @click="$emit('download')" 
+        class="btn-download"
+        :aria-label="`${$t('result.btn_download')} (.${fileInfo.extension})`"
+      >
+        {{ $t('result.btn_download') }}
+      </button>
     </div>
 
     <div v-if="previewPossible" class="preview-area">
       <div class="preview-container">
-        <img v-if="isImage" :src="fileInfo.objectUrl" alt="Previsualización" />
-        <iframe v-else-if="isPdf" :src="fileInfo.objectUrl" frameborder="0" title="Previsualización PDF"></iframe>
-        <pre v-else-if="isText" class="text-preview">{{ textContent }}</pre>
+        <img v-if="isImage" :src="fileInfo.objectUrl" :alt="`${$t('result.title')} (${fileInfo.extension})`" />
+        <iframe v-else-if="isPdf" :src="fileInfo.objectUrl" frameborder="0" :title="`${$t('result.title')} PDF`"></iframe>
+        <pre v-else-if="isText" class="text-preview" tabindex="0" :aria-label="$t('result.title')">{{ textContent }}</pre>
       </div>
     </div>
     <div v-else class="no-preview">
@@ -124,6 +134,11 @@ watch(() => props.fileInfo, (newVal) => {
   opacity: 0.9;
 }
 
+.btn-download:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
 .preview-area {
   padding: 1.5rem;
   background-color: var(--bg-body);
@@ -170,6 +185,11 @@ watch(() => props.fileInfo, (newVal) => {
   font-size: 0.85rem;
   line-height: 1.5;
   color: var(--text-main);
+}
+
+.text-preview:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: -2px;
 }
 
 .no-preview {

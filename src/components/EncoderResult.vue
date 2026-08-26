@@ -23,7 +23,7 @@ const handleCopy = () => {
 </script>
 
 <template>
-  <div class="encoder-result" v-if="base64Result">
+  <div class="encoder-result" v-if="base64Result" role="region" :aria-label="$t('encoder.result_title')">
     <div class="result-header">
       <h3>{{ $t('encoder.result_title') }}</h3>
       <label class="checkbox-label">
@@ -37,7 +37,9 @@ const handleCopy = () => {
     </div>
 
     <div class="result-area">
+      <label for="base64-result-textarea" class="sr-only">{{ $t('encoder.result_title') }}</label>
       <textarea 
+        id="base64-result-textarea"
         readonly 
         :value="base64Result"
         class="result-textarea"
@@ -45,16 +47,19 @@ const handleCopy = () => {
       ></textarea>
       
       <div class="actions">
-        <button @click="handleCopy" class="btn-primary" :class="{ 'btn-success': copied }">
-          <svg v-if="copied" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <button type="button" @click="handleCopy" class="btn-primary" :class="{ 'btn-success': copied }">
+          <svg v-if="copied" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
-          <svg v-else xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg v-else xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
           </svg>
-          {{ copied ? $t('encoder.copied') : $t('encoder.btn_copy') }}
+          <span>{{ copied ? $t('encoder.copied') : $t('encoder.btn_copy') }}</span>
         </button>
+        <div class="sr-only" role="status" aria-live="polite" v-if="copied">
+          {{ $t('encoder.copied') }}
+        </div>
       </div>
     </div>
   </div>
@@ -126,9 +131,11 @@ const handleCopy = () => {
   min-height: 150px;
 }
 
+.result-textarea:focus-visible,
 .result-textarea:focus {
   outline: none;
   border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px var(--accent-color-alpha);
 }
 
 .actions {
@@ -152,6 +159,11 @@ const handleCopy = () => {
 
 .btn-primary:hover {
   opacity: 0.9;
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
 .btn-success {

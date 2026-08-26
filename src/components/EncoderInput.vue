@@ -39,31 +39,38 @@ const handleFileChange = (e: Event) => {
     <div 
       class="drop-zone"
       :class="{ 'is-dragging': isDragging }"
+      role="button"
+      tabindex="0"
+      :aria-label="!selectedFile ? $t('encoder.drop_zone') : `${$t('encoder.file_selected')} ${selectedFile.name}`"
       @dragenter="emit('dragenter', $event)"
       @dragleave="emit('dragleave', $event)"
       @dragover="emit('dragover', $event)"
       @drop="emit('drop', $event)"
       @click="triggerFileInput"
+      @keydown.enter.prevent="triggerFileInput"
+      @keydown.space.prevent="triggerFileInput"
     >
       <input 
         type="file" 
         ref="fileInputRef" 
-        style="display: none;" 
+        class="sr-only"
+        tabindex="-1"
+        aria-hidden="true"
         @change="handleFileChange"
       >
       <div v-if="!selectedFile" class="drop-content">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="upload-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="upload-icon" aria-hidden="true">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
           <polyline points="17 8 12 3 7 8"></polyline>
           <line x1="12" y1="3" x2="12" y2="15"></line>
         </svg>
         <p>{{ $t('encoder.drop_zone') }}</p>
         <p class="text-sm text-muted">{{ $t('encoder.or') }}</p>
-        <button class="btn-browse" @click.stop="triggerFileInput">{{ $t('encoder.btn_browse') }}</button>
+        <button type="button" class="btn-browse" @click.stop="triggerFileInput" :aria-label="$t('encoder.btn_browse')">{{ $t('encoder.btn_browse') }}</button>
       </div>
       <div v-else class="file-selected">
         <div class="file-info">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
             <polyline points="13 2 13 9 20 9"></polyline>
           </svg>
@@ -72,14 +79,17 @@ const handleFileChange = (e: Event) => {
             <p class="filesize">{{ (selectedFile.size / 1024).toFixed(2) }} KB</p>
           </div>
         </div>
+        <div class="sr-only" role="status" aria-live="polite">
+          {{ $t('encoder.file_selected') }} {{ selectedFile.name }}, {{ (selectedFile.size / 1024).toFixed(2) }} KB
+        </div>
       </div>
     </div>
     
     <div class="actions">
-      <button v-if="selectedFile" @click="emit('clear')" class="btn-secondary">{{ $t('encoder.btn_clear') }}</button>
+      <button type="button" v-if="selectedFile" @click="emit('clear')" class="btn-secondary">{{ $t('encoder.btn_clear') }}</button>
     </div>
     
-    <p v-if="error" class="error-msg">
+    <p v-if="error" class="error-msg" role="alert" aria-live="assertive">
       {{ error }}
     </p>
   </div>
@@ -109,6 +119,12 @@ const handleFileChange = (e: Event) => {
 .drop-zone:hover {
   border-color: var(--accent-color);
   background-color: var(--bg-surface-hover);
+}
+
+.drop-zone:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  border-color: var(--accent-color);
 }
 
 .drop-zone.is-dragging {
@@ -154,6 +170,11 @@ const handleFileChange = (e: Event) => {
   opacity: 0.9;
 }
 
+.btn-browse:focus-visible {
+  outline: 2px solid var(--bg-body);
+  box-shadow: 0 0 0 4px var(--accent-color);
+}
+
 .file-selected {
   width: 100%;
 }
@@ -197,6 +218,11 @@ const handleFileChange = (e: Event) => {
 
 .btn-secondary:hover {
   background-color: var(--bg-surface-hover);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
 .error-msg {
