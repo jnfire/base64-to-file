@@ -29,7 +29,6 @@ const emit = defineEmits<{
           :aria-label="t('settings.title') || 'Settings'"
         >
           <SettingsIcon class="icon" />
-          <span class="text">{{ t('settings.title') || 'Settings' }}</span>
         </button>
       </div>
     </div>
@@ -127,9 +126,6 @@ const emit = defineEmits<{
   }
   .title {
     font-size: 1.05rem;
-  }
-  .config-toggle .text {
-    display: none;
   }
 }
 </style>
