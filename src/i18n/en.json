@@ -58,7 +58,8 @@
   },
   "settings": {
     "title": "Settings",
-    "general": "General Settings",
+    "general": "Personalization",
+    "personalization": "Personalization",
     "language": "Language",
     "theme": "Theme",
     "themeLight": "Light",

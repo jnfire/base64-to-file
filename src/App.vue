@@ -312,10 +312,10 @@ body {
 /* Mobile Responsive Adjustments */
 @media (max-width: 600px) {
   .app-layout {
-    padding: 0 0.5rem 2rem 0.5rem;
+    padding: 1.5rem 0.75rem 2rem 0.75rem;
   }
   .app-hero {
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     margin-bottom: 1.5rem;
   }
   .subtitle {

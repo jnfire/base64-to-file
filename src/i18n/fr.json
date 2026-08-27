@@ -58,14 +58,15 @@
   },
   "settings": {
     "title": "Paramètres",
-    "general": "Général",
+    "general": "Personnalisation",
+    "personalization": "Personnalisation",
     "language": "Langue",
     "theme": "Thème",
     "themeLight": "Clair",
     "themeDark": "Sombre",
     "themeSystem": "Système",
-    "encoder": "Paramètres de l'encodeur",
-    "autoCopy": "Copie automatique base64",
+    "encoder": "Paramètres de l'Encodeur",
+    "autoCopy": "Copier automatiquement base64",
     "mimeFormat": "Format MIME (sauts de ligne)"
   }
 }

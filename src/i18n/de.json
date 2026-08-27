@@ -58,7 +58,8 @@
   },
   "settings": {
     "title": "Einstellungen",
-    "general": "Allgemein",
+    "general": "Personalisierung",
+    "personalization": "Personalisierung",
     "language": "Sprache",
     "theme": "Thema",
     "themeLight": "Hell",

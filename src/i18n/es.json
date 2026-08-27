@@ -58,7 +58,8 @@
   },
   "settings": {
     "title": "Configuración",
-    "general": "General",
+    "general": "Personalización",
+    "personalization": "Personalización",
     "language": "Idioma",
     "theme": "Tema",
     "themeLight": "Claro",

@@ -58,13 +58,14 @@
   },
   "settings": {
     "title": "Impostazioni",
-    "general": "Generale",
+    "general": "Personalizzazione",
+    "personalization": "Personalizzazione",
     "language": "Lingua",
     "theme": "Tema",
     "themeLight": "Chiaro",
     "themeDark": "Scuro",
     "themeSystem": "Sistema",
-    "encoder": "Impostazioni codificatore",
+    "encoder": "Impostazioni Codificatore",
     "autoCopy": "Copia automatica base64",
     "mimeFormat": "Formato MIME (interruzioni di riga)"
   }
