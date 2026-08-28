@@ -42,7 +42,6 @@ const fileSizeKb = computed(() => (props.fileInfo.data.length / 1024).toFixed(2)
     <FilePreview
       :objectUrl="fileInfo.objectUrl"
       :mimeType="fileInfo.mime"
-      :fileName="`archivo_recuperado.${fileInfo.extension}`"
     />
   </div>
 </template>
