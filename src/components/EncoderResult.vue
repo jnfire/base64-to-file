@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import FilePreview from './FilePreview.vue';
 
 defineProps<{
   base64Result: string;
   includeDataUri: boolean;
+  selectedFile?: File | null;
+  fileObjectUrl?: string;
 }>();
 
 const emit = defineEmits<{
-  (e: 'update:includeDataUri', value: boolean): void;
-  (e: 'copy'): void;
+  (emitEvent: 'update:includeDataUri', value: boolean): void;
+  (emitEvent: 'copy'): void;
 }>();
 
 const copied = ref(false);
@@ -34,6 +37,19 @@ const handleCopy = () => {
         >
         {{ $t('encoder.include_data_uri') }}
       </label>
+    </div>
+
+    <!-- Previsualización del archivo cargado -->
+    <div v-if="fileObjectUrl && selectedFile" class="preview-section">
+      <div class="preview-header">
+        <h4>{{ $t('encoder.preview_title') || $t('result.title') }}</h4>
+        <span class="preview-filename">{{ selectedFile.name }} ({{ (selectedFile.size / 1024).toFixed(2) }} KB)</span>
+      </div>
+      <FilePreview
+        :objectUrl="fileObjectUrl"
+        :mimeType="selectedFile.type || 'application/octet-stream'"
+        :fileName="selectedFile.name"
+      />
     </div>
 
     <div class="result-area">
@@ -77,7 +93,7 @@ const handleCopy = () => {
 }
 
 .result-header {
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -100,6 +116,7 @@ const handleCopy = () => {
   color: var(--text-muted);
   cursor: pointer;
   font-size: 0.95rem;
+  font-weight: 600;
 }
 
 .checkbox-label input[type="checkbox"] {
@@ -109,8 +126,35 @@ const handleCopy = () => {
   accent-color: var(--accent-color);
 }
 
+.preview-section {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.preview-header {
+  padding: 1rem 1.5rem 0.5rem 1.5rem;
+  background-color: var(--bg-body);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.preview-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.preview-filename {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
 .result-area {
-  padding: 2rem;
+  padding: 1.5rem;
   background-color: var(--bg-body);
   display: flex;
   flex-direction: column;
@@ -154,7 +198,7 @@ const handleCopy = () => {
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: opacity 0.2s;
 }
 
 .btn-primary:hover {
@@ -176,11 +220,7 @@ const handleCopy = () => {
 }
 
 @media (max-width: 600px) {
-  .encoder-result {
-    padding: 0;
-  }
-  
-  .result-header, .result-area {
+  .result-header, .result-area, .preview-header {
     padding: 1rem;
   }
 

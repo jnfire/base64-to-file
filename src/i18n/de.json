@@ -40,6 +40,7 @@
     "btn_encode": "In Base64 Codieren",
     "btn_clear": "Leeren",
     "include_data_uri": "Data-URI-Präfix einschließen",
+    "preview_title": "Dateivorschau",
     "result_title": "Base64-Ergebnis",
     "btn_copy": "In die Zwischenablage kopieren",
     "copied": "Kopiert!",

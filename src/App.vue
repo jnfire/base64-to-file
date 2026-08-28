@@ -35,6 +35,7 @@ const {
 
 const {
   selectedFile,
+  fileObjectUrl,
   finalBase64Result,
   error: encoderError,
   includeDataUri,
@@ -47,6 +48,19 @@ const {
   clear: clearEncoder,
   copyToClipboard
 } = useFileEncoder();
+const selectTab = (targetTab: 'decode' | 'encode') => {
+  activeTab.value = targetTab;
+};
+
+const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode' | 'encode') => {
+  if (keyboardEvent.key === 'ArrowRight' || keyboardEvent.key === 'ArrowLeft') {
+    keyboardEvent.preventDefault();
+    const nextTabName = currentTabName === 'decode' ? 'encode' : 'decode';
+    activeTab.value = nextTabName;
+    const targetElement = document.getElementById(`tab-${nextTabName}`);
+    targetElement?.focus();
+  }
+};
 </script>
 
 <template>
@@ -62,7 +76,7 @@ const {
       </div>
     </header>
 
-    <SettingsView v-if="showSettings" :show="showSettings" @close="showSettings = false" />
+    <SettingsView v-if="showSettings" :show="showSettings" />
 
     <main class="main-content" v-else>
       <div class="tabs" role="tablist" :aria-label="$t('header.title')">
@@ -74,9 +88,8 @@ const {
           :aria-selected="activeTab === 'decode'"
           aria-controls="panel-decode"
           :tabindex="activeTab === 'decode' ? 0 : -1"
-          @click="activeTab = 'decode'"
-          @keydown.right.prevent="activeTab = 'encode'"
-          @keydown.left.prevent="activeTab = 'encode'"
+          @click="selectTab('decode')"
+          @keydown="handleTabKeydown($event, 'decode')"
         >
           {{ $t('tabs.decode') }}
         </button>
@@ -88,9 +101,8 @@ const {
           :aria-selected="activeTab === 'encode'"
           aria-controls="panel-encode"
           :tabindex="activeTab === 'encode' ? 0 : -1"
-          @click="activeTab = 'encode'"
-          @keydown.right.prevent="activeTab = 'decode'"
-          @keydown.left.prevent="activeTab = 'decode'"
+          @click="selectTab('encode')"
+          @keydown="handleTabKeydown($event, 'encode')"
         >
           {{ $t('tabs.encode') }}
         </button>
@@ -145,6 +157,8 @@ const {
         <EncoderResult
           :base64Result="finalBase64Result"
           :includeDataUri="includeDataUri"
+          :selectedFile="selectedFile"
+          :fileObjectUrl="fileObjectUrl"
           @update:includeDataUri="includeDataUri = $event"
           @copy="copyToClipboard"
         />

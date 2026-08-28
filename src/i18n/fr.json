@@ -40,6 +40,7 @@
     "btn_encode": "Encoder en Base64",
     "btn_clear": "Effacer",
     "include_data_uri": "Inclure le préfixe Data URI",
+    "preview_title": "Aperçu du Fichier",
     "result_title": "Résultat Base64",
     "btn_copy": "Copier dans le Presse-papiers",
     "copied": "Copié !",

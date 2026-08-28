@@ -119,7 +119,7 @@ const localSelectedType = computed({
   border: none;
   color: var(--text-muted);
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   border-radius: 6px;
   transition: all 0.2s;
@@ -138,6 +138,7 @@ const localSelectedType = computed({
   background-color: var(--bg-surface);
   color: var(--text-main);
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  font-weight: 600;
 }
 
 .manual-options {

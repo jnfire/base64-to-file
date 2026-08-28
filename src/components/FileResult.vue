@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed } from 'vue';
 import type { FileInfo } from '../core/types';
+import FilePreview from './FilePreview.vue';
 
 const props = defineProps<{
   fileInfo: FileInfo;
@@ -8,38 +9,10 @@ const props = defineProps<{
 }>();
 
 defineEmits<{
-  (e: 'download'): void;
+  (emitEvent: 'download'): void;
 }>();
 
-const isImage = computed(() => 
-  props.fileInfo.mime.startsWith('image/') || props.fileInfo.mime === 'image/svg+xml'
-);
-const isPdf = computed(() => props.fileInfo.mime === 'application/pdf');
-const isText = computed(() => 
-  props.fileInfo.mime.startsWith('text/') || 
-  props.fileInfo.mime === 'application/json' || 
-  props.fileInfo.mime === 'application/xml'
-);
-
-const textContent = ref('');
 const fileSizeKb = computed(() => (props.fileInfo.data.length / 1024).toFixed(2));
-
-watch(() => props.fileInfo, (newVal) => {
-  if (newVal && isText.value) {
-    const rawText = new TextDecoder().decode(newVal.data);
-    if (newVal.mime === 'application/json') {
-      try {
-        textContent.value = JSON.stringify(JSON.parse(rawText), null, 2);
-      } catch {
-        textContent.value = rawText;
-      }
-    } else {
-      textContent.value = rawText;
-    }
-  } else {
-    textContent.value = '';
-  }
-}, { immediate: true });
 </script>
 
 <template>
@@ -66,16 +39,11 @@ watch(() => props.fileInfo, (newVal) => {
       </button>
     </div>
 
-    <div v-if="previewPossible" class="preview-area">
-      <div class="preview-container">
-        <img v-if="isImage" :src="fileInfo.objectUrl" :alt="`${$t('result.title')} (${fileInfo.extension})`" />
-        <iframe v-else-if="isPdf" :src="fileInfo.objectUrl" frameborder="0" :title="`${$t('result.title')} PDF`"></iframe>
-        <pre v-else-if="isText" class="text-preview" tabindex="0" :aria-label="$t('result.title')">{{ textContent }}</pre>
-      </div>
-    </div>
-    <div v-else class="no-preview">
-      <p>{{ $t('result.no_preview') }}</p>
-    </div>
+    <FilePreview
+      :objectUrl="fileInfo.objectUrl"
+      :mimeType="fileInfo.mime"
+      :fileName="`archivo_recuperado.${fileInfo.extension}`"
+    />
   </div>
 </template>
 
@@ -139,78 +107,14 @@ watch(() => props.fileInfo, (newVal) => {
   outline-offset: 2px;
 }
 
-.preview-area {
-  padding: 1.5rem;
-  background-color: var(--bg-body);
-}
-
-.preview-container {
-  display: flex;
-  justify-content: center;
-  background-color: var(--bg-surface);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  overflow: hidden;
-  min-height: 200px;
-}
-
-.preview-container img {
-  max-width: 100%;
-  max-height: 600px;
-  object-fit: contain;
-  background-image: linear-gradient(45deg, var(--bg-body) 25%, transparent 25%), 
-                    linear-gradient(-45deg, var(--bg-body) 25%, transparent 25%), 
-                    linear-gradient(45deg, transparent 75%, var(--bg-body) 75%), 
-                    linear-gradient(-45deg, transparent 75%, var(--bg-body) 75%);
-  background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-}
-
-.preview-container iframe {
-  width: 100%;
-  height: 600px;
-  border: none;
-}
-
-.text-preview {
-  width: 100%;
-  padding: 1rem;
-  margin: 0;
-  overflow: auto;
-  max-height: 500px;
-  text-align: left;
-  white-space: pre-wrap;
-  word-break: break-all;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--text-main);
-}
-
-.text-preview:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: -2px;
-}
-
-.no-preview {
-  padding: 3rem 2rem;
-  text-align: center;
-  color: var(--text-muted);
-  background-color: var(--bg-body);
-}
-
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 600px) {
-  .result-header, .preview-area {
+  .result-header {
     padding: 1rem;
-  }
-
-  .text-preview {
-    font-size: 0.95rem;
   }
 }
 </style>

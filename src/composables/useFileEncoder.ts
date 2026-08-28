@@ -19,8 +19,8 @@ export function useFileEncoder() {
       result = extractRawBase64(dataUriResult.value);
     }
     
-    if (mimeFormatConfig.value) {
-      // Add line breaks every 76 characters
+    if (mimeFormatConfig.value && !includeDataUri.value) {
+      // Add line breaks every 76 characters only for raw base64
       const regex = /.{1,76}/g;
       const chunks = result.match(regex);
       if (chunks) {
@@ -30,9 +30,15 @@ export function useFileEncoder() {
     return result;
   });
 
+  const fileObjectUrl = ref<string>('');
+
   const encodeFile = async (file: File) => {
     error.value = null;
+    if (fileObjectUrl.value) {
+      URL.revokeObjectURL(fileObjectUrl.value);
+    }
     selectedFile.value = file;
+    fileObjectUrl.value = URL.createObjectURL(file);
     isEncoding.value = true;
     
     try {
@@ -43,10 +49,11 @@ export function useFileEncoder() {
           copyToClipboard();
         }, 50);
       }
-    } catch (e: any) {
-      if (e.message === 'FILE_TOO_LARGE') {
-        const mb = (MAX_FILE_SIZE_BYTES / 1024 / 1024).toFixed(0);
-        error.value = `El archivo supera el límite de seguridad de ${mb}MB.`;
+    } catch (encodingError: unknown) {
+      const errorObject = encodingError as { message?: string };
+      if (errorObject?.message === 'FILE_TOO_LARGE') {
+        const maxMegabytes = (MAX_FILE_SIZE_BYTES / 1024 / 1024).toFixed(0);
+        error.value = `El archivo supera el límite de seguridad de ${maxMegabytes}MB.`;
       } else {
         error.value = 'Error al leer el archivo.';
       }
@@ -57,32 +64,36 @@ export function useFileEncoder() {
   };
 
   const clear = () => {
+    if (fileObjectUrl.value) {
+      URL.revokeObjectURL(fileObjectUrl.value);
+      fileObjectUrl.value = '';
+    }
     selectedFile.value = null;
     dataUriResult.value = '';
     error.value = null;
   };
 
-  const handleDragEnter = (e: DragEvent) => {
-    e.preventDefault();
+  const handleDragEnter = (dragEvent: DragEvent) => {
+    dragEvent.preventDefault();
     isDragging.value = true;
   };
 
-  const handleDragLeave = (e: DragEvent) => {
-    e.preventDefault();
+  const handleDragLeave = (dragEvent: DragEvent) => {
+    dragEvent.preventDefault();
     isDragging.value = false;
   };
 
-  const handleDragOver = (e: DragEvent) => {
-    e.preventDefault();
+  const handleDragOver = (dragEvent: DragEvent) => {
+    dragEvent.preventDefault();
     isDragging.value = true;
   };
 
-  const handleDrop = async (e: DragEvent) => {
-    e.preventDefault();
+  const handleDrop = async (dragEvent: DragEvent) => {
+    dragEvent.preventDefault();
     isDragging.value = false;
     
-    if (e.dataTransfer && e.dataTransfer.files.length > 0) {
-      const file = e.dataTransfer.files[0];
+    if (dragEvent.dataTransfer && dragEvent.dataTransfer.files.length > 0) {
+      const file = dragEvent.dataTransfer.files[0];
       await encodeFile(file);
     }
   };
@@ -92,14 +103,15 @@ export function useFileEncoder() {
     try {
       await navigator.clipboard.writeText(finalBase64Result.value);
       return true;
-    } catch (err) {
-      console.error('Error al copiar:', err);
+    } catch (clipboardError) {
+      console.error('Error al copiar:', clipboardError);
       return false;
     }
   };
 
   return {
     selectedFile,
+    fileObjectUrl,
     dataUriResult,
     finalBase64Result,
     error,

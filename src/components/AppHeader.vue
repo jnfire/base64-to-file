@@ -9,20 +9,21 @@ defineProps<{
 const { t } = useI18n();
 
 const emit = defineEmits<{
-  (e: 'toggle-settings'): void;
-  (e: 'home'): void;
+  (emitEvent: 'toggle-settings'): void;
+  (emitEvent: 'home'): void;
 }>();
 </script>
 
 <template>
   <header class="navbar">
     <div class="navbar-container">
-      <button class="navbar-brand" @click="emit('home')" :aria-label="t('header.title')">
+      <button type="button" class="navbar-brand" @click="emit('home')" :aria-label="t('header.title')">
         <h1 class="title">{{ t('header.title') }}</h1>
       </button>
 
       <div class="navbar-actions">
         <button
+          type="button"
           class="btn-secondary config-toggle"
           :class="{ 'config-toggle--active': showSettings }"
           @click="emit('toggle-settings')"

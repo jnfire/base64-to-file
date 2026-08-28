@@ -1,17 +1,36 @@
 import { ref, watch } from 'vue';
 
-const getBool = (key: string, def: boolean) => {
-  const item = localStorage.getItem(key);
-  return item !== null ? item === 'true' : def;
+const getBoolConfig = (storageKey: string, defaultValue: boolean): boolean => {
+  try {
+    if (typeof window === 'undefined' || !window.localStorage) {
+      return defaultValue;
+    }
+    const storedValue = window.localStorage.getItem(storageKey);
+    return storedValue !== null ? storedValue === 'true' : defaultValue;
+  } catch (storageError) {
+    return defaultValue;
+  }
 };
 
-export const autoCopyConfig = ref(getBool('base64-auto-copy', false));
-export const mimeFormatConfig = ref(getBool('base64-mime-format', false));
+export const autoCopyConfig = ref<boolean>(getBoolConfig('base64-auto-copy', false));
+export const mimeFormatConfig = ref<boolean>(getBoolConfig('base64-mime-format', false));
 
-watch(autoCopyConfig, (val) => {
-  localStorage.setItem('base64-auto-copy', val ? 'true' : 'false');
+watch(autoCopyConfig, (isEnabled: boolean) => {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.setItem('base64-auto-copy', isEnabled ? 'true' : 'false');
+    }
+  } catch (storageError) {
+    // ignore storage write errors
+  }
 });
 
-watch(mimeFormatConfig, (val) => {
-  localStorage.setItem('base64-mime-format', val ? 'true' : 'false');
+watch(mimeFormatConfig, (isEnabled: boolean) => {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.setItem('base64-mime-format', isEnabled ? 'true' : 'false');
+    }
+  } catch (storageError) {
+    // ignore storage write errors
+  }
 });
