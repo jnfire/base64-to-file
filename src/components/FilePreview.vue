@@ -54,7 +54,7 @@ watch(
   { immediate: true }
 );
 
-const isSupportedPreview = computed(() => isImage.value || isPdf.value || isText.value);
+const isSupportedPreview = computed(() => !!props.objectUrl && (isImage.value || isPdf.value || isText.value));
 </script>
 
 <template>
