@@ -29,8 +29,8 @@
     "no_preview": "Previsualización no disponible para este formato. Por favor, descarga el archivo."
   },
   "tabs": {
-    "decode": "Decodificar (Base64 \u2192 Archivo)",
-    "encode": "Codificar (Archivo \u2192 Base64)"
+    "decode": "Decodificar (Base64 → Archivo)",
+    "encode": "Codificar (Archivo → Base64)"
   },
   "encoder": {
     "drop_zone": "Arrastra y suelta un archivo aquí",
@@ -40,6 +40,7 @@
     "btn_encode": "Codificar a Base64",
     "btn_clear": "Limpiar",
     "include_data_uri": "Incluir prefijo Data URI",
+    "preview_title": "Vista Previa del Archivo",
     "result_title": "Resultado Base64",
     "btn_copy": "Copiar al Portapapeles",
     "copied": "¡Copiado!",
@@ -55,5 +56,18 @@
     "text": "Desarrollo local-first. Tus datos, tu control.",
     "source": "Ver Código Fuente",
     "license": "Derechos Reservados"
+  },
+  "settings": {
+    "title": "Configuración",
+    "general": "Personalización",
+    "personalization": "Personalización",
+    "language": "Idioma",
+    "theme": "Tema",
+    "themeLight": "Claro",
+    "themeDark": "Oscuro",
+    "themeSystem": "Sistema",
+    "encoder": "Configuración del Codificador",
+    "autoCopy": "Autocopiar base64 al portapapeles",
+    "mimeFormat": "Formato MIME (saltos de línea cada 76 caracteres)"
   }
 }

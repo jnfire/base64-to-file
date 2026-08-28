@@ -7,6 +7,7 @@ import EncoderInput from './components/EncoderInput.vue';
 import EncoderResult from './components/EncoderResult.vue';
 import AppFooter from './components/AppFooter.vue';
 import CookieBanner from './components/CookieBanner.vue';
+import SettingsView from './components/SettingsView.vue';
 import { useBase64Converter } from './composables/useBase64Converter';
 import { useFileEncoder } from './composables/useFileEncoder';
 import { initAnalytics } from './utils/analytics';
@@ -17,6 +18,7 @@ const handleCookieAccept = () => {
 };
 
 const activeTab = ref<'decode' | 'encode'>('decode');
+const showSettings = ref(false);
 
 const {
   base64Input,
@@ -33,6 +35,7 @@ const {
 
 const {
   selectedFile,
+  fileObjectUrl,
   finalBase64Result,
   error: encoderError,
   includeDataUri,
@@ -45,13 +48,26 @@ const {
   clear: clearEncoder,
   copyToClipboard
 } = useFileEncoder();
+const selectTab = (targetTab: 'decode' | 'encode') => {
+  activeTab.value = targetTab;
+};
+
+const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode' | 'encode') => {
+  if (keyboardEvent.key === 'ArrowRight' || keyboardEvent.key === 'ArrowLeft') {
+    keyboardEvent.preventDefault();
+    const nextTabName = currentTabName === 'decode' ? 'encode' : 'decode';
+    activeTab.value = nextTabName;
+    const targetElement = document.getElementById(`tab-${nextTabName}`);
+    targetElement?.focus();
+  }
+};
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader :showSettings="showSettings" @toggle-settings="showSettings = !showSettings" @home="showSettings = false" />
 
   <div class="app-layout">
-    <header class="app-hero">
+    <header class="app-hero" v-if="!showSettings">
       <p class="subtitle">{{ $t('header.subtitle') }}</p>
       <div class="badges">
         <span class="badge">{{ $t('header.badges.auditable') }}</span>
@@ -60,25 +76,46 @@ const {
       </div>
     </header>
 
-    <main class="main-content">
-      <div class="tabs">
+    <SettingsView v-if="showSettings" :show="showSettings" />
+
+    <main class="main-content" v-else>
+      <div class="tabs" role="tablist" :aria-label="$t('header.title')">
         <button 
+          id="tab-decode"
+          role="tab"
           class="tab-btn" 
           :class="{ active: activeTab === 'decode' }"
-          @click="activeTab = 'decode'"
+          :aria-selected="activeTab === 'decode'"
+          aria-controls="panel-decode"
+          :tabindex="activeTab === 'decode' ? 0 : -1"
+          @click="selectTab('decode')"
+          @keydown="handleTabKeydown($event, 'decode')"
         >
           {{ $t('tabs.decode') }}
         </button>
         <button 
+          id="tab-encode"
+          role="tab"
           class="tab-btn" 
           :class="{ active: activeTab === 'encode' }"
-          @click="activeTab = 'encode'"
+          :aria-selected="activeTab === 'encode'"
+          aria-controls="panel-encode"
+          :tabindex="activeTab === 'encode' ? 0 : -1"
+          @click="selectTab('encode')"
+          @keydown="handleTabKeydown($event, 'encode')"
         >
           {{ $t('tabs.encode') }}
         </button>
       </div>
 
-      <div v-if="activeTab === 'decode'" class="tab-pane">
+      <div 
+        v-if="activeTab === 'decode'" 
+        id="panel-decode"
+        role="tabpanel"
+        aria-labelledby="tab-decode"
+        tabindex="0"
+        class="tab-pane"
+      >
         <ConverterInput
           v-model:base64Input="base64Input"
           v-model:detectionMode="detectionMode"
@@ -97,7 +134,14 @@ const {
         />
       </div>
 
-      <div v-if="activeTab === 'encode'" class="tab-pane">
+      <div 
+        v-if="activeTab === 'encode'" 
+        id="panel-encode"
+        role="tabpanel"
+        aria-labelledby="tab-encode"
+        tabindex="0"
+        class="tab-pane"
+      >
         <EncoderInput
           :selectedFile="selectedFile"
           :isDragging="isDragging"
@@ -113,6 +157,8 @@ const {
         <EncoderResult
           :base64Result="finalBase64Result"
           :includeDataUri="includeDataUri"
+          :selectedFile="selectedFile"
+          :fileObjectUrl="fileObjectUrl"
           @update:includeDataUri="includeDataUri = $event"
           @copy="copyToClipboard"
         />
@@ -139,7 +185,7 @@ const {
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg-body: #111827;
     --bg-surface: #1f2937;
     --bg-surface-hover: #374151;
@@ -150,6 +196,18 @@ const {
     --accent-color-alpha: rgba(255, 255, 255, 0.1);
     --error-color: #f87171;
   }
+}
+
+:root[data-theme="dark"] {
+  --bg-body: #111827;
+  --bg-surface: #1f2937;
+  --bg-surface-hover: #374151;
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+  --border-color: #374151;
+  --accent-color: #ffffff;
+  --accent-color-alpha: rgba(255, 255, 255, 0.1);
+  --error-color: #f87171;
 }
 
 * {
@@ -170,7 +228,7 @@ body {
 .app-layout {
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 1.5rem 3rem 1.5rem;
+  padding: 3rem 1.5rem;
   min-height: calc(100vh - 55px);
   display: flex;
   flex-direction: column;
@@ -178,8 +236,7 @@ body {
 
 .app-hero {
   text-align: center;
-  margin-top: 2.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .subtitle {
@@ -242,6 +299,16 @@ body {
   background-color: var(--bg-surface-hover);
 }
 
+.tab-btn:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+[role="tabpanel"]:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
+}
+
 .tab-btn.active {
   background-color: var(--accent-color);
   color: var(--bg-body);
@@ -259,10 +326,10 @@ body {
 /* Mobile Responsive Adjustments */
 @media (max-width: 600px) {
   .app-layout {
-    padding: 0 0.5rem 2rem 0.5rem;
+    padding: 1.5rem 0.75rem 2rem 0.75rem;
   }
   .app-hero {
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     margin-bottom: 1.5rem;
   }
   .subtitle {

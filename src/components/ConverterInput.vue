@@ -37,12 +37,18 @@ const localSelectedType = computed({
 <template>
   <div class="converter-input">
     <div class="controls-header">
-      <div class="mode-selector">
+      <div class="mode-selector" role="radiogroup" :aria-label="$t('input.format')">
         <button 
+          type="button"
+          role="radio"
+          :aria-checked="localDetectionMode === 'auto'"
           :class="{ active: localDetectionMode === 'auto' }" 
           @click="localDetectionMode = 'auto'"
         >{{ $t('input.mode.auto') }}</button>
         <button 
+          type="button"
+          role="radio"
+          :aria-checked="localDetectionMode === 'manual'"
           :class="{ active: localDetectionMode === 'manual' }" 
           @click="localDetectionMode = 'manual'"
         >{{ $t('input.mode.manual') }}</button>
@@ -58,18 +64,22 @@ const localSelectedType = computed({
       </div>
     </div>
 
+    <label for="base64-input-textarea" class="sr-only">{{ $t('input.placeholder') }}</label>
     <textarea
+      id="base64-input-textarea"
       v-model="localInput"
       :placeholder="$t('input.placeholder')"
+      :aria-invalid="!!error"
+      :aria-describedby="error ? 'decoder-error-msg' : undefined"
       rows="8"
     ></textarea>
     
     <div class="actions">
-      <button @click="$emit('convert')" class="btn-primary">{{ $t('input.btn_decode') }}</button>
-      <button @click="$emit('clear')" class="btn-secondary">{{ $t('input.btn_clear') }}</button>
+      <button type="button" @click="$emit('convert')" class="btn-primary">{{ $t('input.btn_decode') }}</button>
+      <button type="button" @click="$emit('clear')" class="btn-secondary">{{ $t('input.btn_clear') }}</button>
     </div>
     
-    <p v-if="error" class="error-msg">
+    <p v-if="error" id="decoder-error-msg" class="error-msg" role="alert" aria-live="assertive">
       {{ error === 'Por favor, pega un código Base64.' ? $t('input.error_empty') : $t('input.error_invalid') }}
     </p>
   </div>
@@ -109,7 +119,7 @@ const localSelectedType = computed({
   border: none;
   color: var(--text-muted);
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   border-radius: 6px;
   transition: all 0.2s;
@@ -119,10 +129,16 @@ const localSelectedType = computed({
   color: var(--text-main);
 }
 
+.mode-selector button:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 1px;
+}
+
 .mode-selector button.active {
   background-color: var(--bg-surface);
   color: var(--text-main);
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  font-weight: 600;
 }
 
 .manual-options {
@@ -148,6 +164,11 @@ select {
   cursor: pointer;
 }
 
+select:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
 textarea {
   width: 100%;
   padding: 1rem;
@@ -162,6 +183,7 @@ textarea {
   line-height: 1.5;
 }
 
+textarea:focus-visible,
 textarea:focus {
   outline: none;
   border-color: var(--accent-color);
@@ -193,6 +215,11 @@ button {
   opacity: 0.9;
 }
 
+.btn-primary:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
 .btn-secondary {
   background-color: var(--bg-body);
   color: var(--text-main);
@@ -205,6 +232,11 @@ button {
 
 .btn-secondary:hover {
   background-color: var(--bg-surface-hover);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
 .error-msg {

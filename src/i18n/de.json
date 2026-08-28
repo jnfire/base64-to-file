@@ -29,8 +29,8 @@
     "no_preview": "Vorschau für dieses Format nicht verfügbar. Bitte laden Sie die Datei herunter."
   },
   "tabs": {
-    "decode": "Decodieren (Base64 \u2192 Datei)",
-    "encode": "Codieren (Datei \u2192 Base64)"
+    "decode": "Decodieren (Base64 → Datei)",
+    "encode": "Codieren (Datei → Base64)"
   },
   "encoder": {
     "drop_zone": "Ziehen Sie eine Datei hierher",
@@ -40,6 +40,7 @@
     "btn_encode": "In Base64 Codieren",
     "btn_clear": "Leeren",
     "include_data_uri": "Data-URI-Präfix einschließen",
+    "preview_title": "Dateivorschau",
     "result_title": "Base64-Ergebnis",
     "btn_copy": "In die Zwischenablage kopieren",
     "copied": "Kopiert!",
@@ -55,5 +56,18 @@
     "text": "Local-First-Entwicklung. Ihre Daten, Ihre Kontrolle.",
     "source": "Quellcode Anzeigen",
     "license": "Alle Rechte Vorbehalten"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "general": "Personalisierung",
+    "personalization": "Personalisierung",
+    "language": "Sprache",
+    "theme": "Thema",
+    "themeLight": "Hell",
+    "themeDark": "Dunkel",
+    "themeSystem": "System",
+    "encoder": "Encoder-Einstellungen",
+    "autoCopy": "Base64 automatisch kopieren",
+    "mimeFormat": "MIME-Format (Zeilenumbrüche)"
   }
 }

@@ -1,15 +1,21 @@
-<!-- src/components/LangSelector.vue -->
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue';
-import FlagIcon from './FlagIcon.vue';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   modelValue: string;
-  options: { code: string; label: string }[];
-}>();
+  options: { value: string; label: string }[];
+  placeholder?: string;
+  id?: string;
+  name?: string;
+  size?: 'md' | 'sm';
+  disabled?: boolean;
+}>(), {
+  size: 'md',
+  disabled: false
+});
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
+  (emitEvent: 'update:modelValue', value: string): void;
 }>();
 
 const isOpen = ref(false);
@@ -18,18 +24,18 @@ const triggerRef = ref<HTMLButtonElement | null>(null);
 const optionRefs = ref<HTMLButtonElement[]>([]);
 
 const currentLabel = computed(() => {
-  const found = props.options.find(opt => opt.code === props.modelValue);
-  return found ? found.label : props.modelValue;
+  const matchingOption = props.options.find((optionItem) => optionItem.value === props.modelValue);
+  return matchingOption ? matchingOption.label : (props.placeholder || 'Select an option');
 });
 
-const setOptionRef = (el: any, index: number) => {
-  if (el) optionRefs.value[index] = el as HTMLButtonElement;
+const setOptionRef = (element: unknown, index: number) => {
+  if (element) optionRefs.value[index] = element as HTMLButtonElement;
 };
 
 const openDropdown = async () => {
   isOpen.value = true;
   await nextTick();
-  const selectedIndex = props.options.findIndex(opt => opt.code === props.modelValue);
+  const selectedIndex = props.options.findIndex((optionItem) => optionItem.value === props.modelValue);
   optionRefs.value[selectedIndex >= 0 ? selectedIndex : 0]?.focus();
 };
 
@@ -39,6 +45,7 @@ const closeDropdown = (returnFocus = true) => {
 };
 
 const toggleDropdown = () => {
+  if (props.disabled) return;
   if (isOpen.value) {
     closeDropdown(false);
   } else {
@@ -46,15 +53,14 @@ const toggleDropdown = () => {
   }
 };
 
-const selectOption = (code: string) => {
-  emit('update:modelValue', code);
+const selectOption = (value: string) => {
+  emit('update:modelValue', value);
   closeDropdown();
 };
 
-// Moves focus between options with the arrow keys (roving focus), wrapping
-// around at the edges, so keyboard users never get stuck in the listbox.
 const focusOptionByOffset = (currentIndex: number, offset: number) => {
   const count = props.options.length;
+  if (count === 0) return;
   const nextIndex = (currentIndex + offset + count) % count;
   optionRefs.value[nextIndex]?.focus();
 };
@@ -88,6 +94,7 @@ const handleOptionKeydown = (event: KeyboardEvent, index: number) => {
 };
 
 const handleTriggerKeydown = (event: KeyboardEvent) => {
+  if (props.disabled) return;
   if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
     event.preventDefault();
     openDropdown();
@@ -96,7 +103,7 @@ const handleTriggerKeydown = (event: KeyboardEvent) => {
 
 const handleClickOutside = (event: MouseEvent) => {
   if (containerRef.value && !containerRef.value.contains(event.target as Node)) {
-    isOpen.value = false;
+    closeDropdown(false);
   }
 };
 
@@ -110,41 +117,44 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="lang-selector-container" ref="containerRef">
+  <div class="custom-select-container" ref="containerRef" :id="id">
+    <!-- input oculto para compatibilidad con forms -->
+    <input type="hidden" :name="name" :value="modelValue" />
+
     <button
       ref="triggerRef"
       type="button"
-      class="lang-selector-trigger"
+      class="custom-select-trigger"
+      :class="{ 'custom-select-trigger--sm': size === 'sm' }"
+      :disabled="disabled"
       @click="toggleDropdown"
       @keydown="handleTriggerKeydown"
       aria-haspopup="listbox"
       :aria-expanded="isOpen"
     >
-      <FlagIcon :code="modelValue" />
-      <span class="lang-label">{{ currentLabel }}</span>
+      <span class="select-label" :class="{ 'placeholder': !modelValue && placeholder }">{{ currentLabel }}</span>
       <span class="dropdown-arrow" :class="{ 'arrow-open': isOpen }" aria-hidden="true">▾</span>
     </button>
 
     <transition name="fade-slide">
-      <ul v-if="isOpen" class="lang-selector-dropdown" role="listbox">
+      <ul v-if="isOpen" class="custom-select-dropdown" role="listbox">
         <li
-          v-for="(opt, index) in options"
-          :key="opt.code"
+          v-for="(optionItem, index) in options"
+          :key="optionItem.value"
           role="presentation"
         >
           <button
             type="button"
-            :ref="(el) => setOptionRef(el, index)"
-            class="lang-option"
-            :class="{ 'option-selected': opt.code === modelValue }"
+            :ref="(element) => setOptionRef(element, index)"
+            class="select-option"
+            :class="{ 'option-selected': optionItem.value === modelValue }"
             role="option"
-            :aria-selected="opt.code === modelValue"
-            :tabindex="opt.code === modelValue ? 0 : -1"
-            @click="selectOption(opt.code)"
+            :aria-selected="optionItem.value === modelValue"
+            :tabindex="optionItem.value === modelValue ? 0 : -1"
+            @click="selectOption(optionItem.value)"
             @keydown="handleOptionKeydown($event, index)"
           >
-            <FlagIcon :code="opt.code" />
-            <span>{{ opt.label }}</span>
+            <span>{{ optionItem.label }}</span>
           </button>
         </li>
       </ul>
@@ -153,53 +163,79 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.lang-selector-container {
+.custom-select-container {
   position: relative;
+  display: block;
   width: 100%;
 }
 
-.lang-selector-trigger {
-  background: var(--bg-surface);
+.custom-select-trigger {
+  width: 100%;
+  background: var(--bg-body);
   border: 1px solid var(--border-color);
   color: var(--text-main);
-  padding: 0.6rem 1rem;
+  padding: 0.85rem 1rem;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-family: inherit;
   font-weight: 600;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
-  transition: all 0.2s;
-  user-select: none;
-  width: 100%;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  text-align: left;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.lang-selector-trigger:hover {
-  background: var(--bg-surface-hover);
-  border-color: var(--text-muted);
+.custom-select-trigger--sm {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
 }
 
-.lang-selector-trigger:focus-visible {
+.custom-select-trigger:focus,
+.custom-select-trigger:focus-visible {
   outline: none;
   border-color: var(--accent-color);
   box-shadow: 0 0 0 3px var(--accent-color-alpha);
 }
 
+.custom-select-trigger:hover {
+  border-color: var(--text-muted);
+}
+
+.custom-select-trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.custom-select-trigger:disabled:hover {
+  border-color: var(--border-color);
+}
+
+.placeholder {
+  color: var(--text-muted);
+}
+
+.select-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
 .dropdown-arrow {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   transition: transform 0.2s ease;
-  margin-left: auto;
+  margin-left: 0.5rem;
 }
 
 .arrow-open {
   transform: rotate(180deg);
 }
 
-.lang-selector-dropdown {
+.custom-select-dropdown {
   position: absolute;
   top: calc(100% + 0.35rem);
   left: 0;
@@ -209,18 +245,19 @@ onUnmounted(() => {
   border-radius: 8px;
   box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
   padding: 0.35rem 0;
+  max-height: 250px;
+  overflow-y: auto;
   list-style: none;
   z-index: 2000;
   margin: 0;
 }
 
-.lang-option {
+.select-option {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   width: 100%;
-  padding: 0.45rem 1rem;
-  font-size: 0.85rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   font-family: inherit;
   color: var(--text-main);
@@ -231,9 +268,10 @@ onUnmounted(() => {
   text-align: left;
 }
 
-.lang-option:hover,
-.lang-option:focus-visible {
+.select-option:hover,
+.select-option:focus-visible {
   background-color: var(--bg-surface-hover);
+  outline: none;
 }
 
 .option-selected {
