@@ -51,32 +51,34 @@ watch(
       textContent.value = '';
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
-const isSupportedPreview = computed(() => !!props.objectUrl && (isImage.value || isPdf.value || isText.value));
+const isSupportedPreview = computed(
+  () => !!props.objectUrl && (isImage.value || isPdf.value || isText.value),
+);
 </script>
 
 <template>
   <div v-if="isSupportedPreview" class="preview-area">
     <div class="preview-container">
-      <img 
-        v-if="isImage" 
-        :src="objectUrl" 
-        :alt="fileName ? `Preview of ${fileName}` : $t('result.title')" 
+      <img
+        v-if="isImage"
+        :src="objectUrl"
+        :alt="fileName ? `Preview of ${fileName}` : $t('result.title')"
       />
-      <iframe 
-        v-else-if="isPdf" 
-        :src="objectUrl" 
-        frameborder="0" 
+      <iframe
+        v-else-if="isPdf"
+        :src="objectUrl"
+        frameborder="0"
         :title="fileName ? `PDF preview of ${fileName}` : `${$t('result.title')} PDF`"
       ></iframe>
-      <pre 
-        v-else-if="isText" 
-        class="text-preview" 
-        tabindex="0" 
+      <pre
+        v-else-if="isText"
+        class="text-preview"
+        tabindex="0"
         :aria-label="fileName ? `Text content of ${fileName}` : $t('result.title')"
-      >{{ textContent }}</pre>
+        >{{ textContent }}</pre>
     </div>
   </div>
   <div v-else class="no-preview">
@@ -104,12 +106,17 @@ const isSupportedPreview = computed(() => !!props.objectUrl && (isImage.value ||
   max-width: 100%;
   max-height: 500px;
   object-fit: contain;
-  background-image: linear-gradient(45deg, var(--bg-body) 25%, transparent 25%), 
-                    linear-gradient(-45deg, var(--bg-body) 25%, transparent 25%), 
-                    linear-gradient(45deg, transparent 75%, var(--bg-body) 75%), 
-                    linear-gradient(-45deg, transparent 75%, var(--bg-body) 75%);
+  background-image:
+    linear-gradient(45deg, var(--bg-body) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--bg-body) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--bg-body) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--bg-body) 75%);
   background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  background-position:
+    0 0,
+    0 10px,
+    10px -10px,
+    -10px 0px;
 }
 
 .preview-container iframe {

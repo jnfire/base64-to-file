@@ -17,7 +17,12 @@ const emit = defineEmits<{
 <template>
   <header class="navbar">
     <div class="navbar-container">
-      <button type="button" class="navbar-brand" :aria-label="t('header.title')" @click="emit('home')">
+      <button
+        type="button"
+        class="navbar-brand"
+        :aria-label="t('header.title')"
+        @click="emit('home')"
+      >
         <h1 class="title">{{ t('header.title') }}</h1>
       </button>
 
@@ -36,7 +41,7 @@ const emit = defineEmits<{
   </header>
 </template>
 
-<style scoped >
+<style scoped>
 .navbar {
   background-color: var(--bg-surface);
   border-bottom: 1px solid var(--border-color);

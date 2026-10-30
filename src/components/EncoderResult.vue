@@ -26,15 +26,20 @@ const handleCopy = () => {
 </script>
 
 <template>
-  <div v-if="base64Result" class="encoder-result" role="region" :aria-label="$t('encoder.result_title')">
+  <div
+    v-if="base64Result"
+    class="encoder-result"
+    role="region"
+    :aria-label="$t('encoder.result_title')"
+  >
     <div class="result-header">
       <h3>{{ $t('encoder.result_title') }}</h3>
       <label class="checkbox-label">
-        <input 
-          type="checkbox" 
+        <input
+          type="checkbox"
           :checked="includeDataUri"
           @change="emit('update:includeDataUri', ($event.target as HTMLInputElement).checked)"
-        >
+        />
         {{ $t('encoder.include_data_uri') }}
       </label>
     </div>
@@ -43,7 +48,9 @@ const handleCopy = () => {
     <div v-if="fileObjectUrl && selectedFile" class="preview-section">
       <div class="preview-header">
         <h4>{{ $t('encoder.preview_title') || $t('result.title') }}</h4>
-        <span class="preview-filename">{{ selectedFile.name }} ({{ (selectedFile.size / 1024).toFixed(2) }} KB)</span>
+        <span class="preview-filename"
+          >{{ selectedFile.name }} ({{ (selectedFile.size / 1024).toFixed(2) }} KB)</span
+        >
       </div>
       <FilePreview
         :objectUrl="fileObjectUrl"
@@ -54,20 +61,49 @@ const handleCopy = () => {
 
     <div class="result-area">
       <label for="base64-result-textarea" class="sr-only">{{ $t('encoder.result_title') }}</label>
-      <textarea 
+      <textarea
         id="base64-result-textarea"
-        readonly 
+        readonly
         :value="base64Result"
         class="result-textarea"
         rows="10"
       ></textarea>
-      
+
       <div class="actions">
-        <button type="button" class="btn-primary" :class="{ 'btn-success': copied }" @click="handleCopy">
-          <svg v-if="copied" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <button
+          type="button"
+          class="btn-primary"
+          :class="{ 'btn-success': copied }"
+          @click="handleCopy"
+        >
+          <svg
+            v-if="copied"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
-          <svg v-else xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
           </svg>
@@ -119,7 +155,7 @@ const handleCopy = () => {
   font-weight: 600;
 }
 
-.checkbox-label input[type="checkbox"] {
+.checkbox-label input[type='checkbox'] {
   width: 1.1rem;
   height: 1.1rem;
   cursor: pointer;
@@ -215,12 +251,20 @@ const handleCopy = () => {
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 600px) {
-  .result-header, .result-area, .preview-header {
+  .result-header,
+  .result-area,
+  .preview-header {
     padding: 1rem;
   }
 

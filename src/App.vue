@@ -22,7 +22,7 @@ const {
   convert: convertBase64,
   clear: clearDecoder,
   download,
-  previewPossible
+  previewPossible,
 } = useBase64Converter();
 
 const {
@@ -38,7 +38,7 @@ const {
   handleDrop,
   encodeFile,
   clear: clearEncoder,
-  copyToClipboard
+  copyToClipboard,
 } = useFileEncoder();
 const selectTab = (targetTab: 'decode' | 'encode') => {
   activeTab.value = targetTab;
@@ -56,7 +56,11 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
 </script>
 
 <template>
-  <AppHeader :showSettings="showSettings" @toggle-settings="showSettings = !showSettings" @home="showSettings = false" />
+  <AppHeader
+    :showSettings="showSettings"
+    @toggle-settings="showSettings = !showSettings"
+    @home="showSettings = false"
+  />
 
   <div class="app-layout">
     <header v-if="!showSettings" class="app-hero">
@@ -72,10 +76,10 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
 
     <main v-else class="main-content">
       <div class="tabs" role="tablist" :aria-label="$t('header.title')">
-        <button 
+        <button
           id="tab-decode"
           role="tab"
-          class="tab-btn" 
+          class="tab-btn"
           :class="{ active: activeTab === 'decode' }"
           :aria-selected="activeTab === 'decode'"
           aria-controls="panel-decode"
@@ -85,10 +89,10 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
         >
           {{ $t('tabs.decode') }}
         </button>
-        <button 
+        <button
           id="tab-encode"
           role="tab"
-          class="tab-btn" 
+          class="tab-btn"
           :class="{ active: activeTab === 'encode' }"
           :aria-selected="activeTab === 'encode'"
           aria-controls="panel-encode"
@@ -100,8 +104,8 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
         </button>
       </div>
 
-      <div 
-        v-if="activeTab === 'decode'" 
+      <div
+        v-if="activeTab === 'decode'"
         id="panel-decode"
         role="tabpanel"
         aria-labelledby="tab-decode"
@@ -126,8 +130,8 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
         />
       </div>
 
-      <div 
-        v-if="activeTab === 'encode'" 
+      <div
+        v-if="activeTab === 'encode'"
         id="panel-encode"
         role="tabpanel"
         aria-labelledby="tab-encode"
@@ -145,7 +149,7 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
           @dragover="handleDragOver"
           @drop="handleDrop"
         />
-        
+
         <EncoderResult
           :base64Result="finalBase64Result"
           :includeDataUri="includeDataUri"
@@ -176,7 +180,7 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme='light']) {
     --bg-body: #111827;
     --bg-surface: #1f2937;
     --bg-surface-hover: #374151;
@@ -189,7 +193,7 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
   }
 }
 
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --bg-body: #111827;
   --bg-surface: #1f2937;
   --bg-surface-hover: #374151;
@@ -208,7 +212,7 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--bg-body);
   color: var(--text-main);
   line-height: 1.6;
@@ -295,7 +299,7 @@ body {
   outline-offset: 2px;
 }
 
-[role="tabpanel"]:focus-visible {
+[role='tabpanel']:focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 4px;
 }
@@ -310,8 +314,14 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Mobile Responsive Adjustments */

@@ -49,7 +49,7 @@ const { t } = useI18n();
   cursor: pointer;
 }
 
-.checkbox-label input[type="checkbox"] {
+.checkbox-label input[type='checkbox'] {
   cursor: pointer;
   accent-color: var(--accent-color);
 }

@@ -11,7 +11,7 @@ export function fileToDataUri(file: File): Promise<string> {
     }
 
     const reader = new FileReader();
-    
+
     reader.onload = () => {
       if (typeof reader.result === 'string') {
         resolve(reader.result);
@@ -19,7 +19,7 @@ export function fileToDataUri(file: File): Promise<string> {
         reject(new Error('INVALID_RESULT_TYPE'));
       }
     };
-    
+
     reader.onerror = () => {
       reject(new Error('FILE_READ_ERROR'));
     };

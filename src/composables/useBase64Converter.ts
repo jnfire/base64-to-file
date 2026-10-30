@@ -53,7 +53,7 @@ export function useBase64Converter() {
         mime,
         extension,
         data: decodedData,
-        objectUrl
+        objectUrl,
       };
     } catch (e) {
       console.error(e);
@@ -101,6 +101,6 @@ export function useBase64Converter() {
     convert,
     clear,
     download,
-    previewPossible
+    previewPossible,
   };
 }

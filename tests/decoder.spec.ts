@@ -6,7 +6,7 @@ describe('decoder', () => {
     // "hello" in base64 is "aGVsbG8="
     const base64 = 'aGVsbG8=';
     const result = decodeBase64(base64);
-    
+
     expect(result).toBeInstanceOf(Uint8Array);
     const decodedText = new TextDecoder().decode(result);
     expect(decodedText).toBe('hello');
@@ -16,7 +16,7 @@ describe('decoder', () => {
     // Data URI for "hello"
     const dataUri = 'data:text/plain;base64,aGVsbG8=';
     const result = decodeBase64(dataUri);
-    
+
     expect(result).toBeInstanceOf(Uint8Array);
     const decodedText = new TextDecoder().decode(result);
     expect(decodedText).toBe('hello');
@@ -25,7 +25,7 @@ describe('decoder', () => {
   it('should handle base64 with surrounding whitespaces', () => {
     const base64 = '  aGVsbG8=  ';
     const result = decodeBase64(base64);
-    
+
     const decodedText = new TextDecoder().decode(result);
     expect(decodedText).toBe('hello');
   });

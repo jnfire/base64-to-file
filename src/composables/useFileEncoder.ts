@@ -18,7 +18,7 @@ export function useFileEncoder() {
     } else {
       result = extractRawBase64(dataUriResult.value);
     }
-    
+
     if (mimeFormatConfig.value && !includeDataUri.value) {
       // Add line breaks every 76 characters only for raw base64
       const regex = /.{1,76}/g;
@@ -40,7 +40,7 @@ export function useFileEncoder() {
     selectedFile.value = file;
     fileObjectUrl.value = URL.createObjectURL(file);
     isEncoding.value = true;
-    
+
     try {
       dataUriResult.value = await fileToDataUri(file);
       if (autoCopyConfig.value) {
@@ -91,7 +91,7 @@ export function useFileEncoder() {
   const handleDrop = async (dragEvent: DragEvent) => {
     dragEvent.preventDefault();
     isDragging.value = false;
-    
+
     if (dragEvent.dataTransfer && dragEvent.dataTransfer.files.length > 0) {
       const file = dragEvent.dataTransfer.files[0];
       await encodeFile(file);
@@ -124,6 +124,6 @@ export function useFileEncoder() {
     handleDragLeave,
     handleDragOver,
     handleDrop,
-    copyToClipboard
+    copyToClipboard,
   };
 }

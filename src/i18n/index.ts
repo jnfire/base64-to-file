@@ -25,8 +25,8 @@ const i18n = createI18n<[MessageSchema], SupportedLocale, false>({
     fr,
     de,
     it,
-    pt
-  }
+    pt,
+  },
 });
 
 export const setUiLanguage = (lang: SupportedLocale) => {

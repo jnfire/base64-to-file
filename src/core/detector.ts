@@ -1,11 +1,11 @@
 import type { DetectFileTypeResult } from './types';
 
 function isPng(bytes: Uint8Array): boolean {
-  return bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4E && bytes[3] === 0x47;
+  return bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47;
 }
 
 function isJpeg(bytes: Uint8Array): boolean {
-  return bytes[0] === 0xFF && bytes[1] === 0xD8 && bytes[2] === 0xFF;
+  return bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
 }
 
 function isPdf(bytes: Uint8Array): boolean {
@@ -13,7 +13,7 @@ function isPdf(bytes: Uint8Array): boolean {
 }
 
 function isZip(bytes: Uint8Array): boolean {
-  return bytes[0] === 0x50 && bytes[1] === 0x4B && bytes[2] === 0x03 && bytes[3] === 0x04;
+  return bytes[0] === 0x50 && bytes[1] === 0x4b && bytes[2] === 0x03 && bytes[3] === 0x04;
 }
 
 function isGif(bytes: Uint8Array): boolean {
@@ -21,7 +21,7 @@ function isGif(bytes: Uint8Array): boolean {
 }
 
 function isXml(bytes: Uint8Array): boolean {
-  return bytes[0] === 0x3C && bytes[1] === 0x3F && bytes[2] === 0x78 && bytes[3] === 0x6D;
+  return bytes[0] === 0x3c && bytes[1] === 0x3f && bytes[2] === 0x78 && bytes[3] === 0x6d;
 }
 
 export function extractDataUriInfo(dataUri: string): DetectFileTypeResult | null {
