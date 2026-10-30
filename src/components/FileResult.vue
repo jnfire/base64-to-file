@@ -31,9 +31,9 @@ const fileSizeKb = computed(() => (props.fileInfo.data.length / 1024).toFixed(2)
       </div>
       <button 
         type="button" 
-        @click="$emit('download')" 
-        class="btn-download"
+        class="btn-download" 
         :aria-label="`${$t('result.btn_download')} (.${fileInfo.extension})`"
+        @click="$emit('download')"
       >
         {{ $t('result.btn_download') }}
       </button>

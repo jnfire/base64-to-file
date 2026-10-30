@@ -10,7 +10,13 @@ export interface DetectFileTypeResult {
   extension: string;
 }
 
-export const COMMON_TYPES = [
+export interface FileTypeOption {
+  label: string;
+  mime: string;
+  extension: string;
+}
+
+export const COMMON_TYPES: FileTypeOption[] = [
   { label: 'Imagen PNG', mime: 'image/png', extension: 'png' },
   { label: 'Imagen JPEG', mime: 'image/jpeg', extension: 'jpg' },
   { label: 'Documento PDF', mime: 'application/pdf', extension: 'pdf' },

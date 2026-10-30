@@ -26,7 +26,7 @@ const handleCopy = () => {
 </script>
 
 <template>
-  <div class="encoder-result" v-if="base64Result" role="region" :aria-label="$t('encoder.result_title')">
+  <div v-if="base64Result" class="encoder-result" role="region" :aria-label="$t('encoder.result_title')">
     <div class="result-header">
       <h3>{{ $t('encoder.result_title') }}</h3>
       <label class="checkbox-label">
@@ -63,7 +63,7 @@ const handleCopy = () => {
       ></textarea>
       
       <div class="actions">
-        <button type="button" @click="handleCopy" class="btn-primary" :class="{ 'btn-success': copied }">
+        <button type="button" class="btn-primary" :class="{ 'btn-success': copied }" @click="handleCopy">
           <svg v-if="copied" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
@@ -73,7 +73,7 @@ const handleCopy = () => {
           </svg>
           <span>{{ copied ? $t('encoder.copied') : $t('encoder.btn_copy') }}</span>
         </button>
-        <div class="sr-only" role="status" aria-live="polite" v-if="copied">
+        <div v-if="copied" class="sr-only" role="status" aria-live="polite">
           {{ $t('encoder.copied') }}
         </div>
       </div>

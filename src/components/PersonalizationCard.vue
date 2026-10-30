@@ -45,8 +45,8 @@ const handleLanguageChange = (langCode: string) => {
         <label class="setting-label">{{ t('settings.language') || 'Language' }}</label>
         <LangSelector
           :modelValue="locale"
-          @update:modelValue="handleLanguageChange"
           :options="languages"
+          @update:modelValue="handleLanguageChange"
         />
       </div>
       <div class="setting-item">

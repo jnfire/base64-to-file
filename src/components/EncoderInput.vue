@@ -51,8 +51,8 @@ const handleFileChange = (e: Event) => {
       @keydown.space.prevent="triggerFileInput"
     >
       <input 
-        type="file" 
         ref="fileInputRef" 
+        type="file" 
         class="sr-only"
         tabindex="-1"
         aria-hidden="true"
@@ -66,7 +66,7 @@ const handleFileChange = (e: Event) => {
         </svg>
         <p>{{ $t('encoder.drop_zone') }}</p>
         <p class="text-sm text-muted">{{ $t('encoder.or') }}</p>
-        <button type="button" class="btn-browse" @click.stop="triggerFileInput" :aria-label="$t('encoder.btn_browse')">{{ $t('encoder.btn_browse') }}</button>
+        <button type="button" class="btn-browse" :aria-label="$t('encoder.btn_browse')" @click.stop="triggerFileInput">{{ $t('encoder.btn_browse') }}</button>
       </div>
       <div v-else class="file-selected">
         <div class="file-info">
@@ -86,7 +86,7 @@ const handleFileChange = (e: Event) => {
     </div>
     
     <div class="actions">
-      <button type="button" v-if="selectedFile" @click="emit('clear')" class="btn-secondary">{{ $t('encoder.btn_clear') }}</button>
+      <button v-if="selectedFile" type="button" class="btn-secondary" @click="emit('clear')">{{ $t('encoder.btn_clear') }}</button>
     </div>
     
     <p v-if="error" class="error-msg" role="alert" aria-live="assertive">

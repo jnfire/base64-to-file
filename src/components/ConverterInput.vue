@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import type { FileTypeOption } from '../core/types';
 
 const props = defineProps<{
   base64Input: string;
   error: string;
   detectionMode: 'auto' | 'manual';
-  selectedManualType: any;
-  commonTypes: any[];
+  selectedManualType: FileTypeOption;
+  commonTypes: FileTypeOption[];
 }>();
 
 const emit = defineEmits<{
   (e: 'update:base64Input', value: string): void;
   (e: 'update:detectionMode', value: 'auto' | 'manual'): void;
-  (e: 'update:selectedManualType', value: any): void;
+  (e: 'update:selectedManualType', value: FileTypeOption): void;
   (e: 'convert'): void;
   (e: 'clear'): void;
 }>();
@@ -75,8 +76,8 @@ const localSelectedType = computed({
     ></textarea>
     
     <div class="actions">
-      <button type="button" @click="$emit('convert')" class="btn-primary">{{ $t('input.btn_decode') }}</button>
-      <button type="button" @click="$emit('clear')" class="btn-secondary">{{ $t('input.btn_clear') }}</button>
+      <button type="button" class="btn-primary" @click="$emit('convert')">{{ $t('input.btn_decode') }}</button>
+      <button type="button" class="btn-secondary" @click="$emit('clear')">{{ $t('input.btn_clear') }}</button>
     </div>
     
     <p v-if="error" id="decoder-error-msg" class="error-msg" role="alert" aria-live="assertive">

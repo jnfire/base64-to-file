@@ -17,7 +17,7 @@ const emit = defineEmits<{
 <template>
   <header class="navbar">
     <div class="navbar-container">
-      <button type="button" class="navbar-brand" @click="emit('home')" :aria-label="t('header.title')">
+      <button type="button" class="navbar-brand" :aria-label="t('header.title')" @click="emit('home')">
         <h1 class="title">{{ t('header.title') }}</h1>
       </button>
 
@@ -26,8 +26,8 @@ const emit = defineEmits<{
           type="button"
           class="btn-secondary config-toggle"
           :class="{ 'config-toggle--active': showSettings }"
-          @click="emit('toggle-settings')"
           :aria-label="t('settings.title') || 'Settings'"
+          @click="emit('toggle-settings')"
         >
           <SettingsIcon class="icon" />
         </button>

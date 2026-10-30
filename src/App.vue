@@ -59,7 +59,7 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
   <AppHeader :showSettings="showSettings" @toggle-settings="showSettings = !showSettings" @home="showSettings = false" />
 
   <div class="app-layout">
-    <header class="app-hero" v-if="!showSettings">
+    <header v-if="!showSettings" class="app-hero">
       <p class="subtitle">{{ $t('header.subtitle') }}</p>
       <div class="badges">
         <span class="badge">{{ $t('header.badges.auditable') }}</span>
@@ -70,7 +70,7 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
 
     <SettingsView v-if="showSettings" :show="showSettings" />
 
-    <main class="main-content" v-else>
+    <main v-else class="main-content">
       <div class="tabs" role="tablist" :aria-label="$t('header.title')">
         <button 
           id="tab-decode"
