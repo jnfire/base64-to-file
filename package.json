@@ -2,6 +2,13 @@
   "name": "base64-to",
   "private": true,
   "version": "0.2.0",
+  "description": "Local-first web tool to decode Base64 strings into files and encode files into Base64, entirely in the browser.",
+  "license": "AGPL-3.0-only",
+  "author": "Javier Nicolás Pérez Mesa",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jnfire/base64-to-file.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
