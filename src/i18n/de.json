@@ -47,11 +47,6 @@
     "error_too_large": "Die Datei überschreitet das Sicherheitslimit von {mb}MB.",
     "error_read": "Fehler beim Lesen der Datei."
   },
-  "cookies": {
-    "text": "Helfen Sie uns, uns zu verbessern? Wir verwenden anonyme Analyse-Cookies, um die Nutzung zu verstehen und die Website zu optimieren.",
-    "accept": "Akzeptieren",
-    "decline": "Ablehnen"
-  },
   "footer": {
     "text": "Local-First-Entwicklung. Ihre Daten, Ihre Kontrolle.",
     "source": "Quellcode Anzeigen",

@@ -15,6 +15,7 @@ All processing is done locally in your web browser, ensuring **complete control*
   - **PDFs:** Embedded for quick review without downloading.
   - **Data (JSON/XML/Text):** Embedded code viewer with **auto-formatting for JSON** for easy reading.
 - **Local Processing:** Everything happens client-side. Your files and converted data are never sent to any server.
+- **No Tracking:** No cookies, no analytics and no sign-up.
 - **Interface:** Clean, responsive design with dark/light mode support. Multi-language support.
 
 ## 🛠️ Built With

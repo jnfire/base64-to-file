@@ -15,6 +15,7 @@ Todo el procesamiento se realiza localmente en tu navegador web, garantizando un
   - **PDF:** Embebido para revisión rápida sin descarga.
   - **Datos (JSON/XML/Texto):** Visor de código con **auto-formateo para JSON** para una lectura cómoda.
 - **Procesamiento Local:** Todo el procesamiento ocurre en el cliente. Tus archivos y datos convertidos nunca se envían a ningún servidor.
+- **Sin rastreo:** sin cookies, sin analítica y sin registro.
 - **Interfaz:** Diseño limpio, responsivo y con soporte para temas claro/oscuro. Soporte multi-idioma.
 
 ## 🛠️ Tecnologías Utilizadas
