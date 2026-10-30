@@ -1,5 +1,5 @@
 {
-  "name": "base64-to",
+  "name": "base64-to-file",
   "private": true,
   "version": "0.2.0",
   "description": "Local-first web tool to decode Base64 strings into files and encode files into Base64, entirely in the browser.",
