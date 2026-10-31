@@ -1,57 +1,61 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import type { FileTypeOption } from '../core/types';
 
 const props = defineProps<{
   base64Input: string;
   error: string;
   detectionMode: 'auto' | 'manual';
-  selectedManualType: any;
-  commonTypes: any[];
+  selectedManualType: FileTypeOption;
+  commonTypes: FileTypeOption[];
 }>();
 
 const emit = defineEmits<{
   (e: 'update:base64Input', value: string): void;
   (e: 'update:detectionMode', value: 'auto' | 'manual'): void;
-  (e: 'update:selectedManualType', value: any): void;
+  (e: 'update:selectedManualType', value: FileTypeOption): void;
   (e: 'convert'): void;
   (e: 'clear'): void;
 }>();
 
 const localInput = computed({
   get: () => props.base64Input,
-  set: (val) => emit('update:base64Input', val)
+  set: (val) => emit('update:base64Input', val),
 });
 
 const localDetectionMode = computed({
   get: () => props.detectionMode,
-  set: (val) => emit('update:detectionMode', val)
+  set: (val) => emit('update:detectionMode', val),
 });
 
 const localSelectedType = computed({
   get: () => props.selectedManualType,
-  set: (val) => emit('update:selectedManualType', val)
+  set: (val) => emit('update:selectedManualType', val),
 });
-
 </script>
 
 <template>
   <div class="converter-input">
     <div class="controls-header">
       <div class="mode-selector" role="radiogroup" :aria-label="$t('input.format')">
-        <button 
+        <button
           type="button"
           role="radio"
           :aria-checked="localDetectionMode === 'auto'"
-          :class="{ active: localDetectionMode === 'auto' }" 
+          :class="{ active: localDetectionMode === 'auto' }"
           @click="localDetectionMode = 'auto'"
-        >{{ $t('input.mode.auto') }}</button>
-        <button 
+        >
+          {{ $t('input.mode.auto') }}
+        </button>
+        <button
           type="button"
           role="radio"
           :aria-checked="localDetectionMode === 'manual'"
-          :class="{ active: localDetectionMode === 'manual' }" 
+          :class="{ active: localDetectionMode === 'manual' }"
           @click="localDetectionMode = 'manual'"
-        >{{ $t('input.mode.manual') }}</button>
+        >
+          {{ $t('input.mode.manual') }}
+        </button>
       </div>
 
       <div v-if="localDetectionMode === 'manual'" class="manual-options">
@@ -73,14 +77,22 @@ const localSelectedType = computed({
       :aria-describedby="error ? 'decoder-error-msg' : undefined"
       rows="8"
     ></textarea>
-    
+
     <div class="actions">
-      <button type="button" @click="$emit('convert')" class="btn-primary">{{ $t('input.btn_decode') }}</button>
-      <button type="button" @click="$emit('clear')" class="btn-secondary">{{ $t('input.btn_clear') }}</button>
+      <button type="button" class="btn-primary" @click="$emit('convert')">
+        {{ $t('input.btn_decode') }}
+      </button>
+      <button type="button" class="btn-secondary" @click="$emit('clear')">
+        {{ $t('input.btn_clear') }}
+      </button>
     </div>
-    
+
     <p v-if="error" id="decoder-error-msg" class="error-msg" role="alert" aria-live="assertive">
-      {{ error === 'Por favor, pega un código Base64.' ? $t('input.error_empty') : $t('input.error_invalid') }}
+      {{
+        error === 'Por favor, pega un código Base64.'
+          ? $t('input.error_empty')
+          : $t('input.error_invalid')
+      }}
     </p>
   </div>
 </template>
@@ -137,7 +149,7 @@ const localSelectedType = computed({
 .mode-selector button.active {
   background-color: var(--bg-surface);
   color: var(--text-main);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   font-weight: 600;
 }
 
@@ -247,8 +259,12 @@ button {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 600px) {

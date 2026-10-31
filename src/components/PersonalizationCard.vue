@@ -15,7 +15,7 @@ const languages = [
   { code: 'fr', label: 'Français' },
   { code: 'de', label: 'Deutsch' },
   { code: 'it', label: 'Italiano' },
-  { code: 'pt', label: 'Português' }
+  { code: 'pt', label: 'Português' },
 ];
 
 const currentTheme = ref<Theme>(getTheme());
@@ -23,7 +23,7 @@ const currentTheme = ref<Theme>(getTheme());
 const themeOptions = computed(() => [
   { value: 'light', label: t('settings.themeLight') || 'Light' },
   { value: 'dark', label: t('settings.themeDark') || 'Dark' },
-  { value: 'system', label: t('settings.themeSystem') || 'System' }
+  { value: 'system', label: t('settings.themeSystem') || 'System' },
 ]);
 
 const handleThemeChange = (theme: string) => {
@@ -45,8 +45,8 @@ const handleLanguageChange = (langCode: string) => {
         <label class="setting-label">{{ t('settings.language') || 'Language' }}</label>
         <LangSelector
           :modelValue="locale"
-          @update:modelValue="handleLanguageChange"
           :options="languages"
+          @update:modelValue="handleLanguageChange"
         />
       </div>
       <div class="setting-item">

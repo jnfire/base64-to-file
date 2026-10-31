@@ -47,15 +47,11 @@
     "error_too_large": "Il file supera il limite di sicurezza di {mb}MB.",
     "error_read": "Errore durante la lettura del file."
   },
-  "cookies": {
-    "text": "Aiutaci a migliorare? Utilizziamo cookie di analisi anonimi per comprendere l'uso e ottimizzare il sito.",
-    "accept": "Accetta",
-    "decline": "Rifiuta"
-  },
   "footer": {
     "text": "Sviluppo local-first. I tuoi dati, il tuo controllo.",
     "source": "Visualizza Codice Sorgente",
-    "license": "Tutti i Diritti Riservati"
+    "license": "Licenza AGPL-3.0",
+    "madeBy": "Realizzato da {name}"
   },
   "settings": {
     "title": "Impostazioni",

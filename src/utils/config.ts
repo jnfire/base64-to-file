@@ -7,7 +7,7 @@ const getBoolConfig = (storageKey: string, defaultValue: boolean): boolean => {
     }
     const storedValue = window.localStorage.getItem(storageKey);
     return storedValue !== null ? storedValue === 'true' : defaultValue;
-  } catch (storageError) {
+  } catch {
     return defaultValue;
   }
 };
@@ -20,7 +20,7 @@ watch(autoCopyConfig, (isEnabled: boolean) => {
     if (typeof window !== 'undefined' && window.localStorage) {
       window.localStorage.setItem('base64-auto-copy', isEnabled ? 'true' : 'false');
     }
-  } catch (storageError) {
+  } catch {
     // ignore storage write errors
   }
 });
@@ -30,7 +30,7 @@ watch(mimeFormatConfig, (isEnabled: boolean) => {
     if (typeof window !== 'undefined' && window.localStorage) {
       window.localStorage.setItem('base64-mime-format', isEnabled ? 'true' : 'false');
     }
-  } catch (storageError) {
+  } catch {
     // ignore storage write errors
   }
 });

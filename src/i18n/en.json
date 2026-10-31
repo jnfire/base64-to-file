@@ -47,15 +47,11 @@
     "error_too_large": "The file exceeds the safety limit of {mb}MB.",
     "error_read": "Error reading file."
   },
-  "cookies": {
-    "text": "Help us improve? We use anonymous analytics cookies to understand usage and optimize the web.",
-    "accept": "Accept",
-    "decline": "Decline"
-  },
   "footer": {
     "text": "Local-first development. Your data, your control.",
     "source": "View Source Code",
-    "license": "All Rights Reserved"
+    "license": "AGPL-3.0 License",
+    "madeBy": "Made by {name}"
   },
   "settings": {
     "title": "Settings",

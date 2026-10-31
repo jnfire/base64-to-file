@@ -15,6 +15,7 @@ All processing is done locally in your web browser, ensuring **complete control*
   - **PDFs:** Embedded for quick review without downloading.
   - **Data (JSON/XML/Text):** Embedded code viewer with **auto-formatting for JSON** for easy reading.
 - **Local Processing:** Everything happens client-side. Your files and converted data are never sent to any server.
+- **No Tracking:** No cookies, no analytics and no sign-up.
 - **Interface:** Clean, responsive design with dark/light mode support. Multi-language support.
 
 ## 🛠️ Built With
@@ -33,7 +34,9 @@ npm run dev
 ```
 
 ## 📄 License
-This project is proprietary and all rights are reserved by Javier Nicolás Pérez Mesa. It is published exclusively for portfolio review, code audit, and personal use. See the `LICENSE` file for details.
+Copyright (C) 2026 Javier Nicolás Pérez Mesa.
+
+This project is free software released under the [GNU Affero General Public License v3.0](LICENSE) (`AGPL-3.0-only`). You may use, study, modify and share it. If you distribute a modified version, or offer it to users over a network, you must make its source code available under the same license.
 
 ---
-Made with :heart: 2026.
+Made by [Javier Nicolás Pérez Mesa](https://github.com/jnfire), 2026.

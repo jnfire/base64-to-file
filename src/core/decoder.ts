@@ -5,7 +5,7 @@ function removeDataUriPrefix(base64String: string): string {
   return base64String;
 }
 
-function convertBase64StringToUint8Array(base64String: string): Uint8Array {
+function convertBase64StringToUint8Array(base64String: string): Uint8Array<ArrayBuffer> {
   const binaryString = atob(base64String.trim());
   const bytes = new Uint8Array(binaryString.length);
   for (let i = 0; i < binaryString.length; i++) {
@@ -14,7 +14,7 @@ function convertBase64StringToUint8Array(base64String: string): Uint8Array {
   return bytes;
 }
 
-export function decodeBase64(base64: string): Uint8Array {
+export function decodeBase64(base64: string): Uint8Array<ArrayBuffer> {
   const pureBase64 = removeDataUriPrefix(base64);
   return convertBase64StringToUint8Array(pureBase64);
 }

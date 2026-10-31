@@ -24,25 +24,28 @@ const fileSizeKb = computed(() => (props.fileInfo.data.length / 1024).toFixed(2)
       <div class="meta-info">
         <h3>{{ $t('result.title') }}</h3>
         <div class="meta-details">
-          <span class="meta-item"><span class="label">{{ $t('result.mime') }}</span> {{ fileInfo.mime }}</span>
-          <span class="meta-item"><span class="label">{{ $t('result.extension') }}</span> .{{ fileInfo.extension }}</span>
-          <span class="meta-item"><span class="label">{{ $t('result.size') }}</span> {{ fileSizeKb }} KB</span>
+          <span class="meta-item"
+            ><span class="label">{{ $t('result.mime') }}</span> {{ fileInfo.mime }}</span
+          >
+          <span class="meta-item"
+            ><span class="label">{{ $t('result.extension') }}</span> .{{ fileInfo.extension }}</span
+          >
+          <span class="meta-item"
+            ><span class="label">{{ $t('result.size') }}</span> {{ fileSizeKb }} KB</span
+          >
         </div>
       </div>
-      <button 
-        type="button" 
-        @click="$emit('download')" 
+      <button
+        type="button"
         class="btn-download"
         :aria-label="`${$t('result.btn_download')} (.${fileInfo.extension})`"
+        @click="$emit('download')"
       >
         {{ $t('result.btn_download') }}
       </button>
     </div>
 
-    <FilePreview
-      :objectUrl="fileInfo.objectUrl"
-      :mimeType="fileInfo.mime"
-    />
+    <FilePreview :objectUrl="fileInfo.objectUrl" :mimeType="fileInfo.mime" />
   </div>
 </template>
 
@@ -107,8 +110,14 @@ const fileSizeKb = computed(() => (props.fileInfo.data.length / 1024).toFixed(2)
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 600px) {

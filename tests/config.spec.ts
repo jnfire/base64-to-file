@@ -19,11 +19,11 @@ describe('Config Utility Module', () => {
         mockStorage = {};
       },
       key: () => null,
-      length: 0
+      length: 0,
     };
 
     (globalThis as unknown as { window: unknown }).window = {
-      localStorage: globalThis.localStorage
+      localStorage: globalThis.localStorage,
     };
 
     vi.restoreAllMocks();

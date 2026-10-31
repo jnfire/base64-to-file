@@ -12,13 +12,13 @@ const { t } = useI18n();
     <div class="settings-column">
       <div class="setting-item check-item">
         <label class="checkbox-label">
-          <input type="checkbox" v-model="autoCopyConfig" />
+          <input v-model="autoCopyConfig" type="checkbox" />
           {{ t('settings.autoCopy') || 'Auto-copy base64 to clipboard' }}
         </label>
       </div>
       <div class="setting-item check-item">
         <label class="checkbox-label">
-          <input type="checkbox" v-model="mimeFormatConfig" />
+          <input v-model="mimeFormatConfig" type="checkbox" />
           {{ t('settings.mimeFormat') || 'MIME format (line breaks every 76 chars)' }}
         </label>
       </div>
@@ -49,7 +49,7 @@ const { t } = useI18n();
   cursor: pointer;
 }
 
-.checkbox-label input[type="checkbox"] {
+.checkbox-label input[type='checkbox'] {
   cursor: pointer;
   accent-color: var(--accent-color);
 }
