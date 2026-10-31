@@ -6,6 +6,12 @@ How Base64 to File went from its first commit to today, with the screenshots to 
 
 ![Base64 to File at three stages, desktop](base64-to-file-evolution-desktop.png)
 
+## The story
+
+Base64 to File did not so much change its look as its shape. It started as a decoder with a big title and badges. Every real need that appeared added a piece, and each piece became a component or a pattern: tabs once there were two directions, a shared preview component for images, PDF and text, a settings card for the theme and the encoder options, an accessible language selector. Along the way the interface got simpler: the hero block went away and the footer states the facts.
+
+Releases: v0.1.0 and v0.2.0 (May 2026) stay as they were; this work continues them as 1.0.0.
+
 ## Timeline
 
 | When | What happened |
@@ -13,7 +19,7 @@ How Base64 to File went from its first commit to today, with the screenshots to 
 | April 2026 | First commit. |
 | May 2026 | First release (v0.1.0): the decoder, with its own large title, language flag and badges. A week later (v0.2.0) the encoder arrived, with tabs and a layout for phones. |
 | July–August 2026 | Accessible language selector with flags, sticky header with the version in the footer, unified settings (theme and encoder options), ARIA roles and keyboard support, a shared preview component and more tests. |
-| October 2026 | Free software (AGPL-3.0), no Google Analytics or cookie banner, one design system shared with the other two tools, CI that gates every deploy, and the first stable release. |
+| October 2026 | Free software (AGPL-3.0), no Google Analytics or cookie banner, one design system shared with the other two tools, CI that gates every deploy, and version 1.0.0, the next step after 0.1.0 and 0.2.0. |
 
 ## In numbers
 

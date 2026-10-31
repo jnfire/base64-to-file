@@ -51,7 +51,7 @@ standard of the other portfolio tools.
 - The stricter lint found and fixed untyped values in the file-type selector
   and the decoder.
 
-## Before 1.0
+## Earlier versions (tags kept)
 
 - **0.2.0 (2026-05-01):** the encoder (file to Base64) with a tabbed
   interface, and a layout for phones.

@@ -6,6 +6,8 @@ A fast, local-first web tool designed for developers and technical users. It dec
 
 All processing is done locally in your web browser, ensuring **complete control** of your data (Local-First). Built with **Vue 3 (Composition API)** and **TypeScript**.
 
+**▶ [Try it: base64-to-file.jnfire.dev](https://base64-to-file.jnfire.dev/)**
+
 ![Base64 to File on desktop and mobile](docs/screenshots/base64-to-file-hero.png)
 
 ## ✨ Key Features
