@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const props = withDefaults(
   defineProps<{
@@ -24,6 +25,8 @@ const emit = defineEmits<{
   (emitEvent: 'update:modelValue', value: string): void;
 }>();
 
+const { t } = useI18n();
+
 const isOpen = ref(false);
 const containerRef = ref<HTMLElement | null>(null);
 const triggerRef = ref<HTMLButtonElement | null>(null);
@@ -31,7 +34,7 @@ const optionRefs = ref<HTMLButtonElement[]>([]);
 
 const currentLabel = computed(() => {
   const matchingOption = props.options.find((optionItem) => optionItem.value === props.modelValue);
-  return matchingOption ? matchingOption.label : props.placeholder || 'Select an option';
+  return matchingOption ? matchingOption.label : props.placeholder || t('shared.select_option');
 });
 
 const setOptionRef = (element: unknown, index: number) => {
@@ -125,11 +128,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div :id="id" ref="containerRef" class="custom-select-container">
+  <div :id="id ? `${id}-container` : undefined" ref="containerRef" class="custom-select-container">
     <!-- input oculto para compatibilidad con forms -->
     <input type="hidden" :name="name" :value="modelValue" />
 
     <button
+      :id="id"
       ref="triggerRef"
       type="button"
       class="custom-select-trigger"
@@ -203,7 +207,7 @@ onUnmounted(() => {
 .custom-select-trigger:focus-visible {
   outline: none;
   border-color: var(--accent-color);
-  box-shadow: 0 0 0 3px var(--accent-color-alpha);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 .custom-select-trigger:hover {
@@ -246,7 +250,7 @@ onUnmounted(() => {
   top: calc(100% + 0.35rem);
   left: 0;
   width: 100%;
-  background-color: var(--bg-surface);
+  background-color: var(--bg-body);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow:
@@ -278,7 +282,7 @@ onUnmounted(() => {
 
 .select-option:hover,
 .select-option:focus-visible {
-  background-color: var(--bg-surface-hover);
+  background-color: var(--bg-surface-hover, rgba(0, 0, 0, 0.05));
   outline: none;
 }
 

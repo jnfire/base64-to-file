@@ -152,17 +152,18 @@ onUnmounted(() => {
 <style scoped>
 .lang-selector-container {
   position: relative;
+  display: block;
   width: 100%;
 }
 
 .lang-selector-trigger {
-  background: var(--bg-surface);
+  background: var(--bg-body);
   border: 1px solid var(--border-color);
   color: var(--text-main);
-  padding: 0.6rem 1rem;
+  padding: 0.85rem 1rem;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-family: inherit;
   font-weight: 600;
   display: flex;
@@ -175,18 +176,18 @@ onUnmounted(() => {
 }
 
 .lang-selector-trigger:hover {
-  background: var(--bg-surface-hover);
+  background: var(--bg-surface-hover, rgba(0, 0, 0, 0.05));
   border-color: var(--text-muted);
 }
 
 .lang-selector-trigger:focus-visible {
   outline: none;
   border-color: var(--accent-color);
-  box-shadow: 0 0 0 3px var(--accent-color-alpha);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-arrow {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   transition: transform 0.2s ease;
   margin-left: auto;
@@ -201,7 +202,7 @@ onUnmounted(() => {
   top: calc(100% + 0.35rem);
   left: 0;
   width: 100%;
-  background-color: var(--bg-surface);
+  background-color: var(--bg-body);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow:
@@ -218,8 +219,8 @@ onUnmounted(() => {
   align-items: center;
   gap: 0.5rem;
   width: 100%;
-  padding: 0.45rem 1rem;
-  font-size: 0.85rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   font-family: inherit;
   color: var(--text-main);
@@ -232,7 +233,7 @@ onUnmounted(() => {
 
 .lang-option:hover,
 .lang-option:focus-visible {
-  background-color: var(--bg-surface-hover);
+  background-color: var(--bg-surface-hover, rgba(0, 0, 0, 0.05));
 }
 
 .option-selected {

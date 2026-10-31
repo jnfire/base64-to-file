@@ -1,7 +1,9 @@
 {
   "header": {
     "title": "Base64 to File",
-    "subtitle": "Decode and encode Base64 without leaving your browser."
+    "subtitle": "Decode and encode Base64 without leaving your browser.",
+    "settings": "Open settings",
+    "share": "Share link"
   },
   "input": {
     "mode": {
@@ -43,10 +45,10 @@
     "error_read": "Error reading file."
   },
   "footer": {
-    "text": "No cookies · No accounts · Open source",
     "source": "View Source Code",
     "license": "AGPL-3.0 License",
-    "madeBy": "Made by {name}"
+    "madeBy": "Made by {name}",
+    "facts": "No cookies · No accounts · Open source"
   },
   "settings": {
     "title": "Settings",
@@ -60,5 +62,8 @@
     "encoder": "Encoder Settings",
     "autoCopy": "Auto-copy base64 to clipboard",
     "mimeFormat": "MIME format (line breaks every 76 chars)"
+  },
+  "shared": {
+    "select_option": "Select an option"
   }
 }

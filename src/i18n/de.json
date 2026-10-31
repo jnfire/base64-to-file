@@ -1,7 +1,9 @@
 {
   "header": {
     "title": "Base64 to File",
-    "subtitle": "Base64 dekodieren und kodieren, ohne den Browser zu verlassen."
+    "subtitle": "Base64 dekodieren und kodieren, ohne den Browser zu verlassen.",
+    "settings": "Einstellungen öffnen",
+    "share": "Link teilen"
   },
   "input": {
     "mode": {
@@ -43,10 +45,10 @@
     "error_read": "Fehler beim Lesen der Datei."
   },
   "footer": {
-    "text": "Keine Cookies · Keine Konten · Open Source",
     "source": "Quellcode Anzeigen",
     "license": "Lizenz AGPL-3.0",
-    "madeBy": "Erstellt von {name}"
+    "madeBy": "Erstellt von {name}",
+    "facts": "Keine Cookies · Keine Konten · Open Source"
   },
   "settings": {
     "title": "Einstellungen",
@@ -60,5 +62,8 @@
     "encoder": "Encoder-Einstellungen",
     "autoCopy": "Base64 automatisch kopieren",
     "mimeFormat": "MIME-Format (Zeilenumbrüche)"
+  },
+  "shared": {
+    "select_option": "Option auswählen"
   }
 }
