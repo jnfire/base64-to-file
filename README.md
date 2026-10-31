@@ -6,6 +6,8 @@ A fast, local-first web tool designed for developers and technical users. It dec
 
 All processing is done locally in your web browser, ensuring **complete control** of your data (Local-First). Built with **Vue 3 (Composition API)** and **TypeScript**.
 
+![Base64 to File on desktop and mobile](docs/screenshots/base64-to-file-hero.png)
+
 ## ✨ Key Features
 - **Dual Detection:**
   - **Automatic:** Identifies file types via Data URIs or by parsing binary *Magic Bytes* (PNG, JPEG, PDF, ZIP, GIF, XML).
@@ -32,6 +34,17 @@ The project follows a modular architecture separating business logic from the vi
 npm install
 npm run dev
 ```
+
+## 📚 Documentation
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Design system](docs/DESIGN-SYSTEM.md), shared with the other portfolio tools
+- [Roadmap](docs/ROADMAP.md)
+- [Evolution](docs/evolution/README.md): how the project has changed, with screenshots
+
+## 🤝 Development
+
+Designed and directed by [Javier Nicolás Pérez Mesa](https://github.com/jnfire): the product, the architecture and the design decisions are his. Much of the implementation was written with AI assistance ([Claude Code](https://claude.com/claude-code)), working under his direction and through pull requests he reviews; the commits made that way carry a `Co-Authored-By` trailer.
 
 ## 📄 License
 Copyright (C) 2026 Javier Nicolás Pérez Mesa.

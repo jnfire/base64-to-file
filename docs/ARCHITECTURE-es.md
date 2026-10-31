@@ -30,3 +30,7 @@ Contiene los diccionarios (`en.json`, `es.json`) y la configuración de `vue-i18
 
 ### 5. `tests/`
 Contiene las pruebas unitarias de Vitest que aseguran que la lógica de `core/` permanece estable.
+
+### Componentes compartidos
+
+La cabecera, el pie, los selectores, la tarjeta de configuración, los iconos y la utilidad de tema se comparten byte a byte con las otras herramientas del portafolio. Lo que cambia en cada app (repositorio y autor) está en `src/app.config.ts`. Ver [`DESIGN-SYSTEM-es.md`](DESIGN-SYSTEM-es.md).

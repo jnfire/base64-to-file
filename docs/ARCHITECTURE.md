@@ -30,3 +30,7 @@ Contains dictionaries (`en.json`, `es.json`) and the `vue-i18n` setup to support
 
 ### 5. `tests/`
 Contains the Vitest unit tests that ensure the `core/` logic remains stable.
+
+### Shared components
+
+The header, footer, selects, settings card, icons and theme util are shared byte for byte with the other portfolio tools. What differs per app (repository and author) lives in `src/app.config.ts`. See [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md).

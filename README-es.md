@@ -6,6 +6,8 @@ Una herramienta web rápida y local-first diseñada para desarrolladores y usuar
 
 Todo el procesamiento se realiza localmente en tu navegador web, garantizando un **control total** de tus datos (Local-First). Construida con **Vue 3 (Composition API)** y **TypeScript**.
 
+![Base64 to File en escritorio y móvil](docs/screenshots/base64-to-file-hero.png)
+
 ## ✨ Características Principales
 - **Detección Dual:**
   - **Automática:** Identifica el tipo de archivo mediante Data URI o analizando los *Magic Bytes* del binario (PNG, JPEG, PDF, ZIP, GIF, XML).
@@ -32,6 +34,17 @@ El proyecto sigue una arquitectura modular separando la lógica de negocio de la
 npm install
 npm run dev
 ```
+
+## 📚 Documentación
+
+- [Arquitectura](docs/ARCHITECTURE-es.md)
+- [Sistema de diseño](docs/DESIGN-SYSTEM-es.md), compartido con las otras herramientas del portafolio
+- [Roadmap](docs/ROADMAP-es.md)
+- [Evolución](docs/evolution/README-es.md): cómo ha cambiado el proyecto, con capturas
+
+## 🤝 Desarrollo
+
+Diseñado y dirigido por [Javier Nicolás Pérez Mesa](https://github.com/jnfire): el producto, la arquitectura y las decisiones de diseño son suyos. Buena parte de la implementación se ha escrito con ayuda de IA ([Claude Code](https://claude.com/claude-code)), trabajando bajo su dirección y mediante pull requests que él revisa; los commits hechos así llevan un `Co-Authored-By`.
 
 ## 📄 Licencia
 Copyright (C) 2026 Javier Nicolás Pérez Mesa.
