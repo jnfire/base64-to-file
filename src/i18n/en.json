@@ -1,12 +1,7 @@
 {
   "header": {
     "title": "Base64 to File",
-    "subtitle": "Convert your Base64 strings to files instantly and securely. Local-first and no registration.",
-    "badges": {
-      "auditable": "Auditable",
-      "privacy": "Local-First",
-      "serverless": "No Registration"
-    }
+    "subtitle": "Decode and encode Base64 without leaving your browser."
   },
   "input": {
     "mode": {
@@ -48,7 +43,7 @@
     "error_read": "Error reading file."
   },
   "footer": {
-    "text": "Local-first development. Your data, your control.",
+    "text": "No cookies · No accounts · Open source",
     "source": "View Source Code",
     "license": "AGPL-3.0 License",
     "madeBy": "Made by {name}"

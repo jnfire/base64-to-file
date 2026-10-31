@@ -1,12 +1,7 @@
 {
   "header": {
     "title": "Base64 to File",
-    "subtitle": "Converta suas strings Base64 em arquivos instantaneamente e com segurança. Local-first e sem registo.",
-    "badges": {
-      "auditable": "Auditável",
-      "privacy": "Local-First",
-      "serverless": "Sem Registo"
-    }
+    "subtitle": "Descodifique e codifique Base64 sem sair do navegador."
   },
   "input": {
     "mode": {
@@ -48,7 +43,7 @@
     "error_read": "Erro ao ler o arquivo."
   },
   "footer": {
-    "text": "Desenvolvimento local-first. Seus dados, seu controlo.",
+    "text": "Sem cookies · Sem contas · Código aberto",
     "source": "Ver Código Fonte",
     "license": "Licença AGPL-3.0",
     "madeBy": "Feito por {name}"

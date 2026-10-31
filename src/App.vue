@@ -63,15 +63,6 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
   />
 
   <div class="app-layout">
-    <header v-if="!showSettings" class="app-hero">
-      <p class="subtitle">{{ $t('header.subtitle') }}</p>
-      <div class="badges">
-        <span class="badge">{{ $t('header.badges.auditable') }}</span>
-        <span class="badge">{{ $t('header.badges.privacy') }}</span>
-        <span class="badge">{{ $t('header.badges.serverless') }}</span>
-      </div>
-    </header>
-
     <SettingsView v-if="showSettings" :show="showSettings" />
 
     <main v-else class="main-content">
@@ -229,39 +220,6 @@ body {
   flex-direction: column;
 }
 
-.app-hero {
-  text-align: center;
-  margin-bottom: 2.5rem;
-}
-
-.subtitle {
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.badges {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.badge {
-  font-size: 0.75rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 9999px;
-  background-color: var(--bg-surface);
-  color: var(--text-muted);
-  border: 1px solid var(--border-color);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
 .main-content {
   flex: 1;
 }
@@ -328,13 +286,6 @@ body {
 @media (max-width: 600px) {
   .app-layout {
     padding: 1.5rem 0.75rem 2rem 0.75rem;
-  }
-  .app-hero {
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-  .subtitle {
-    font-size: 1rem;
   }
 }
 </style>
