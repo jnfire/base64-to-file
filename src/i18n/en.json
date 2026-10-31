@@ -50,7 +50,8 @@
   "footer": {
     "text": "Local-first development. Your data, your control.",
     "source": "View Source Code",
-    "license": "AGPL-3.0 License"
+    "license": "AGPL-3.0 License",
+    "madeBy": "Made by {name}"
   },
   "settings": {
     "title": "Settings",

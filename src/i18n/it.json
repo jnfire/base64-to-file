@@ -50,7 +50,8 @@
   "footer": {
     "text": "Sviluppo local-first. I tuoi dati, il tuo controllo.",
     "source": "Visualizza Codice Sorgente",
-    "license": "Licenza AGPL-3.0"
+    "license": "Licenza AGPL-3.0",
+    "madeBy": "Realizzato da {name}"
   },
   "settings": {
     "title": "Impostazioni",

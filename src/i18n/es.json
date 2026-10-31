@@ -50,7 +50,8 @@
   "footer": {
     "text": "Desarrollo local-first. Tus datos, tu control.",
     "source": "Ver Código Fuente",
-    "license": "Licencia AGPL-3.0"
+    "license": "Licencia AGPL-3.0",
+    "madeBy": "Hecho por {name}"
   },
   "settings": {
     "title": "Configuración",
