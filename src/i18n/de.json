@@ -1,12 +1,7 @@
 {
   "header": {
     "title": "Base64 to File",
-    "subtitle": "Konvertieren Sie Ihre Base64-Zeichenfolgen sofort und sicher in Dateien. Local-First und ohne Registrierung.",
-    "badges": {
-      "auditable": "Überprüfbar",
-      "privacy": "Local-First",
-      "serverless": "Keine Registrierung"
-    }
+    "subtitle": "Base64 dekodieren und kodieren, ohne den Browser zu verlassen."
   },
   "input": {
     "mode": {
@@ -48,7 +43,7 @@
     "error_read": "Fehler beim Lesen der Datei."
   },
   "footer": {
-    "text": "Local-First-Entwicklung. Ihre Daten, Ihre Kontrolle.",
+    "text": "Keine Cookies · Keine Konten · Open Source",
     "source": "Quellcode Anzeigen",
     "license": "Lizenz AGPL-3.0",
     "madeBy": "Erstellt von {name}"
