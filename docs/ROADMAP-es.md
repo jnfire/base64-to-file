@@ -23,5 +23,5 @@ Lo que hace Base64 to File hoy y hacia dónde podría ir. Las ideas están orden
 
 ## Fuera de alcance
 
-- Cuentas, un backend o cualquier almacenamiento en un servidor: lo que escribes se queda en tu navegador, salvo las peticiones a los servicios públicos que se listan en [`ARCHITECTURE-es.md`](ARCHITECTURE-es.md).
+- Cuentas, un backend o cualquier almacenamiento en un servidor: lo que escribes se queda en tu navegador.
 - Publicidad y rastreo.

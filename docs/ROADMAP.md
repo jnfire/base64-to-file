@@ -23,5 +23,5 @@ What Base64 to File does today and where it could go. The ideas are ordered by h
 
 ## Out of scope
 
-- Accounts, a backend or any storage on a server: what you enter stays in your browser, apart from the requests to the public services listed in [`ARCHITECTURE.md`](ARCHITECTURE.md).
+- Accounts, a backend or any storage on a server: what you enter stays in your browser.
 - Advertising and tracking.

@@ -7,7 +7,7 @@ and this project uses [Semantic Versioning](https://semver.org/). The version
 number lives in a single place, `package.json`, and is shown live in the app
 footer.
 
-## [1.0.0] - 2026-10-31
+## [1.0.0] - 2026-11-01
 
 First stable release. The tool decodes Base64 and Data URIs into files and
 encodes files into Base64, entirely in the browser, with previews, six

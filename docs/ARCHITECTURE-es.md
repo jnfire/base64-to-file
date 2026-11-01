@@ -20,13 +20,15 @@ Esta carpeta contiene lógica pura en TypeScript. Es completamente independiente
 
 ### 3. `src/components/` (Capa de Presentación)
 Componentes de Vue de responsabilidad única.
-- **`AppHeader.vue`**: Muestra el título, las insignias (badges) y el selector de idioma.
-- **`ConverterInput.vue`**: Renderiza el área de texto para la entrada y los controles de selección de modo.
+- **`AppHeader.vue`**: Muestra el título, el subtítulo y el acceso a la configuración.
+- **`ConverterInput.vue`**: Renderiza el área de texto de entrada, el selector de formato y los controles de modo.
 - **`FileResult.vue`**: Muestra los metadatos del archivo decodificado, el botón de descarga y la previsualización inteligente.
-- **`AppFooter.vue`**: Renderiza los enlaces del pie de página y la información de privacidad.
+- **`EncoderInput.vue`**: Proporciona el área de arrastrar y soltar y el selector de archivos para codificar.
+- **`EncoderResult.vue`**: Muestra el resultado Base64 generado, la acción de copiado y la previsualización del archivo.
+- **`AppFooter.vue`**: Renderiza los hechos, la versión, los enlaces al código fuente/licencia y el crédito del autor.
 
 ### 4. `src/i18n/` (Internacionalización)
-Contiene los diccionarios (`en.json`, `es.json`) y la configuración de `vue-i18n` para soportar múltiples idiomas sin problemas.
+Contiene los diccionarios para seis idiomas (`de`, `en`, `es`, `fr`, `it`, `pt`) y la configuración de `vue-i18n` para soportar múltiples idiomas sin problemas.
 
 ### 5. `tests/`
 Contiene las pruebas unitarias de Vitest que aseguran que la lógica de `core/` permanece estable.

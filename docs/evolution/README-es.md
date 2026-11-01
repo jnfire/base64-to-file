@@ -35,7 +35,7 @@ La columna "antes" es el estado del proyecto el 28 de agosto de 2026, justo ante
 
 ## Imágenes
 
-Todas las imágenes están en esta carpeta y en [`../screenshots`](../screenshots); usan datos de ejemplo y no muestran las teselas del mapa porque se capturaron sin conexión.
+Todas las imágenes están en esta carpeta y en [`../screenshots`](../screenshots); usan datos de ejemplo.
 
 - [`base64-to-file-evolution-desktop.png`](base64-to-file-evolution-desktop.png): Tres etapas una junto a otra, en escritorio
 - [`base64-to-file-evolution-mobile.png`](base64-to-file-evolution-mobile.png): Las mismas tres etapas en el móvil

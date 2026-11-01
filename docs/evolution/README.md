@@ -35,7 +35,7 @@ The "before" column is the state of the project on 28 August 2026, just before t
 
 ## Images
 
-All the images are in this folder and in [`../screenshots`](../screenshots); they use sample data, and the map tiles are not shown because they were captured offline.
+All the images are in this folder and in [`../screenshots`](../screenshots); they use sample data.
 
 - [`base64-to-file-evolution-desktop.png`](base64-to-file-evolution-desktop.png): Three stages side by side, desktop
 - [`base64-to-file-evolution-mobile.png`](base64-to-file-evolution-mobile.png): The same three stages on a phone

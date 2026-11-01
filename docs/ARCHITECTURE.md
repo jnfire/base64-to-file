@@ -20,13 +20,15 @@ This folder contains pure TypeScript logic. It is entirely framework-agnostic.
 
 ### 3. `src/components/` (Presentation Layer)
 Single-responsibility Vue components.
-- **`AppHeader.vue`**: Displays the title, badges, and language switcher.
-- **`ConverterInput.vue`**: Renders the input textarea and mode selection controls.
+- **`AppHeader.vue`**: Displays the title, tagline, and settings toggle.
+- **`ConverterInput.vue`**: Renders the input textarea, format selector, and mode controls.
 - **`FileResult.vue`**: Shows the decoded file metadata, the download button, and the smart preview.
-- **`AppFooter.vue`**: Renders footer links and privacy info.
+- **`EncoderInput.vue`**: Provides a drag-and-drop zone and file picker for encoding.
+- **`EncoderResult.vue`**: Displays the generated Base64 result, copy action, and file preview.
+- **`AppFooter.vue`**: Renders facts, version, source/license links, and author credit.
 
 ### 4. `src/i18n/` (Internationalization)
-Contains dictionaries (`en.json`, `es.json`) and the `vue-i18n` setup to support multiple languages seamlessly.
+Contains dictionaries for six languages (`de`, `en`, `es`, `fr`, `it`, `pt`) and the `vue-i18n` setup to support multiple languages seamlessly.
 
 ### 5. `tests/`
 Contains the Vitest unit tests that ensure the `core/` logic remains stable.
