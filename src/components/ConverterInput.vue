@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { FileTypeOption } from '../core/types';
+import CustomSelect from './CustomSelect.vue';
 
 const props = defineProps<{
   base64Input: string;
@@ -28,9 +29,21 @@ const localDetectionMode = computed({
   set: (val) => emit('update:detectionMode', val),
 });
 
-const localSelectedType = computed({
-  get: () => props.selectedManualType,
-  set: (val) => emit('update:selectedManualType', val),
+const formatOptions = computed(() =>
+  props.commonTypes.map((type) => ({
+    value: type.mime,
+    label: `${type.label} (.${type.extension})`,
+  })),
+);
+
+const selectedMime = computed({
+  get: () => props.selectedManualType?.mime || props.commonTypes[0]?.mime || '',
+  set: (mimeValue: string) => {
+    const matchingType = props.commonTypes.find((type) => type.mime === mimeValue);
+    if (matchingType) {
+      emit('update:selectedManualType', matchingType);
+    }
+  },
 });
 </script>
 
@@ -59,12 +72,10 @@ const localSelectedType = computed({
       </div>
 
       <div v-if="localDetectionMode === 'manual'" class="manual-options">
-        <label for="fileType">{{ $t('input.format') }}</label>
-        <select id="fileType" v-model="localSelectedType">
-          <option v-for="type in commonTypes" :key="type.mime" :value="type">
-            {{ type.label }} (.{{ type.extension }})
-          </option>
-        </select>
+        <label id="format-label" class="format-label">{{ $t('input.format') }}</label>
+        <div class="format-select-wrapper">
+          <CustomSelect id="fileType" v-model="selectedMime" :options="formatOptions" size="sm" />
+        </div>
       </div>
     </div>
 
@@ -160,25 +171,14 @@ const localSelectedType = computed({
   animation: fadeIn 0.2s ease-out;
 }
 
-.manual-options label {
+.format-label {
   font-size: 0.9rem;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
-select {
-  padding: 0.5rem;
-  border-radius: 6px;
-  background-color: var(--bg-body);
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
-  font-family: inherit;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-select:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
+.format-select-wrapper {
+  min-width: 250px;
 }
 
 textarea {
@@ -289,16 +289,18 @@ button {
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
+    width: 100%;
   }
 
-  .manual-options label {
+  .format-label {
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
-  select {
+  .format-select-wrapper {
+    min-width: 0;
     width: 100%;
   }
 }

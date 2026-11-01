@@ -1,7 +1,9 @@
 {
   "header": {
     "title": "Base64 to File",
-    "subtitle": "Decodifica y codifica Base64 sin salir del navegador."
+    "subtitle": "Decodifica y codifica Base64 sin salir del navegador.",
+    "settings": "Abrir configuración",
+    "share": "Compartir enlace"
   },
   "input": {
     "mode": {
@@ -43,10 +45,10 @@
     "error_read": "Error al leer el archivo."
   },
   "footer": {
-    "text": "Sin cookies · Sin cuentas · Código abierto",
     "source": "Ver Código Fuente",
     "license": "Licencia AGPL-3.0",
-    "madeBy": "Hecho por {name}"
+    "madeBy": "Hecho por {name}",
+    "facts": "Sin cookies · Sin cuentas · Código abierto"
   },
   "settings": {
     "title": "Configuración",
@@ -60,5 +62,8 @@
     "encoder": "Configuración del Codificador",
     "autoCopy": "Autocopiar base64 al portapapeles",
     "mimeFormat": "Formato MIME (saltos de línea cada 76 caracteres)"
+  },
+  "shared": {
+    "select_option": "Selecciona una opción"
   }
 }

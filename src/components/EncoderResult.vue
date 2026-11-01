@@ -220,7 +220,7 @@ const handleCopy = () => {
 
 .actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .btn-primary {

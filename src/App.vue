@@ -56,103 +56,107 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
 </script>
 
 <template>
-  <AppHeader
-    :showSettings="showSettings"
-    @toggle-settings="showSettings = !showSettings"
-    @home="showSettings = false"
-  />
+  <div class="app-wrapper">
+    <AppHeader
+      :showSettings="showSettings"
+      @toggle-settings="showSettings = !showSettings"
+      @home="showSettings = false"
+    />
 
-  <div class="app-layout">
-    <SettingsView v-if="showSettings" :show="showSettings" />
+    <div class="app-layout">
+      <SettingsView v-if="showSettings" :show="showSettings" />
 
-    <main v-else class="main-content">
-      <div class="tabs" role="tablist" :aria-label="$t('header.title')">
-        <button
-          id="tab-decode"
-          role="tab"
-          class="tab-btn"
-          :class="{ active: activeTab === 'decode' }"
-          :aria-selected="activeTab === 'decode'"
-          aria-controls="panel-decode"
-          :tabindex="activeTab === 'decode' ? 0 : -1"
-          @click="selectTab('decode')"
-          @keydown="handleTabKeydown($event, 'decode')"
+      <main v-else class="main-content">
+        <div class="tabs" role="tablist" :aria-label="$t('header.title')">
+          <button
+            id="tab-decode"
+            role="tab"
+            class="tab-btn"
+            :class="{ active: activeTab === 'decode' }"
+            :aria-selected="activeTab === 'decode'"
+            aria-controls="panel-decode"
+            :tabindex="activeTab === 'decode' ? 0 : -1"
+            @click="selectTab('decode')"
+            @keydown="handleTabKeydown($event, 'decode')"
+          >
+            {{ $t('tabs.decode') }}
+          </button>
+          <button
+            id="tab-encode"
+            role="tab"
+            class="tab-btn"
+            :class="{ active: activeTab === 'encode' }"
+            :aria-selected="activeTab === 'encode'"
+            aria-controls="panel-encode"
+            :tabindex="activeTab === 'encode' ? 0 : -1"
+            @click="selectTab('encode')"
+            @keydown="handleTabKeydown($event, 'encode')"
+          >
+            {{ $t('tabs.encode') }}
+          </button>
+        </div>
+
+        <div
+          v-if="activeTab === 'decode'"
+          id="panel-decode"
+          role="tabpanel"
+          aria-labelledby="tab-decode"
+          tabindex="0"
+          class="tab-pane"
         >
-          {{ $t('tabs.decode') }}
-        </button>
-        <button
-          id="tab-encode"
-          role="tab"
-          class="tab-btn"
-          :class="{ active: activeTab === 'encode' }"
-          :aria-selected="activeTab === 'encode'"
-          aria-controls="panel-encode"
-          :tabindex="activeTab === 'encode' ? 0 : -1"
-          @click="selectTab('encode')"
-          @keydown="handleTabKeydown($event, 'encode')"
+          <ConverterInput
+            v-model:base64Input="base64Input"
+            v-model:detectionMode="detectionMode"
+            v-model:selectedManualType="selectedManualType"
+            :error="decoderError"
+            :commonTypes="COMMON_TYPES"
+            @convert="convertBase64"
+            @clear="clearDecoder"
+          />
+
+          <FileResult
+            v-if="fileInfo"
+            :fileInfo="fileInfo"
+            :previewPossible="previewPossible"
+            @download="download"
+          />
+        </div>
+
+        <div
+          v-if="activeTab === 'encode'"
+          id="panel-encode"
+          role="tabpanel"
+          aria-labelledby="tab-encode"
+          tabindex="0"
+          class="tab-pane"
         >
-          {{ $t('tabs.encode') }}
-        </button>
-      </div>
+          <EncoderInput
+            :selectedFile="selectedFile"
+            :isDragging="isDragging"
+            :error="encoderError"
+            @file-selected="encodeFile"
+            @clear="clearEncoder"
+            @dragenter="handleDragEnter"
+            @dragleave="handleDragLeave"
+            @dragover="handleDragOver"
+            @drop="handleDrop"
+          />
 
-      <div
-        v-if="activeTab === 'decode'"
-        id="panel-decode"
-        role="tabpanel"
-        aria-labelledby="tab-decode"
-        tabindex="0"
-        class="tab-pane"
-      >
-        <ConverterInput
-          v-model:base64Input="base64Input"
-          v-model:detectionMode="detectionMode"
-          v-model:selectedManualType="selectedManualType"
-          :error="decoderError"
-          :commonTypes="COMMON_TYPES"
-          @convert="convertBase64"
-          @clear="clearDecoder"
-        />
+          <EncoderResult
+            :base64Result="finalBase64Result"
+            :includeDataUri="includeDataUri"
+            :selectedFile="selectedFile"
+            :fileObjectUrl="fileObjectUrl"
+            @update:includeDataUri="includeDataUri = $event"
+            @copy="copyToClipboard"
+          />
+        </div>
+      </main>
+    </div>
 
-        <FileResult
-          v-if="fileInfo"
-          :fileInfo="fileInfo"
-          :previewPossible="previewPossible"
-          @download="download"
-        />
-      </div>
-
-      <div
-        v-if="activeTab === 'encode'"
-        id="panel-encode"
-        role="tabpanel"
-        aria-labelledby="tab-encode"
-        tabindex="0"
-        class="tab-pane"
-      >
-        <EncoderInput
-          :selectedFile="selectedFile"
-          :isDragging="isDragging"
-          :error="encoderError"
-          @file-selected="encodeFile"
-          @clear="clearEncoder"
-          @dragenter="handleDragEnter"
-          @dragleave="handleDragLeave"
-          @dragover="handleDragOver"
-          @drop="handleDrop"
-        />
-
-        <EncoderResult
-          :base64Result="finalBase64Result"
-          :includeDataUri="includeDataUri"
-          :selectedFile="selectedFile"
-          :fileObjectUrl="fileObjectUrl"
-          @update:includeDataUri="includeDataUri = $event"
-          @copy="copyToClipboard"
-        />
-      </div>
-    </main>
-
-    <AppFooter />
+    <div class="footer-container">
+      <AppFooter />
+    </div>
   </div>
 </template>
 
@@ -211,17 +215,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .app-layout {
-  max-width: 800px;
+  max-width: 1100px;
+  width: 100%;
   margin: 0 auto;
-  padding: 3rem 1.5rem;
-  min-height: calc(100vh - 55px);
+  padding: 3rem 1.5rem 0 1.5rem;
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .main-content {
   flex: 1;
+}
+
+.footer-container {
+  width: 100%;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
 }
 
 .tabs {
@@ -286,6 +303,10 @@ body {
 @media (max-width: 600px) {
   .app-layout {
     padding: 1.5rem 0.75rem 2rem 0.75rem;
+  }
+
+  .footer-container {
+    padding: 0 1rem;
   }
 }
 </style>

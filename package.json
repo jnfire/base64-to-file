@@ -1,6 +1,6 @@
 {
   "name": "base64-to-file",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Local-first web tool to decode Base64 strings into files and encode files into Base64, entirely in the browser.",
   "license": "AGPL-3.0-only",
@@ -23,7 +23,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "check:shared": "node scripts/check-shared.mjs"
   },
   "dependencies": {
     "vue": "^3.5.44",

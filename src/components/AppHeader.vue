@@ -3,15 +3,18 @@ import { useI18n } from 'vue-i18n';
 import SettingsIcon from './SettingsIcon.vue';
 
 defineProps<{
-  showSettings?: boolean;
+  showSettings: boolean;
+  /** Shows the share button; the app handles the `share` event. */
+  showShare?: boolean;
+}>();
+
+const emit = defineEmits<{
+  (e: 'home'): void;
+  (e: 'toggle-settings'): void;
+  (e: 'share'): void;
 }>();
 
 const { t } = useI18n();
-
-const emit = defineEmits<{
-  (emitEvent: 'toggle-settings'): void;
-  (emitEvent: 'home'): void;
-}>();
 </script>
 
 <template>
@@ -31,10 +34,38 @@ const emit = defineEmits<{
 
       <div class="navbar-actions">
         <button
+          v-if="showShare"
+          type="button"
+          class="btn-secondary config-toggle"
+          :aria-label="t('header.share')"
+          :title="t('header.share')"
+          @click="emit('share')"
+        >
+          <svg
+            class="icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+        </button>
+        <button
           type="button"
           class="btn-secondary config-toggle"
           :class="{ 'config-toggle--active': showSettings }"
-          :aria-label="t('settings.title') || 'Settings'"
+          :aria-label="t('header.settings')"
+          :title="t('header.settings')"
+          :aria-expanded="showSettings"
           @click="emit('toggle-settings')"
         >
           <SettingsIcon class="icon" />
@@ -50,7 +81,7 @@ const emit = defineEmits<{
   border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 2000;
   padding: 0.75rem 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
@@ -106,6 +137,7 @@ const emit = defineEmits<{
 .config-toggle {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   font-size: 0.9rem;
   padding: 0.4rem 0.8rem;
@@ -118,7 +150,12 @@ const emit = defineEmits<{
 }
 
 .config-toggle:hover {
-  background-color: var(--bg-surface-hover);
+  background-color: var(--bg-surface-hover, rgba(0, 0, 0, 0.05));
+}
+
+.config-toggle:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
 .config-toggle--active {

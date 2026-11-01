@@ -6,6 +6,10 @@ A fast, local-first web tool designed for developers and technical users. It dec
 
 All processing is done locally in your web browser, ensuring **complete control** of your data (Local-First). Built with **Vue 3 (Composition API)** and **TypeScript**.
 
+**▶ [Try it: base64-to-file.jnfire.dev](https://base64-to-file.jnfire.dev/)**
+
+![Base64 to File on desktop and mobile](docs/screenshots/base64-to-file-hero.png)
+
 ## ✨ Key Features
 - **Dual Detection:**
   - **Automatic:** Identifies file types via Data URIs or by parsing binary *Magic Bytes* (PNG, JPEG, PDF, ZIP, GIF, XML).
@@ -32,6 +36,17 @@ The project follows a modular architecture separating business logic from the vi
 npm install
 npm run dev
 ```
+
+## 📚 Documentation
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Design system](docs/DESIGN-SYSTEM.md), shared with the other portfolio tools
+- [Roadmap](docs/ROADMAP.md)
+- [Evolution](docs/evolution/README.md): how the project has changed, with screenshots
+
+## 🤝 Development
+
+Designed and directed by [Javier Nicolás Pérez Mesa](https://github.com/jnfire): the product, the architecture and the design decisions are the author's. AI has been part of the work as a deliberate experiment in learning new technology: Gemini CLI, Antigravity, GitHub Copilot and Claude Code, tried one after another. It began with small interventions and, as the experiment went on, moved towards more autonomy, always through pull requests that the author reviews. Commits made with Claude Code carry a `Co-Authored-By` trailer.
 
 ## 📄 License
 Copyright (C) 2026 Javier Nicolás Pérez Mesa.
