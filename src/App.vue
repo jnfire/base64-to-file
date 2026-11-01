@@ -154,7 +154,9 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
       </main>
     </div>
 
-    <AppFooter />
+    <div class="footer-container">
+      <AppFooter />
+    </div>
   </div>
 </template>
 
@@ -233,6 +235,12 @@ body {
   flex: 1;
 }
 
+.footer-container {
+  width: 100%;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
 .tabs {
   display: flex;
   gap: 0.5rem;
@@ -295,6 +303,10 @@ body {
 @media (max-width: 600px) {
   .app-layout {
     padding: 1.5rem 0.75rem 2rem 0.75rem;
+  }
+
+  .footer-container {
+    padding: 0 1rem;
   }
 }
 </style>
