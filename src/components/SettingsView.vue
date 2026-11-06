@@ -1,37 +1,24 @@
 <script setup lang="ts">
+import AppIcon from './AppIcon.vue';
 import EncoderSettingsCard from './EncoderSettingsCard.vue';
 import PersonalizationCard from './PersonalizationCard.vue';
+import { useRoute } from '../composables/useRoute';
 
-defineProps<{
-  show: boolean;
-}>();
+const { goDecode } = useRoute();
 </script>
 
 <template>
-  <div v-if="show" class="settings-view">
-    <EncoderSettingsCard />
-    <PersonalizationCard />
+  <div class="st-page">
+    <div class="st-head">
+      <h2>{{ $t('settings.title') }}</h2>
+      <button type="button" class="link-btn back-link" @click="goDecode">
+        <AppIcon name="back" />
+        {{ $t('nav.back') }}
+      </button>
+    </div>
+    <div class="st-row2">
+      <EncoderSettingsCard />
+      <PersonalizationCard />
+    </div>
   </div>
 </template>
-
-<style scoped>
-.settings-view {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  width: 100%;
-  animation: fadeIn 0.2s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>

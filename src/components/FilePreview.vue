@@ -5,6 +5,8 @@ const props = defineProps<{
   objectUrl: string;
   mimeType: string;
   fileName?: string;
+  /** Text for a type that cannot be previewed; the default asks to download the file. */
+  fallback?: string;
 }>();
 
 const isImage = computed(() => {
@@ -60,105 +62,26 @@ const isSupportedPreview = computed(
 </script>
 
 <template>
-  <div v-if="isSupportedPreview" class="preview-area">
-    <div class="preview-container">
-      <img
-        v-if="isImage"
-        :src="objectUrl"
-        :alt="fileName ? `Preview of ${fileName}` : $t('result.title')"
-      />
-      <iframe
-        v-else-if="isPdf"
-        :src="objectUrl"
-        frameborder="0"
-        :title="fileName ? `PDF preview of ${fileName}` : `${$t('result.title')} PDF`"
-      ></iframe>
-      <pre
-        v-else-if="isText"
-        class="text-preview"
-        tabindex="0"
-        :aria-label="fileName ? `Text content of ${fileName}` : $t('result.title')"
-        >{{ textContent }}</pre>
-    </div>
+  <div v-if="isSupportedPreview" class="preview" :class="{ 'preview--image': isImage }">
+    <img
+      v-if="isImage"
+      :src="objectUrl"
+      :alt="fileName ? `Preview of ${fileName}` : $t('result.title')"
+    />
+    <iframe
+      v-else-if="isPdf"
+      :src="objectUrl"
+      class="preview-frame"
+      :title="fileName ? `PDF preview of ${fileName}` : `${$t('result.title')} PDF`"
+    ></iframe>
+    <pre
+      v-else-if="isText"
+      class="preview-text"
+      tabindex="0"
+      :aria-label="fileName ? `Text content of ${fileName}` : $t('result.title')"
+      >{{ textContent }}</pre>
   </div>
-  <div v-else class="no-preview">
-    <p>{{ $t('result.no_preview') }}</p>
+  <div v-else class="empty">
+    <p>{{ fallback ?? $t('result.no_preview') }}</p>
   </div>
 </template>
-
-<style scoped>
-.preview-area {
-  padding: 1.5rem;
-  background-color: var(--bg-body);
-}
-
-.preview-container {
-  display: flex;
-  justify-content: center;
-  background-color: var(--bg-surface);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  overflow: hidden;
-  min-height: 200px;
-}
-
-.preview-container img {
-  max-width: 100%;
-  max-height: 500px;
-  object-fit: contain;
-  background-image:
-    linear-gradient(45deg, var(--bg-body) 25%, transparent 25%),
-    linear-gradient(-45deg, var(--bg-body) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, var(--bg-body) 75%),
-    linear-gradient(-45deg, transparent 75%, var(--bg-body) 75%);
-  background-size: 20px 20px;
-  background-position:
-    0 0,
-    0 10px,
-    10px -10px,
-    -10px 0px;
-}
-
-.preview-container iframe {
-  width: 100%;
-  height: 500px;
-  border: none;
-}
-
-.text-preview {
-  width: 100%;
-  padding: 1rem;
-  margin: 0;
-  overflow: auto;
-  max-height: 400px;
-  text-align: left;
-  white-space: pre-wrap;
-  word-break: break-all;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--text-main);
-}
-
-.text-preview:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: -2px;
-}
-
-.no-preview {
-  padding: 2.5rem 1.5rem;
-  text-align: center;
-  color: var(--text-muted);
-  background-color: var(--bg-body);
-}
-
-@media (max-width: 600px) {
-  .preview-area {
-    padding: 1rem;
-  }
-
-  .text-preview {
-    font-size: 0.95rem;
-  }
-}
-</style>

@@ -1,156 +1,41 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import AppHeader from './components/AppHeader.vue';
-import ConverterInput from './components/ConverterInput.vue';
-import FileResult from './components/FileResult.vue';
-import EncoderInput from './components/EncoderInput.vue';
-import EncoderResult from './components/EncoderResult.vue';
+import { computed, provide, reactive } from 'vue';
 import AppFooter from './components/AppFooter.vue';
+import AppHeader from './components/AppHeader.vue';
+import ConverterView from './components/ConverterView.vue';
 import SettingsView from './components/SettingsView.vue';
+import { decoderKey, encoderKey } from './composables/keys';
 import { useBase64Converter } from './composables/useBase64Converter';
 import { useFileEncoder } from './composables/useFileEncoder';
-const activeTab = ref<'decode' | 'encode'>('decode');
-const showSettings = ref(false);
+import { useRoute } from './composables/useRoute';
 
-const {
-  base64Input,
-  error: decoderError,
-  detectionMode,
-  selectedManualType,
-  fileInfo,
-  COMMON_TYPES,
-  convert: convertBase64,
-  clear: clearDecoder,
-  download,
-  previewPossible,
-} = useBase64Converter();
+// The state of both directions lives here, so it survives moving between screens.
+const decoder = reactive(useBase64Converter());
+const encoder = reactive(useFileEncoder());
+provide(decoderKey, decoder);
+provide(encoderKey, encoder);
 
-const {
-  selectedFile,
-  fileObjectUrl,
-  finalBase64Result,
-  error: encoderError,
-  includeDataUri,
-  isDragging,
-  handleDragEnter,
-  handleDragLeave,
-  handleDragOver,
-  handleDrop,
-  encodeFile,
-  clear: clearEncoder,
-  copyToClipboard,
-} = useFileEncoder();
-const selectTab = (targetTab: 'decode' | 'encode') => {
-  activeTab.value = targetTab;
-};
+const { route, goDecode, goEncode, goSettings } = useRoute();
 
-const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode' | 'encode') => {
-  if (keyboardEvent.key === 'ArrowRight' || keyboardEvent.key === 'ArrowLeft') {
-    keyboardEvent.preventDefault();
-    const nextTabName = currentTabName === 'decode' ? 'encode' : 'decode';
-    activeTab.value = nextTabName;
-    const targetElement = document.getElementById(`tab-${nextTabName}`);
-    targetElement?.focus();
-  }
-};
+const onSettings = computed(() => route.value === 'settings');
+const direction = computed(() => (route.value === 'encode' ? 'encode' : 'decode'));
+
+// The gear opens the settings; pressing it again goes back to the converter.
+const toggleSettings = () => (onSettings.value ? goDecode() : goSettings());
 </script>
 
 <template>
   <div class="app-wrapper">
-    <AppHeader
-      :showSettings="showSettings"
-      @toggle-settings="showSettings = !showSettings"
-      @home="showSettings = false"
-    />
+    <AppHeader :showSettings="onSettings" @toggle-settings="toggleSettings" @home="goDecode" />
 
     <div class="app-layout">
-      <SettingsView v-if="showSettings" :show="showSettings" />
-
-      <main v-else class="main-content">
-        <div class="tabs" role="tablist" :aria-label="$t('header.title')">
-          <button
-            id="tab-decode"
-            role="tab"
-            class="tab-btn"
-            :class="{ active: activeTab === 'decode' }"
-            :aria-selected="activeTab === 'decode'"
-            aria-controls="panel-decode"
-            :tabindex="activeTab === 'decode' ? 0 : -1"
-            @click="selectTab('decode')"
-            @keydown="handleTabKeydown($event, 'decode')"
-          >
-            {{ $t('tabs.decode') }}
-          </button>
-          <button
-            id="tab-encode"
-            role="tab"
-            class="tab-btn"
-            :class="{ active: activeTab === 'encode' }"
-            :aria-selected="activeTab === 'encode'"
-            aria-controls="panel-encode"
-            :tabindex="activeTab === 'encode' ? 0 : -1"
-            @click="selectTab('encode')"
-            @keydown="handleTabKeydown($event, 'encode')"
-          >
-            {{ $t('tabs.encode') }}
-          </button>
-        </div>
-
-        <div
-          v-if="activeTab === 'decode'"
-          id="panel-decode"
-          role="tabpanel"
-          aria-labelledby="tab-decode"
-          tabindex="0"
-          class="tab-pane"
-        >
-          <ConverterInput
-            v-model:base64Input="base64Input"
-            v-model:detectionMode="detectionMode"
-            v-model:selectedManualType="selectedManualType"
-            :error="decoderError"
-            :commonTypes="COMMON_TYPES"
-            @convert="convertBase64"
-            @clear="clearDecoder"
-          />
-
-          <FileResult
-            v-if="fileInfo"
-            :fileInfo="fileInfo"
-            :previewPossible="previewPossible"
-            @download="download"
-          />
-        </div>
-
-        <div
-          v-if="activeTab === 'encode'"
-          id="panel-encode"
-          role="tabpanel"
-          aria-labelledby="tab-encode"
-          tabindex="0"
-          class="tab-pane"
-        >
-          <EncoderInput
-            :selectedFile="selectedFile"
-            :isDragging="isDragging"
-            :error="encoderError"
-            @file-selected="encodeFile"
-            @clear="clearEncoder"
-            @dragenter="handleDragEnter"
-            @dragleave="handleDragLeave"
-            @dragover="handleDragOver"
-            @drop="handleDrop"
-          />
-
-          <EncoderResult
-            :base64Result="finalBase64Result"
-            :includeDataUri="includeDataUri"
-            :selectedFile="selectedFile"
-            :fileObjectUrl="fileObjectUrl"
-            @update:includeDataUri="includeDataUri = $event"
-            @copy="copyToClipboard"
-          />
-        </div>
+      <main class="main-content">
+        <SettingsView v-if="onSettings" />
+        <ConverterView
+          v-else
+          :direction="direction"
+          @select="$event === 'encode' ? goEncode() : goDecode()"
+        />
       </main>
     </div>
 
@@ -159,154 +44,3 @@ const handleTabKeydown = (keyboardEvent: KeyboardEvent, currentTabName: 'decode'
     </div>
   </div>
 </template>
-
-<style>
-/* Global CSS variables for Light/Dark Mode (Sober, Developer-focused) */
-:root {
-  --bg-body: #ffffff;
-  --bg-surface: #f9fafb;
-  --bg-surface-hover: #f3f4f6;
-  --text-main: #111827;
-  --text-muted: #6b7280;
-  --border-color: #e5e7eb;
-  --accent-color: #000000;
-  --accent-color-alpha: rgba(0, 0, 0, 0.1);
-  --error-color: #ef4444;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --bg-body: #111827;
-    --bg-surface: #1f2937;
-    --bg-surface-hover: #374151;
-    --text-main: #f9fafb;
-    --text-muted: #9ca3af;
-    --border-color: #374151;
-    --accent-color: #ffffff;
-    --accent-color-alpha: rgba(255, 255, 255, 0.1);
-    --error-color: #f87171;
-  }
-}
-
-:root[data-theme='dark'] {
-  --bg-body: #111827;
-  --bg-surface: #1f2937;
-  --bg-surface-hover: #374151;
-  --text-main: #f9fafb;
-  --text-muted: #9ca3af;
-  --border-color: #374151;
-  --accent-color: #ffffff;
-  --accent-color-alpha: rgba(255, 255, 255, 0.1);
-  --error-color: #f87171;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background-color: var(--bg-body);
-  color: var(--text-main);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.app-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.app-layout {
-  max-width: 1100px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 3rem 1.5rem 0 1.5rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.main-content {
-  flex: 1;
-}
-
-.footer-container {
-  width: 100%;
-  padding: 0 1.5rem;
-  box-sizing: border-box;
-}
-
-.tabs {
-  display: flex;
-  gap: 0.5rem;
-  background-color: var(--bg-surface);
-  padding: 0.5rem;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  margin-bottom: 1.5rem;
-}
-
-.tab-btn {
-  flex: 1;
-  padding: 0.75rem 1rem;
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  font-weight: 600;
-  font-size: 0.95rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.tab-btn:hover {
-  color: var(--text-main);
-  background-color: var(--bg-surface-hover);
-}
-
-.tab-btn:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
-}
-
-[role='tabpanel']:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 4px;
-}
-
-.tab-btn.active {
-  background-color: var(--accent-color);
-  color: var(--bg-body);
-}
-
-.tab-pane {
-  animation: fadeIn 0.3s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Mobile Responsive Adjustments */
-@media (max-width: 600px) {
-  .app-layout {
-    padding: 1.5rem 0.75rem 2rem 0.75rem;
-  }
-
-  .footer-container {
-    padding: 0 1rem;
-  }
-}
-</style>

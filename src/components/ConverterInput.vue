@@ -1,32 +1,33 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { FileTypeOption } from '../core/types';
+import { useI18n } from 'vue-i18n';
+import type { FileInfo, FileTypeOption } from '../core/types';
+import type { DecodeError } from '../composables/useBase64Converter';
+import { formatSize } from '../utils/format';
+import AppIcon from './AppIcon.vue';
 import CustomSelect from './CustomSelect.vue';
 
 const props = defineProps<{
   base64Input: string;
-  error: string;
+  error: DecodeError;
   detectionMode: 'auto' | 'manual';
   selectedManualType: FileTypeOption;
   commonTypes: FileTypeOption[];
+  fileInfo: FileInfo | null;
 }>();
 
 const emit = defineEmits<{
   (e: 'update:base64Input', value: string): void;
   (e: 'update:detectionMode', value: 'auto' | 'manual'): void;
   (e: 'update:selectedManualType', value: FileTypeOption): void;
-  (e: 'convert'): void;
   (e: 'clear'): void;
 }>();
 
+const { locale } = useI18n();
+
 const localInput = computed({
   get: () => props.base64Input,
-  set: (val) => emit('update:base64Input', val),
-});
-
-const localDetectionMode = computed({
-  get: () => props.detectionMode,
-  set: (val) => emit('update:detectionMode', val),
+  set: (value) => emit('update:base64Input', value),
 });
 
 const formatOptions = computed(() =>
@@ -45,263 +46,64 @@ const selectedMime = computed({
     }
   },
 });
+
+const inputSize = computed(() => formatSize(props.base64Input.length, locale.value));
 </script>
 
 <template>
-  <div class="converter-input">
-    <div class="controls-header">
-      <div class="mode-selector" role="radiogroup" :aria-label="$t('input.format')">
+  <section class="settings-card pane" :aria-label="$t('tabs.base64')">
+    <div class="pane-head">
+      <span class="card-title">{{ $t('tabs.base64') }}</span>
+      <div class="mini-seg" role="radiogroup" :aria-label="$t('input.format')">
         <button
           type="button"
           role="radio"
-          :aria-checked="localDetectionMode === 'auto'"
-          :class="{ active: localDetectionMode === 'auto' }"
-          @click="localDetectionMode = 'auto'"
+          :aria-checked="detectionMode === 'auto'"
+          @click="emit('update:detectionMode', 'auto')"
         >
           {{ $t('input.mode.auto') }}
         </button>
         <button
           type="button"
           role="radio"
-          :aria-checked="localDetectionMode === 'manual'"
-          :class="{ active: localDetectionMode === 'manual' }"
-          @click="localDetectionMode = 'manual'"
+          :aria-checked="detectionMode === 'manual'"
+          @click="emit('update:detectionMode', 'manual')"
         >
           {{ $t('input.mode.manual') }}
         </button>
       </div>
+    </div>
 
-      <div v-if="localDetectionMode === 'manual'" class="manual-options">
-        <label id="format-label" class="format-label">{{ $t('input.format') }}</label>
-        <div class="format-select-wrapper">
-          <CustomSelect id="fileType" v-model="selectedMime" :options="formatOptions" size="sm" />
-        </div>
-      </div>
+    <div v-if="detectionMode === 'manual'" class="field-row">
+      <label id="format-label" class="field-label">{{ $t('input.format') }}</label>
+      <CustomSelect id="fileType" v-model="selectedMime" :options="formatOptions" />
     </div>
 
     <label for="base64-input-textarea" class="sr-only">{{ $t('input.placeholder') }}</label>
     <textarea
       id="base64-input-textarea"
       v-model="localInput"
+      class="code-area"
+      :class="{ 'is-error': error }"
       :placeholder="$t('input.placeholder')"
       :aria-invalid="!!error"
       :aria-describedby="error ? 'decoder-error-msg' : undefined"
-      rows="8"
+      spellcheck="false"
     ></textarea>
 
-    <div class="actions">
-      <button type="button" class="btn-primary" @click="$emit('convert')">
-        {{ $t('input.btn_decode') }}
-      </button>
-      <button type="button" class="btn-secondary" @click="$emit('clear')">
+    <div class="pane-foot">
+      <p v-if="error" id="decoder-error-msg" class="status is-error" role="alert">
+        <AppIcon name="alert" />
+        {{ $t('input.error_invalid') }}
+      </p>
+      <span v-else-if="fileInfo" class="foot-info">
+        <span class="chip is-accent">{{ $t(`input.source.${fileInfo.source}`) }}</span>
+        <span class="chip">{{ inputSize }}</span>
+      </span>
+      <span v-else>{{ $t('input.hint_live') }}</span>
+      <button type="button" class="link-btn" :disabled="!base64Input" @click="emit('clear')">
         {{ $t('input.btn_clear') }}
       </button>
     </div>
-
-    <p v-if="error" id="decoder-error-msg" class="error-msg" role="alert" aria-live="assertive">
-      {{
-        error === 'Por favor, pega un código Base64.'
-          ? $t('input.error_empty')
-          : $t('input.error_invalid')
-      }}
-    </p>
-  </div>
+  </section>
 </template>
-
-<style scoped>
-.converter-input {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  background-color: var(--bg-surface);
-  padding: 2rem;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-}
-
-.controls-header {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: center;
-}
-
-.mode-selector {
-  display: flex;
-  background-color: var(--bg-body);
-  padding: 0.25rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-}
-
-.mode-selector button {
-  padding: 0.5rem 1rem;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: all 0.2s;
-}
-
-.mode-selector button:hover {
-  color: var(--text-main);
-}
-
-.mode-selector button:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 1px;
-}
-
-.mode-selector button.active {
-  background-color: var(--bg-surface);
-  color: var(--text-main);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  font-weight: 600;
-}
-
-.manual-options {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  animation: fadeIn 0.2s ease-out;
-}
-
-.format-label {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  white-space: nowrap;
-}
-
-.format-select-wrapper {
-  min-width: 250px;
-}
-
-textarea {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-body);
-  color: var(--text-main);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.9rem;
-  resize: vertical;
-  min-height: 120px;
-  line-height: 1.5;
-}
-
-textarea:focus-visible,
-textarea:focus {
-  outline: none;
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 2px var(--accent-color-alpha);
-}
-
-.actions {
-  display: flex;
-  gap: 1rem;
-}
-
-button {
-  cursor: pointer;
-  font-family: inherit;
-}
-
-.btn-primary {
-  background-color: var(--text-main);
-  color: var(--bg-body);
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-weight: 600;
-  flex: 1;
-  transition: opacity 0.2s;
-}
-
-.btn-primary:hover {
-  opacity: 0.9;
-}
-
-.btn-primary:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
-}
-
-.btn-secondary {
-  background-color: var(--bg-body);
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: background-color 0.2s;
-}
-
-.btn-secondary:hover {
-  background-color: var(--bg-surface-hover);
-}
-
-.btn-secondary:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
-}
-
-.error-msg {
-  color: var(--error-color);
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-top: 0.5rem;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@media (max-width: 600px) {
-  .converter-input {
-    padding: 1rem;
-  }
-
-  .controls-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .mode-selector {
-    width: 100%;
-  }
-
-  .mode-selector button {
-    flex: 1;
-  }
-
-  .manual-options {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.5rem;
-    width: 100%;
-  }
-
-  .format-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .format-select-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
-}
-</style>

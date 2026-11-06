@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { formatSize } from '../utils/format';
+import AppIcon from './AppIcon.vue';
+import FilePreview from './FilePreview.vue';
 
-defineProps<{
+const props = defineProps<{
   selectedFile: File | null;
+  fileObjectUrl: string;
   isDragging: boolean;
   error: string | null;
 }>();
@@ -16,262 +21,96 @@ const emit = defineEmits<{
   (e: 'drop', event: DragEvent): void;
 }>();
 
+const { locale } = useI18n();
 const fileInputRef = ref<HTMLInputElement | null>(null);
+const fileSize = computed(() =>
+  props.selectedFile ? formatSize(props.selectedFile.size, locale.value) : '',
+);
 
 const triggerFileInput = () => {
-  if (fileInputRef.value) {
-    fileInputRef.value.click();
-  }
+  fileInputRef.value?.click();
 };
 
 const handleFileChange = (e: Event) => {
   const target = e.target as HTMLInputElement;
   if (target.files && target.files.length > 0) {
     emit('file-selected', target.files[0]);
-    // Resetear el input para permitir seleccionar el mismo archivo después de limpiarlo
+    // Reset the input so that the same file can be chosen again after clearing it.
     target.value = '';
   }
 };
 </script>
 
 <template>
-  <div class="encoder-input">
+  <section
+    class="settings-card pane"
+    :aria-label="$t('encoder.file_title')"
+    @dragenter="emit('dragenter', $event)"
+    @dragleave="emit('dragleave', $event)"
+    @dragover="emit('dragover', $event)"
+    @drop="emit('drop', $event)"
+  >
+    <div class="pane-head">
+      <span class="card-title">{{ $t('encoder.file_title') }}</span>
+      <button v-if="selectedFile" type="button" class="link-btn" @click="triggerFileInput">
+        {{ $t('encoder.change_file') }}
+      </button>
+    </div>
+
+    <input
+      ref="fileInputRef"
+      type="file"
+      class="sr-only"
+      tabindex="-1"
+      aria-hidden="true"
+      @change="handleFileChange"
+    />
+
+    <template v-if="selectedFile">
+      <FilePreview
+        :objectUrl="fileObjectUrl"
+        :mimeType="selectedFile.type || 'application/octet-stream'"
+        :fileName="selectedFile.name"
+        :fallback="$t('encoder.no_preview')"
+      />
+      <div class="file-bar" :class="{ 'is-dragging': isDragging }">
+        <AppIcon name="file" />
+        <span class="file-name" :title="selectedFile.name">{{ selectedFile.name }}</span>
+        <span class="file-size">{{ fileSize }}</span>
+        <button
+          type="button"
+          class="icon-btn"
+          :aria-label="$t('encoder.remove_file')"
+          :title="$t('encoder.remove_file')"
+          @click="emit('clear')"
+        >
+          <AppIcon name="x" />
+        </button>
+      </div>
+    </template>
     <div
-      class="drop-zone"
+      v-else
+      class="drop"
       :class="{ 'is-dragging': isDragging }"
       role="button"
       tabindex="0"
-      :aria-label="
-        !selectedFile
-          ? $t('encoder.drop_zone')
-          : `${$t('encoder.file_selected')} ${selectedFile.name}`
-      "
-      @dragenter="emit('dragenter', $event)"
-      @dragleave="emit('dragleave', $event)"
-      @dragover="emit('dragover', $event)"
-      @drop="emit('drop', $event)"
+      :aria-label="$t('encoder.drop_zone')"
       @click="triggerFileInput"
       @keydown.enter.prevent="triggerFileInput"
       @keydown.space.prevent="triggerFileInput"
     >
-      <input
-        ref="fileInputRef"
-        type="file"
-        class="sr-only"
-        tabindex="-1"
-        aria-hidden="true"
-        @change="handleFileChange"
-      />
-      <div v-if="!selectedFile" class="drop-content">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="48"
-          height="48"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="upload-icon"
-          aria-hidden="true"
-        >
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="17 8 12 3 7 8"></polyline>
-          <line x1="12" y1="3" x2="12" y2="15"></line>
-        </svg>
-        <p>{{ $t('encoder.drop_zone') }}</p>
-        <p class="text-sm text-muted">{{ $t('encoder.or') }}</p>
-        <button
-          type="button"
-          class="btn-browse"
-          :aria-label="$t('encoder.btn_browse')"
-          @click.stop="triggerFileInput"
-        >
-          {{ $t('encoder.btn_browse') }}
-        </button>
-      </div>
-      <div v-else class="file-selected">
-        <div class="file-info">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
-            <polyline points="13 2 13 9 20 9"></polyline>
-          </svg>
-          <div>
-            <p class="filename">{{ selectedFile.name }}</p>
-            <p class="filesize">{{ (selectedFile.size / 1024).toFixed(2) }} KB</p>
-          </div>
-        </div>
-        <div class="sr-only" role="status" aria-live="polite">
-          {{ $t('encoder.file_selected') }} {{ selectedFile.name }},
-          {{ (selectedFile.size / 1024).toFixed(2) }} KB
-        </div>
-      </div>
-    </div>
-
-    <div class="actions">
-      <button v-if="selectedFile" type="button" class="btn-secondary" @click="emit('clear')">
-        {{ $t('encoder.btn_clear') }}
+      <span class="drop-ico"><AppIcon name="upload" /></span>
+      <strong>{{ $t('encoder.drop_zone') }}</strong>
+      <span class="or">{{ $t('encoder.or') }}</span>
+      <button type="button" class="btn-secondary with-ico" @click.stop="triggerFileInput">
+        <AppIcon name="file" />
+        {{ $t('encoder.btn_browse') }}
       </button>
     </div>
 
-    <p v-if="error" class="error-msg" role="alert" aria-live="assertive">
+    <p v-if="error" class="status is-error" role="alert">
+      <AppIcon name="alert" />
       {{ error }}
     </p>
-  </div>
+  </section>
 </template>
-
-<style scoped>
-.encoder-input {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.drop-zone {
-  border: 2px dashed var(--border-color);
-  border-radius: 12px;
-  padding: 3rem 2rem;
-  text-align: center;
-  background-color: var(--bg-surface);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  min-height: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.drop-zone:hover {
-  border-color: var(--accent-color);
-  background-color: var(--bg-surface-hover);
-}
-
-.drop-zone:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
-  border-color: var(--accent-color);
-}
-
-.drop-zone.is-dragging {
-  border-color: var(--accent-color);
-  background-color: rgba(74, 158, 255, 0.1);
-  transform: scale(1.02);
-}
-
-.drop-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text-main);
-}
-
-.upload-icon {
-  margin-bottom: 1rem;
-  color: var(--accent-color);
-}
-
-.text-muted {
-  color: var(--text-muted);
-}
-
-.text-sm {
-  font-size: 0.9rem;
-}
-
-.btn-browse {
-  margin-top: 0.5rem;
-  background-color: var(--accent-color);
-  color: var(--bg-body);
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.btn-browse:hover {
-  opacity: 0.9;
-}
-
-.btn-browse:focus-visible {
-  outline: 2px solid var(--bg-body);
-  box-shadow: 0 0 0 4px var(--accent-color);
-}
-
-.file-selected {
-  width: 100%;
-}
-
-.file-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  color: var(--text-main);
-}
-
-.filename {
-  font-weight: 600;
-  margin: 0;
-  word-break: break-all;
-}
-
-.filesize {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin: 0;
-}
-
-.actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.btn-secondary {
-  padding: 0.75rem 1.5rem;
-  background-color: var(--bg-surface);
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-secondary:hover {
-  background-color: var(--bg-surface-hover);
-}
-
-.btn-secondary:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
-}
-
-.error-msg {
-  color: #ef4444;
-  font-weight: 500;
-  margin: 0;
-}
-
-@media (max-width: 600px) {
-  .drop-zone {
-    padding: 1rem;
-    min-height: 200px;
-  }
-}
-</style>

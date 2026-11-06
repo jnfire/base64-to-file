@@ -1,4 +1,5 @@
 import type { DetectFileTypeResult } from './types';
+import { COMMON_TYPES } from './types';
 
 function isPng(bytes: Uint8Array): boolean {
   return bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47;
@@ -29,7 +30,11 @@ export function extractDataUriInfo(dataUri: string): DetectFileTypeResult | null
   if (!match) return null;
 
   const mime = match[1];
-  const extension = mime.split('/')[1] || 'bin';
+  // A known type has its own extension (image/svg+xml is .svg, image/jpeg is .jpg). For any
+  // other one, the subtype, or its suffix when it has one: application/ld+json is .json.
+  const known = COMMON_TYPES.find((type) => type.mime === mime);
+  const subtype = mime.split('/')[1] || 'bin';
+  const extension = known ? known.extension : (subtype.split('+').pop() as string);
   return { mime, extension };
 }
 

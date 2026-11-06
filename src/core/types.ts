@@ -1,8 +1,12 @@
+/** Where the type of a decoded file came from. */
+export type FileTypeSource = 'uri' | 'signature' | 'manual';
+
 export interface FileInfo {
   mime: string;
   extension: string;
   data: Uint8Array;
   objectUrl: string;
+  source: FileTypeSource;
 }
 
 export interface DetectFileTypeResult {

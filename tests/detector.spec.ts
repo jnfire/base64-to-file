@@ -19,6 +19,15 @@ describe('detector', () => {
       expect(result).toBeNull();
     });
 
+    it.each([
+      ['data:image/svg+xml;base64,PHN2Zz48L3N2Zz4=', 'svg'],
+      ['data:image/jpeg;base64,/9j/4AAQ', 'jpg'],
+      ['data:application/ld+json;base64,e30=', 'json'],
+      ['data:audio/mpeg;base64,SUQz', 'mpeg'],
+    ])('should give a sensible extension for %s', (dataUri, extension) => {
+      expect(extractDataUriInfo(dataUri)?.extension).toBe(extension);
+    });
+
     it('should fallback to bin extension if mime has no subtype', () => {
       // Unlikely, but let's test the fallback
       const dataUri = 'data:something;base64,123';
