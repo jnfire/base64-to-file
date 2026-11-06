@@ -7,6 +7,30 @@ and this project uses [Semantic Versioning](https://semver.org/). The version
 number lives in a single place, `package.json`, and is shown live in the app
 footer.
 
+## [1.1.0] - 2026-11-06
+
+### Added
+- Live decoding: the file, its preview and the download button appear as soon as a Base64 string or a Data URI is pasted, with no button to press. A text longer than 20,000 characters waits 300 ms after the last change. An empty box is not an error, and an invalid text shows its message next to the box.
+- The two panes, input and result, are side by side with an arrow between them, so what you paste and what you get are on screen together. On narrow screens one goes below the other.
+- Messages for the empty states that say what will appear and where, chips for the type, the extension and the size, and the size of the Base64 with how much bigger it is than the file.
+- Routes in the URL hash (`#/`, `#/codificar`, `#/ajustes`) so that the Back button works.
+- Copying falls back to the old selection-based copy on pages without the clipboard API (plain HTTP).
+- Tests for the live decoding, the routes and the size format: 46 to 68.
+
+### Changed
+- Teal accent color, in light and dark themes. The shared components keep working as before and the other portfolio tools keep their own accent.
+- The direction selector is compact and uses short labels (Base64 → File, File → Base64) that no longer break on phones.
+- Previews of images are shown over a checkerboard, so that transparency can be seen.
+- When encoding, the preview of the file is next to the choice of the file, and the result has the copy button in its header.
+- The settings screen has a title and a link back to the converter, and the two cards side by side on wide screens.
+- Sizes use the number format of the language (1,76 KB or 1.76 KB), and small sizes show two decimals.
+- Text sizes and spaces follow one scale (12, 13.6 and 15.2 px for text, multiples of 4 px for spaces), and the buttons and fields have global styles instead of one copy per component.
+- Texts are in sentence case in all six languages.
+
+### Removed
+- The Decode button and the message asking for a Base64 string when the box is empty.
+- Texts that were no longer used.
+
 ## [1.0.0] - 2026-11-01
 
 First stable release. The tool decodes Base64 and Data URIs into files and
