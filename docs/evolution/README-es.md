@@ -26,7 +26,7 @@ Versiones: la v0.1.0 y la v0.2.0 (mayo de 2026) se quedan como estaban; este tra
 
 | | Antes (agosto de 2026) | Ahora |
 | --- | --- | --- |
-| Tests automáticos | 29 | 72 |
+| Tests automáticos | 29 | 85 |
 | Licencia | Todos los derechos reservados | AGPL-3.0 |
 | Analítica | Google Analytics y banner de cookies | Ninguna |
 | Despliegue | Solo si pasan los tests | Solo si pasan lint, formato, componentes compartidos, tests y build |

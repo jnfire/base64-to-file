@@ -13,6 +13,7 @@ Esta carpeta contiene lógica pura en TypeScript. Es completamente independiente
 - **`detector.ts`**: Responsable de determinar el tipo MIME de los datos decodificados. Lo hace de dos formas:
   - Leyendo la cabecera de la Data URI (si se proporciona).
   - Inspeccionando los *Magic Bytes* (los primeros bytes del array binario) para detectar formatos como PNG, PDF, ZIP, etc.
+  - Reconociendo texto plano, JSON y SVG cuando no hay firma: el UTF-8 válido sin caracteres de control es texto, y el texto que se interpreta como objeto o lista es JSON.
 - **`preview.ts`**: Contiene las reglas de negocio que determinan si un tipo MIME específico puede ser previsualizado de forma nativa en el navegador.
 
 ### 2. `src/composables/` (Capa de Adaptadores)

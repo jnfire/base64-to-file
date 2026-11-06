@@ -13,6 +13,7 @@ This folder contains pure TypeScript logic. It is entirely framework-agnostic.
 - **`detector.ts`**: Responsible for determining the MIME type of the decoded data. It does this in two ways:
   - Reading the Data URI header (if provided).
   - Inspecting the *Magic Bytes* (the first few bytes of the binary array) to detect formats like PNG, PDF, ZIP, etc.
+  - Recognizing plain text, JSON and SVG when there is no signature: valid UTF-8 without control characters is text, and text that parses as an object or an array is JSON.
 - **`preview.ts`**: Contains the business rules that determine if a specific MIME type can be previewed natively in the browser.
 
 ### 2. `src/composables/` (Adapter Layer)

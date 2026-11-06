@@ -14,8 +14,9 @@ footer.
 - The two panes, input and result, are side by side with an arrow between them, so what you paste and what you get are on screen together. On narrow screens one goes below the other.
 - Messages for the empty states that say what will appear and where, chips for the type, the extension and the size, and the size of the Base64 with how much bigger it is than the file.
 - Routes in the URL hash (`#/`, `#/codificar`, `#/ajustes`) so that the Back button works.
+- Plain text, JSON and SVG are recognized from their content when there is no Data URI. Before, the Base64 of a JSON or a note was a `.bin` file with no preview until the type was chosen by hand.
 - Copying falls back to the old selection-based copy on pages without the clipboard API (plain HTTP).
-- Tests for the live decoding, the routes and the size format: 46 to 68.
+- Tests for the live decoding, the type detection, the routes and the size format: 46 to 85.
 
 ### Changed
 - Teal accent color, in light and dark themes. The shared components keep working as before and the other portfolio tools keep their own accent.

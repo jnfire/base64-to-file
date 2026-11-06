@@ -26,7 +26,7 @@ Releases: v0.1.0 and v0.2.0 (May 2026) stay as they were; this work continues th
 
 | | Before (August 2026) | Now |
 | --- | --- | --- |
-| Automated tests | 29 | 72 |
+| Automated tests | 29 | 85 |
 | License | All rights reserved | AGPL-3.0 |
 | Analytics | Google Analytics and a cookie banner | None |
 | Deploy | Only if the tests pass | Only if lint, format, shared components, tests and build pass |

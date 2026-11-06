@@ -6,7 +6,7 @@ What Base64 to File does today and where it could go. The ideas are ordered by h
 
 ## What it does today
 
-- Decode Base64 and Data URIs into files as you paste, with automatic type detection (Data URI and magic bytes) or a manual type, and a download button.
+- Decode Base64 and Data URIs into files as you paste, with automatic type detection (Data URI, magic bytes, and plain text, JSON or SVG) or a manual type, and a download button.
 - Encode any file (up to 5 MB) into Base64, with or without the Data URI prefix.
 - Previews for images, SVG, PDF and text, with JSON formatted for reading.
 - Everything runs in the browser, in six languages, with light and dark themes.
@@ -14,13 +14,12 @@ What Base64 to File does today and where it could go. The ideas are ordered by h
 ## Ideas
 
 1. **URL-safe Base64** (the `-` and `_` variant used in JWTs and URLs): detect it and decode it.
-2. **Detect plain text and JSON** when there is no Data URI: today the Base64 of a JSON or a text gets the `.bin` type until you choose it by hand.
-3. **Clearer errors:** say what is wrong with the input (invalid character, wrong padding) instead of a generic message.
-4. **Offline use** as an installable app (PWA).
-5. **Several files at once** when encoding.
-6. **More previews** (audio and video); today they cover images, SVG, PDF and text.
-7. **A higher limit with a warning** instead of a fixed 5 MB.
-8. **Automated tests for the interface;** today only the core logic and the settings are tested.
+2. **Clearer errors:** say what is wrong with the input (invalid character, wrong padding) instead of a generic message.
+3. **Offline use** as an installable app (PWA).
+4. **Several files at once** when encoding.
+5. **More previews** (audio and video); today they cover images, SVG, PDF and text.
+6. **A higher limit with a warning** instead of a fixed 5 MB.
+7. **Automated tests for the interface;** today only the core logic and the settings are tested.
 
 ## Out of scope
 
