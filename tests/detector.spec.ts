@@ -73,4 +73,61 @@ describe('detector', () => {
       expect(result.extension).toBe('bin');
     });
   });
+
+  describe('detectFileType: text without a signature', () => {
+    const encode = (text: string) => new TextEncoder().encode(text);
+
+    it('recognizes plain text', () => {
+      expect(detectFileType(encode('Hola mundo\nSegunda línea con ñ y acentos.'))).toEqual({
+        mime: 'text/plain',
+        extension: 'txt',
+      });
+    });
+
+    it('recognizes text shorter than four bytes', () => {
+      expect(detectFileType(encode('Hi')).mime).toBe('text/plain');
+    });
+
+    it.each(['{"a":1,"b":[true,null]}', '[1, 2, 3]', '  {"padded": "yes"}\n'])(
+      'recognizes JSON: %s',
+      (json) => {
+        expect(detectFileType(encode(json))).toEqual({
+          mime: 'application/json',
+          extension: 'json',
+        });
+      },
+    );
+
+    it('treats JSON-looking text that does not parse as plain text', () => {
+      expect(detectFileType(encode('{not json at all')).mime).toBe('text/plain');
+    });
+
+    it('does not take a bare number or string for JSON', () => {
+      expect(detectFileType(encode('42')).mime).toBe('text/plain');
+      expect(detectFileType(encode('"hello"')).mime).toBe('text/plain');
+    });
+
+    it('recognizes an SVG without a Data URI', () => {
+      const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"></svg>';
+      expect(detectFileType(encode(svg))).toEqual({ mime: 'image/svg+xml', extension: 'svg' });
+    });
+
+    it('keeps the signatures first: an XML declaration is XML, not text', () => {
+      expect(detectFileType(encode('<?xml version="1.0"?><a/>')).mime).toBe('application/xml');
+    });
+
+    it('does not take binary data for text', () => {
+      expect(detectFileType(new Uint8Array([0x00, 0x01, 0x02, 0x03, 0x04])).mime).toBe(
+        'application/octet-stream',
+      );
+      expect(detectFileType(new Uint8Array([0xc3, 0x28, 0x41, 0x42, 0x43])).mime).toBe(
+        'application/octet-stream',
+      );
+      expect(detectFileType(encode('ok\u0000not text')).mime).toBe('application/octet-stream');
+    });
+
+    it('treats nothing as an unknown file', () => {
+      expect(detectFileType(new Uint8Array([])).mime).toBe('application/octet-stream');
+    });
+  });
 });

@@ -49,6 +49,16 @@ describe('useBase64Converter (live decoding)', () => {
     expect(converter.fileInfo.value).toMatchObject({ mime: 'image/png', source: 'signature' });
   });
 
+  it.each([
+    [btoa('{"a":1}'), 'application/json', 'json'],
+    [btoa('Hola mundo'), 'text/plain', 'txt'],
+  ])('recognizes text pasted without a Data URI (%s)', async (input, mime, extension) => {
+    const converter = useBase64Converter();
+    converter.base64Input.value = input;
+    await nextTick();
+    expect(converter.fileInfo.value).toMatchObject({ mime, extension, source: 'signature' });
+  });
+
   it('uses the chosen type in manual mode, and decodes again when it changes', async () => {
     const converter = useBase64Converter();
     converter.base64Input.value = HELLO;

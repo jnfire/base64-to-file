@@ -38,17 +38,55 @@ export function extractDataUriInfo(dataUri: string): DetectFileTypeResult | null
   return { mime, extension };
 }
 
+/**
+ * Returns the text if the bytes are text: valid UTF-8 with no control
+ * characters other than tab and line breaks. Anything else, such as a file of
+ * a type nobody has taught this detector, is not text.
+ */
+function readAsText(bytes: Uint8Array): string | null {
+  let text: string;
+  try {
+    text = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+  } catch {
+    return null;
+  }
+  for (let index = 0; index < text.length; index += 1) {
+    const code = text.charCodeAt(index);
+    if (code < 32 && code !== 9 && code !== 10 && code !== 13) return null;
+    if (code === 0x7f) return null;
+  }
+  return text;
+}
+
+function isJson(text: string): boolean {
+  const trimmed = text.trim();
+  if (!trimmed.startsWith('{') && !trimmed.startsWith('[')) return false;
+  try {
+    JSON.parse(trimmed);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function detectFileType(bytes: Uint8Array): DetectFileTypeResult {
-  if (bytes.length < 4) {
-    return { mime: 'application/octet-stream', extension: 'bin' };
+  if (bytes.length >= 4) {
+    if (isPng(bytes)) return { mime: 'image/png', extension: 'png' };
+    if (isJpeg(bytes)) return { mime: 'image/jpeg', extension: 'jpg' };
+    if (isPdf(bytes)) return { mime: 'application/pdf', extension: 'pdf' };
+    if (isZip(bytes)) return { mime: 'application/zip', extension: 'zip' };
+    if (isGif(bytes)) return { mime: 'image/gif', extension: 'gif' };
+    if (isXml(bytes)) return { mime: 'application/xml', extension: 'xml' };
   }
 
-  if (isPng(bytes)) return { mime: 'image/png', extension: 'png' };
-  if (isJpeg(bytes)) return { mime: 'image/jpeg', extension: 'jpg' };
-  if (isPdf(bytes)) return { mime: 'application/pdf', extension: 'pdf' };
-  if (isZip(bytes)) return { mime: 'application/zip', extension: 'zip' };
-  if (isGif(bytes)) return { mime: 'image/gif', extension: 'gif' };
-  if (isXml(bytes)) return { mime: 'application/xml', extension: 'xml' };
+  // Without a signature, plain text is the next thing worth recognizing: the Base64 of a
+  // JSON, an SVG or a note is very common (tokens, configuration, small files).
+  const text = bytes.length > 0 ? readAsText(bytes) : null;
+  if (text !== null) {
+    if (isJson(text)) return { mime: 'application/json', extension: 'json' };
+    if (text.trimStart().startsWith('<svg')) return { mime: 'image/svg+xml', extension: 'svg' };
+    return { mime: 'text/plain', extension: 'txt' };
+  }
 
   return { mime: 'application/octet-stream', extension: 'bin' };
 }
