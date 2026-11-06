@@ -11,6 +11,8 @@ All processing is done locally in your web browser, ensuring **complete control*
 ![Base64 to File on desktop and mobile](docs/screenshots/base64-to-file-hero.png)
 
 ## ✨ Key Features
+- **Live decoding:** Paste a Base64 string or a Data URI and the file, its preview and the download button appear at once, with no button to press. Encoding is just as direct: choose a file and the Base64 is ready to copy.
+- **Side by side:** What you paste and what you get are on screen together, with the direction (Base64 → File or File → Base64) one tap away.
 - **Dual Detection:**
   - **Automatic:** Identifies file types via Data URIs or by parsing binary *Magic Bytes* (PNG, JPEG, PDF, ZIP, GIF, XML).
   - **Manual:** Forces a file type using a selector with common formats (Word, Excel, JSON, SVG, etc.).

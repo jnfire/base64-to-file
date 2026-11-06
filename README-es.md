@@ -11,6 +11,8 @@ Todo el procesamiento se realiza localmente en tu navegador web, garantizando un
 ![Base64 to File en escritorio y móvil](docs/screenshots/base64-to-file-hero.png)
 
 ## ✨ Características Principales
+- **Decodificación en vivo:** Pega un Base64 o un Data URI y el archivo, su vista previa y el botón de descarga aparecen al instante, sin botón que pulsar. Codificar es igual de directo: eliges un archivo y el Base64 queda listo para copiar.
+- **Lado a lado:** Lo que pegas y lo que obtienes están en pantalla a la vez, con la dirección (Base64 → Archivo o Archivo → Base64) a un toque.
 - **Detección Dual:**
   - **Automática:** Identifica el tipo de archivo mediante Data URI o analizando los *Magic Bytes* del binario (PNG, JPEG, PDF, ZIP, GIF, XML).
   - **Manual:** Permite forzar el tipo de archivo desde un selector de formatos comunes (Word, Excel, JSON, SVG, etc.).
