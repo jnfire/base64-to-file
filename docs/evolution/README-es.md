@@ -40,7 +40,3 @@ Todas las imágenes están en esta carpeta y en [`../screenshots`](../screenshot
 
 - [`base64-to-file-evolution-desktop.png`](base64-to-file-evolution-desktop.png): Cuatro etapas una junto a otra, en escritorio
 - [`base64-to-file-evolution-mobile.png`](base64-to-file-evolution-mobile.png): Las mismas cuatro etapas en el móvil
-
-## Cómo se ha construido
-
-Diseñado y dirigido por [Javier Nicolás Pérez Mesa](https://github.com/jnfire): el producto, la arquitectura y las decisiones de diseño son del autor. La IA ha formado parte del trabajo como un experimento deliberado para aprender tecnología nueva: Gemini CLI, Antigravity, GitHub Copilot y Claude Code, probados uno tras otro. Empezó con pequeñas intervenciones y, a medida que avanzaba el experimento, fue ganando autonomía, siempre mediante pull requests que revisa el autor. Los commits hechos con Claude Code llevan un `Co-Authored-By`.
