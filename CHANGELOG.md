@@ -27,6 +27,7 @@ footer.
 - Sizes use the number format of the language (1,76 KB or 1.76 KB), and small sizes show two decimals.
 - Text sizes and spaces follow one scale (12, 13.6 and 15.2 px for text, multiples of 4 px for spaces), and the buttons and fields have global styles instead of one copy per component.
 - Texts are in sentence case in all six languages.
+- The arrow of the selects is drawn with CSS instead of a text glyph, so it keeps the same size and weight in every browser and animates cleanly when the list opens.
 
 ### Removed
 - The Decode button and the message asking for a Base64 string when the box is empty.
