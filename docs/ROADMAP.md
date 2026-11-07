@@ -6,7 +6,7 @@ What Base64 to File does today and where it could go. The ideas are ordered by h
 
 ## What it does today
 
-- Decode Base64 and Data URIs into files, with automatic type detection (Data URI and magic bytes) or a manual type.
+- Decode Base64 and Data URIs into files as you paste, with automatic type detection (Data URI, magic bytes, and plain text, JSON or SVG) or a manual type, and a download button.
 - Encode any file (up to 5 MB) into Base64, with or without the Data URI prefix.
 - Previews for images, SVG, PDF and text, with JSON formatted for reading.
 - Everything runs in the browser, in six languages, with light and dark themes.
@@ -23,5 +23,5 @@ What Base64 to File does today and where it could go. The ideas are ordered by h
 
 ## Out of scope
 
-- Accounts, a backend or any storage on a server: what you enter stays in your browser.
+- Accounts, a backend or any storage on a server: what you enter stays in your browser, apart from the requests to the public services listed in [`ARCHITECTURE.md`](ARCHITECTURE.md).
 - Advertising and tracking.

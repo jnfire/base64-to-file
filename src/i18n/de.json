@@ -7,42 +7,51 @@
   },
   "input": {
     "mode": {
-      "auto": "Auto-Erkennung",
+      "auto": "Auto",
       "manual": "Manuell"
     },
-    "format": "Format:",
+    "format": "Dateityp",
     "placeholder": "Fügen Sie hier Ihre Base64-Zeichenfolge oder Ihr Data-URI ein...",
-    "btn_decode": "Decodieren",
     "btn_clear": "Leeren",
-    "error_empty": "Bitte fügen Sie einen Base64-Code ein.",
-    "error_invalid": "Fehler beim Decodieren von Base64. Stellen Sie sicher, dass das Format korrekt ist."
+    "error_invalid": "Der Text ist kein gültiges Base64.",
+    "hint_live": "Es wird beim Einfügen decodiert.",
+    "source": {
+      "uri": "Data-URI erkannt",
+      "signature": "Typ am Inhalt erkannt",
+      "manual": "Typ manuell gewählt"
+    }
   },
   "result": {
     "title": "Wiederhergestellte Datei",
-    "mime": "MIME:",
-    "extension": "Erweiterung:",
-    "size": "Größe:",
     "btn_download": "Herunterladen",
-    "no_preview": "Vorschau für dieses Format nicht verfügbar. Bitte laden Sie die Datei herunter."
+    "no_preview": "Vorschau für dieses Format nicht verfügbar. Bitte laden Sie die Datei herunter.",
+    "empty_title": "Die Datei erscheint hier",
+    "empty_text": "Fügen Sie einen Base64-Text oder eine Data-URI ein, und Sie sehen die Vorschau und die Schaltfläche zum Herunterladen."
   },
   "tabs": {
     "decode": "Decodieren (Base64 → Datei)",
-    "encode": "Codieren (Datei → Base64)"
+    "encode": "Codieren (Datei → Base64)",
+    "base64": "Base64",
+    "file": "Datei"
   },
   "encoder": {
     "drop_zone": "Ziehen Sie eine Datei hierher",
     "or": "oder",
-    "btn_browse": "Datei Durchsuchen",
+    "btn_browse": "Datei durchsuchen",
     "file_selected": "Ausgewählte Datei:",
-    "btn_encode": "In Base64 Codieren",
-    "btn_clear": "Leeren",
     "include_data_uri": "Data-URI-Präfix einschließen",
-    "preview_title": "Dateivorschau",
     "result_title": "Base64-Ergebnis",
     "btn_copy": "In die Zwischenablage kopieren",
-    "copied": "Kopiert!",
+    "copied": "Kopiert",
     "error_too_large": "Die Datei überschreitet das Sicherheitslimit von {mb}MB.",
-    "error_read": "Fehler beim Lesen der Datei."
+    "error_read": "Fehler beim Lesen der Datei.",
+    "file_title": "Datei",
+    "change_file": "Datei ändern",
+    "remove_file": "Datei entfernen",
+    "empty_title": "Der Base64-Text erscheint hier",
+    "empty_text": "Wählen Sie eine Datei, und sie wird sofort codiert, bis zu {mb} MB.",
+    "overhead": "+{pct} % gegenüber dem Original",
+    "no_preview": "Keine Vorschau für diesen Dateityp."
   },
   "footer": {
     "source": "Quellcode Anzeigen",
@@ -61,9 +70,13 @@
     "themeSystem": "System",
     "encoder": "Encoder-Einstellungen",
     "autoCopy": "Base64 automatisch kopieren",
-    "mimeFormat": "MIME-Format (Zeilenumbrüche)"
+    "mimeFormat": "MIME-Format (Zeilenumbrüche)",
+    "encoderHelp": "Diese Optionen gelten beim Codieren einer Datei."
   },
   "shared": {
     "select_option": "Option auswählen"
+  },
+  "nav": {
+    "back": "Zurück zum Konverter"
   }
 }

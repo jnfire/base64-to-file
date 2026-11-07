@@ -11,8 +11,10 @@ All processing is done locally in your web browser, ensuring **complete control*
 ![Base64 to File on desktop and mobile](docs/screenshots/base64-to-file-hero.png)
 
 ## ✨ Key Features
+- **Live decoding:** Paste a Base64 string or a Data URI and the file, its preview and the download button appear at once, with no button to press. Encoding is just as direct: choose a file and the Base64 is ready to copy.
+- **Side by side:** What you paste and what you get are on screen together, with the direction (Base64 → File or File → Base64) one tap away.
 - **Dual Detection:**
-  - **Automatic:** Identifies file types via Data URIs or by parsing binary *Magic Bytes* (PNG, JPEG, PDF, ZIP, GIF, XML).
+  - **Automatic:** Identifies file types via Data URIs or by parsing binary *Magic Bytes* (PNG, JPEG, PDF, ZIP, GIF, XML) or by recognizing plain text, JSON and SVG.
   - **Manual:** Forces a file type using a selector with common formats (Word, Excel, JSON, SVG, etc.).
 - **Smart Preview:**
   - **Images & SVGs:** Displayed natively in the browser.
@@ -43,10 +45,6 @@ npm run dev
 - [Design system](docs/DESIGN-SYSTEM.md), shared with the other portfolio tools
 - [Roadmap](docs/ROADMAP.md)
 - [Evolution](docs/evolution/README.md): how the project has changed, with screenshots
-
-## 🤝 Development
-
-Designed and directed by [Javier Nicolás Pérez Mesa](https://github.com/jnfire): the product, the architecture and the design decisions are the author's. AI has been part of the work as a deliberate experiment in learning new technology: Gemini CLI, Antigravity, GitHub Copilot and Claude Code, tried one after another. It began with small interventions and, as the experiment went on, moved towards more autonomy, always through pull requests that the author reviews. Commits made with Claude Code carry a `Co-Authored-By` trailer.
 
 ## 📄 License
 Copyright (C) 2026 Javier Nicolás Pérez Mesa.

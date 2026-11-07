@@ -1,4 +1,5 @@
-import { ref, computed } from 'vue';
+import { ref, computed, type UnwrapNestedRefs } from 'vue';
+import { copyText } from '../utils/clipboard';
 import { fileToDataUri, extractRawBase64, MAX_FILE_SIZE_BYTES } from '../core/encoder';
 import { autoCopyConfig, mimeFormatConfig } from '../utils/config';
 
@@ -9,6 +10,8 @@ export function useFileEncoder() {
   const includeDataUri = ref<boolean>(true);
   const isDragging = ref<boolean>(false);
   const isEncoding = ref<boolean>(false);
+  const copied = ref<boolean>(false);
+  let copiedTimer: ReturnType<typeof setTimeout> | undefined;
 
   const finalBase64Result = computed(() => {
     if (!dataUriResult.value) return '';
@@ -100,14 +103,26 @@ export function useFileEncoder() {
 
   const copyToClipboard = async () => {
     if (!finalBase64Result.value) return false;
-    try {
-      await navigator.clipboard.writeText(finalBase64Result.value);
-      return true;
-    } catch (clipboardError) {
-      console.error('Error al copiar:', clipboardError);
-      return false;
+    const done = await copyText(finalBase64Result.value);
+    if (done) {
+      copied.value = true;
+      clearTimeout(copiedTimer);
+      copiedTimer = setTimeout(() => {
+        copied.value = false;
+      }, 2000);
     }
+    return done;
   };
+
+  /** Size of the result in bytes. */
+  const resultBytes = computed(() => finalBase64Result.value.length);
+
+  /** How much bigger than the original file the result is, as a whole percentage. */
+  const overheadPercent = computed(() => {
+    const original = selectedFile.value?.size ?? 0;
+    if (!original || !resultBytes.value) return 0;
+    return Math.round((resultBytes.value / original - 1) * 100);
+  });
 
   return {
     selectedFile,
@@ -118,6 +133,9 @@ export function useFileEncoder() {
     includeDataUri,
     isDragging,
     isEncoding,
+    copied,
+    resultBytes,
+    overheadPercent,
     encodeFile,
     clear,
     handleDragEnter,
@@ -127,3 +145,6 @@ export function useFileEncoder() {
     copyToClipboard,
   };
 }
+
+/** The state as the screens see it, once Vue has unwrapped the refs. */
+export type EncoderState = UnwrapNestedRefs<ReturnType<typeof useFileEncoder>>;

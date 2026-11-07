@@ -7,42 +7,51 @@
   },
   "input": {
     "mode": {
-      "auto": "Auto-Deteção",
+      "auto": "Auto",
       "manual": "Manual"
     },
-    "format": "Formato:",
+    "format": "Tipo de ficheiro",
     "placeholder": "Cole sua string Base64 ou Data URI aqui...",
-    "btn_decode": "Decodificar",
     "btn_clear": "Limpar",
-    "error_empty": "Por favor, cole um código Base64.",
-    "error_invalid": "Erro ao decodificar Base64. Certifique-se de que o formato está correto."
+    "error_invalid": "O texto não é um Base64 válido.",
+    "hint_live": "É descodificado enquanto cola.",
+    "source": {
+      "uri": "Data URI detetado",
+      "signature": "Tipo detetado pelo conteúdo",
+      "manual": "Tipo escolhido à mão"
+    }
   },
   "result": {
-    "title": "Arquivo Recuperado",
-    "mime": "MIME:",
-    "extension": "Extensão:",
-    "size": "Tamanho:",
+    "title": "Ficheiro recuperado",
     "btn_download": "Descarregar",
-    "no_preview": "Visualização não disponível para este formato. Por favor, descarregue o arquivo."
+    "no_preview": "Visualização não disponível para este formato. Por favor, descarregue o arquivo.",
+    "empty_title": "O ficheiro aparecerá aqui",
+    "empty_text": "Cole um Base64 ou um Data URI e verá a pré-visualização e o botão de descarregar."
   },
   "tabs": {
     "decode": "Decodificar (Base64 → Arquivo)",
-    "encode": "Codificar (Arquivo → Base64)"
+    "encode": "Codificar (Arquivo → Base64)",
+    "base64": "Base64",
+    "file": "Ficheiro"
   },
   "encoder": {
     "drop_zone": "Arraste e solte um arquivo aqui",
     "or": "ou",
-    "btn_browse": "Procurar Arquivo",
+    "btn_browse": "Procurar ficheiro",
     "file_selected": "Arquivo selecionado:",
-    "btn_encode": "Codificar para Base64",
-    "btn_clear": "Limpar",
     "include_data_uri": "Incluir prefixo Data URI",
-    "preview_title": "Pré-visualização do Ficheiro",
     "result_title": "Resultado Base64",
-    "btn_copy": "Copiar para Área de Transferência",
-    "copied": "Copiado!",
+    "btn_copy": "Copiar para a área de transferência",
+    "copied": "Copiado",
     "error_too_large": "O arquivo excede o limite de segurança de {mb}MB.",
-    "error_read": "Erro ao ler o arquivo."
+    "error_read": "Erro ao ler o arquivo.",
+    "file_title": "Ficheiro",
+    "change_file": "Mudar de ficheiro",
+    "remove_file": "Remover ficheiro",
+    "empty_title": "O Base64 aparecerá aqui",
+    "empty_text": "Escolha um ficheiro e é codificado de imediato, até {mb} MB.",
+    "overhead": "+{pct} % em relação ao original",
+    "no_preview": "Sem pré-visualização para este tipo de ficheiro."
   },
   "footer": {
     "source": "Ver Código Fonte",
@@ -51,7 +60,7 @@
     "facts": "Sem cookies · Sem contas · Código aberto"
   },
   "settings": {
-    "title": "Configurações",
+    "title": "Definições",
     "general": "Personalização",
     "personalization": "Personalização",
     "language": "Idioma",
@@ -59,11 +68,15 @@
     "themeLight": "Claro",
     "themeDark": "Escuro",
     "themeSystem": "Sistema",
-    "encoder": "Configurações do Codificador",
-    "autoCopy": "Copiar base64 automaticamente",
-    "mimeFormat": "Formato MIME (quebras de linha)"
+    "encoder": "Configurações do codificador",
+    "autoCopy": "Copiar o Base64 automaticamente",
+    "mimeFormat": "Formato MIME (quebras de linha)",
+    "encoderHelp": "Estas opções aplicam-se ao codificar um ficheiro."
   },
   "shared": {
     "select_option": "Selecione uma opção"
+  },
+  "nav": {
+    "back": "Voltar ao conversor"
   }
 }

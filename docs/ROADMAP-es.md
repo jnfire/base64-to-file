@@ -6,7 +6,7 @@ Lo que hace Base64 to File hoy y hacia dónde podría ir. Las ideas están orden
 
 ## Lo que hace hoy
 
-- Decodificar Base64 y Data URI a archivos, con detección automática del tipo (Data URI y *magic bytes*) o tipo manual.
+- Decodificar Base64 y Data URI a archivos mientras pegas, con detección automática del tipo (Data URI, *magic bytes*, y texto plano, JSON o SVG) o tipo manual, y un botón de descarga.
 - Codificar cualquier archivo (hasta 5 MB) a Base64, con o sin el prefijo Data URI.
 - Vista previa de imágenes, SVG, PDF y texto, con el JSON formateado para leerlo.
 - Todo se ejecuta en el navegador, en seis idiomas, con tema claro y oscuro.
@@ -23,5 +23,5 @@ Lo que hace Base64 to File hoy y hacia dónde podría ir. Las ideas están orden
 
 ## Fuera de alcance
 
-- Cuentas, un backend o cualquier almacenamiento en un servidor: lo que escribes se queda en tu navegador.
+- Cuentas, un backend o cualquier almacenamiento en un servidor: lo que escribes se queda en tu navegador, salvo las peticiones a los servicios públicos que se listan en [`ARCHITECTURE-es.md`](ARCHITECTURE-es.md).
 - Publicidad y rastreo.

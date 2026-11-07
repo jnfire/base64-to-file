@@ -11,8 +11,10 @@ Todo el procesamiento se realiza localmente en tu navegador web, garantizando un
 ![Base64 to File en escritorio y móvil](docs/screenshots/base64-to-file-hero.png)
 
 ## ✨ Características Principales
+- **Decodificación en vivo:** Pega un Base64 o un Data URI y el archivo, su vista previa y el botón de descarga aparecen al instante, sin botón que pulsar. Codificar es igual de directo: eliges un archivo y el Base64 queda listo para copiar.
+- **Lado a lado:** Lo que pegas y lo que obtienes están en pantalla a la vez, con la dirección (Base64 → Archivo o Archivo → Base64) a un toque.
 - **Detección Dual:**
-  - **Automática:** Identifica el tipo de archivo mediante Data URI o analizando los *Magic Bytes* del binario (PNG, JPEG, PDF, ZIP, GIF, XML).
+  - **Automática:** Identifica el tipo de archivo mediante Data URI o analizando los *Magic Bytes* del binario (PNG, JPEG, PDF, ZIP, GIF, XML) o reconociendo texto plano, JSON y SVG.
   - **Manual:** Permite forzar el tipo de archivo desde un selector de formatos comunes (Word, Excel, JSON, SVG, etc.).
 - **Previsualización Inteligente:**
   - **Imágenes y SVG:** Visualización directa en el navegador.
@@ -43,10 +45,6 @@ npm run dev
 - [Sistema de diseño](docs/DESIGN-SYSTEM-es.md), compartido con las otras herramientas del portafolio
 - [Roadmap](docs/ROADMAP-es.md)
 - [Evolución](docs/evolution/README-es.md): cómo ha cambiado el proyecto, con capturas
-
-## 🤝 Desarrollo
-
-Diseñado y dirigido por [Javier Nicolás Pérez Mesa](https://github.com/jnfire): el producto, la arquitectura y las decisiones de diseño son del autor. La IA ha formado parte del trabajo como un experimento deliberado para aprender tecnología nueva: Gemini CLI, Antigravity, GitHub Copilot y Claude Code, probados uno tras otro. Empezó con pequeñas intervenciones y, a medida que avanzaba el experimento, fue ganando autonomía, siempre mediante pull requests que revisa el autor. Los commits hechos con Claude Code llevan un `Co-Authored-By`.
 
 ## 📄 Licencia
 Copyright (C) 2026 Javier Nicolás Pérez Mesa.

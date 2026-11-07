@@ -1,5 +1,7 @@
 import { createApp } from 'vue';
 import './style.css';
+import './assets/base.css';
+import './assets/converter.css';
 import App from './App.vue';
 import i18n from './i18n';
 import { initTheme } from './utils/theme';

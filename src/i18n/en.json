@@ -7,42 +7,51 @@
   },
   "input": {
     "mode": {
-      "auto": "Auto-Detection",
+      "auto": "Auto",
       "manual": "Manual"
     },
-    "format": "Format:",
+    "format": "File type",
     "placeholder": "Paste your Base64 string or Data URI here...",
-    "btn_decode": "Decode",
     "btn_clear": "Clear",
-    "error_empty": "Please paste a Base64 string.",
-    "error_invalid": "Error decoding Base64. Make sure the format is correct."
+    "error_invalid": "The text is not valid Base64.",
+    "hint_live": "It decodes as you paste.",
+    "source": {
+      "uri": "Data URI detected",
+      "signature": "Type detected from the content",
+      "manual": "Type chosen by hand"
+    }
   },
   "result": {
-    "title": "Recovered File",
-    "mime": "MIME:",
-    "extension": "Extension:",
-    "size": "Size:",
+    "title": "Recovered file",
     "btn_download": "Download",
-    "no_preview": "Preview not available for this format. Please download the file."
+    "no_preview": "Preview not available for this format. Please download the file.",
+    "empty_title": "The file will appear here",
+    "empty_text": "Paste a Base64 string or a Data URI and you will see the preview and the download button."
   },
   "tabs": {
     "decode": "Decode (Base64 → File)",
-    "encode": "Encode (File → Base64)"
+    "encode": "Encode (File → Base64)",
+    "base64": "Base64",
+    "file": "File"
   },
   "encoder": {
     "drop_zone": "Drag and drop a file here",
     "or": "or",
-    "btn_browse": "Browse File",
+    "btn_browse": "Browse file",
     "file_selected": "Selected file:",
-    "btn_encode": "Encode to Base64",
-    "btn_clear": "Clear",
     "include_data_uri": "Include Data URI prefix",
-    "preview_title": "File Preview",
     "result_title": "Base64 Result",
-    "btn_copy": "Copy to Clipboard",
-    "copied": "Copied!",
+    "btn_copy": "Copy to clipboard",
+    "copied": "Copied",
     "error_too_large": "The file exceeds the safety limit of {mb}MB.",
-    "error_read": "Error reading file."
+    "error_read": "Error reading file.",
+    "file_title": "File",
+    "change_file": "Change file",
+    "remove_file": "Remove file",
+    "empty_title": "The Base64 will appear here",
+    "empty_text": "Choose a file and it is encoded right away, up to {mb} MB.",
+    "overhead": "+{pct} % over the original",
+    "no_preview": "No preview for this type of file."
   },
   "footer": {
     "source": "View Source Code",
@@ -59,11 +68,15 @@
     "themeLight": "Light",
     "themeDark": "Dark",
     "themeSystem": "System",
-    "encoder": "Encoder Settings",
-    "autoCopy": "Auto-copy base64 to clipboard",
-    "mimeFormat": "MIME format (line breaks every 76 chars)"
+    "encoder": "Encoder settings",
+    "autoCopy": "Auto-copy the Base64 to the clipboard",
+    "mimeFormat": "MIME format (line breaks every 76 chars)",
+    "encoderHelp": "These options apply when you encode a file."
   },
   "shared": {
     "select_option": "Select an option"
+  },
+  "nav": {
+    "back": "Back to the converter"
   }
 }
